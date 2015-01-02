@@ -160,33 +160,34 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                         vmoNew_Vendor.SelectedValue = oReader["vmoNew_Vendor"].ToString() == "0" ? "0" : "1";
                         odnbScore = oReader["dnbScore"].ToString() != "" ? Convert.ToInt32(oReader["dnbScore"].ToString()) : Convert.ToInt32(oReader["dnbFinCapScore"].ToString()) + Convert.ToInt32(oReader["dnbLegalConfScore"].ToString()) + Convert.ToInt32(oReader["dnbTechCompScore"].ToString());
                         dnbScore.Text = odnbScore.ToString();
-                        if (oReader["vmoOverallScore"].ToString() == "")
-                        {
-                            if (oReader["vmoNew_Vendor"].ToString() == "0")
-                            {
-                                ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
-                                if (oReader["vmoGTPerf_Eval"].ToString() != "" && oReader["vmoGTPerf_Eval"].ToString() != "0")
-                                {
-                                    vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
-                                    vmoOverallScore1.Value = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
-                                }
-                                else
-                                {
-                                    vmoOverallScore.Text = odnbScore.ToString();
-                                    vmoOverallScore1.Value = odnbScore.ToString();
-                                }
-                            }
-                            else
-                            {
-                                vmoOverallScore.Text = odnbScore.ToString();
-                                vmoOverallScore1.Value = odnbScore.ToString();
-                            }
-                        }
-                        else
-                        {
-                            vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                            vmoOverallScore1.Value = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                        }
+                        vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
+                        //if (oReader["vmoOverallScore"].ToString() == "")
+                        //{
+                        //    if (oReader["vmoNew_Vendor"].ToString() == "0")
+                        //    {
+                        //        ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
+                        //        if (oReader["vmoGTPerf_Eval"].ToString() != "" && oReader["vmoGTPerf_Eval"].ToString() != "0")
+                        //        {
+                        //            vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
+                        //            vmoOverallScore1.Value = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
+                        //        }
+                        //        else
+                        //        {
+                        //            vmoOverallScore.Text = odnbScore.ToString();
+                        //            vmoOverallScore1.Value = odnbScore.ToString();
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        vmoOverallScore.Text = odnbScore.ToString();
+                        //        vmoOverallScore1.Value = odnbScore.ToString();
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
+                        //    vmoOverallScore1.Value = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
+                        //}
                         dnbSupplierInfoReport.Text = oReader["dnbSupplierInfoReport"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbSupplierInfoReport"].ToString() + "' target='_blank'>" + oReader["dnbSupplierInfoReport"].ToString() + "</a>" : "No attach file";
                         dnbOtherDocumentsLbl.Text = oReader["dnbOtherDocuments"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbOtherDocuments"].ToString() + "' target='_blank'>" + oReader["dnbOtherDocuments"].ToString() + "</a>" : "No attach file";
                     }

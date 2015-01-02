@@ -79,6 +79,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
             })
         }
     </script>
+
 	<script type="text/javascript" src="Scripts/jquery.table.addrow.js" ></script>
 <link href="Styles/ava_pages.css" rel="stylesheet" type="text/css" />
 <div class="content">
@@ -196,7 +197,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <asp:Label ID="benefitsPagibigFileNameLbl" CssClass="benefitsPagibigFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsPagibigFileName" name="benefitsPagibigFileName" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= benefitsPagibigFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsPagibigFileNameFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= benefitsPagibigFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsPagibigFileNameFile_btup" class="uploadselection">Start Upload</a>
         </td>
   </tr>
   <tr>
@@ -245,7 +246,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <asp:Label ID="benefitsPHICFileNameLbl" CssClass="benefitsPHICFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsPHICFileName" name="benefitsPHICFileName" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= benefitsPHICFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsPHICFileNameFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= benefitsPHICFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsPHICFileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
     </tr>
   <tr>
@@ -295,7 +296,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <asp:Label ID="benefitsSSSFileNameLbl" CssClass="benefitsSSSFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsSSSFileName" name="benefitsSSSFileName" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= benefitsSSSFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsSSSFileNameFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= benefitsSSSFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsSSSFileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
   </tr>
   <tr>
@@ -359,7 +360,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <asp:Label ID="benefitsOthersFileNameLbl" CssClass="benefitsOthersFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsOthersFileName" name="benefitsOthersFileName" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= benefitsOthersFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsOthersFileNameFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= benefitsOthersFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsOthersFileNameFile_btup" class="uploadselection">Start Upload</a>
         </td>
   </tr>
 </table>
@@ -721,7 +722,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <asp:Label ID="assetsMachineriesFileNameLbl" CssClass="assetsMachineriesFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsMachineriesFileName" name="assetsMachineriesFileName" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= assetsMachineriesFileNameFile.ClientID %>').uploadifyUpload();" id="assetsMachineriesFileNameFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= assetsMachineriesFileNameFile.ClientID %>').uploadifyUpload();" id="assetsMachineriesFileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
   </tr>
   <tr>
@@ -764,7 +765,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <asp:Label ID="assetsCompanyProfileFileNameLbl" CssClass="assetsCompanyProfileFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsCompanyProfileFileName" name="assetsCompanyProfileFileName" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= assetsCompanyProfileFileNameFile.ClientID %>').uploadifyUpload();" id="assetsCompanyProfileFileNameFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= assetsCompanyProfileFileNameFile.ClientID %>').uploadifyUpload();" id="assetsCompanyProfileFileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
   </tr>
   <tr>
@@ -807,7 +808,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <asp:Label ID="assetsOthersFileNameLbl" CssClass="assetsOthersFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsOthersFileName" name="assetsOthersFileName" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= assetsOthersFileNameFile.ClientID %>').uploadifyUpload();" id="assetsOthersFileNameFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= assetsOthersFileNameFile.ClientID %>').uploadifyUpload();" id="assetsOthersFileNameFile_btup" class="uploadselection">Start Upload</a>
         </td>
   </tr>
 </table>

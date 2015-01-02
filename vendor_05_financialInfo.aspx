@@ -302,7 +302,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <asp:Label ID="yr1FileNameLbl" CssClass="yr1FileNameLbl" runat="server" Text="Attach file" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="yr1FileName" name="yr1FileName" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= yr1FileNameFile.ClientID %>').uploadifyUpload();" id="yr1FileNameFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= yr1FileNameFile.ClientID %>').uploadifyUpload();" id="yr1FileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
   </tr>
 </table>

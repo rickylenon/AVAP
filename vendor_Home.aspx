@@ -58,6 +58,24 @@ Globe Automated Vendor Accreditation :: Vendor
         .auto-style1 {
             height: 36px;
         }
+        .uploadselection
+        {
+            display:block;
+            padding: 5px 10px;
+            border: 1px solid #333;
+            width: 80px;
+            text-decoration:none;
+            background:#39C;
+            color:#FFF;
+            text-align:center;
+        }
+        .uploadselection:hover
+        {
+            background:#fff;
+            color:#000;
+            text-decoration:none;
+            
+        }
     </style>
         <table style="width: 100%;" cellpadding="10">
             <%--<tr>
@@ -189,7 +207,7 @@ Globe Automated Vendor Accreditation :: Vendor
         <asp:Label ID="CertAndWarranty_AttachedSignedLbl" CssClass="CertAndWarranty_AttachedSignedLbl" runat="server" Text="Attach signed form" style="float:left; padding-top:3px; display:block"></asp:Label>  <img src="images/xicon.png" style="margin-left:10px; padding-top:5px;display:none;" id="CertAndWarranty_AttachedSignedx" onclick="$('#<%= CertAndWarranty_AttachedSigned.ClientID %>').val('');$('#<%= CertAndWarranty_AttachedSignedLbl.ClientID %>').html('Attach signed form');$(this).hide();" />
         <input id="CertAndWarranty_AttachedSigned" name="CertAndWarranty_AttachedSigned" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= CertAndWarranty_AttachedSignedFile.ClientID %>').uploadifyUpload();" id="CertAndWarranty_AttachedSignedFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= CertAndWarranty_AttachedSignedFile.ClientID %>').uploadifyUpload();" id="CertAndWarranty_AttachedSignedFile_btup" class="uploadselection">Start Upload</a>
                 </td>
             </tr>
         </table>
@@ -330,7 +348,7 @@ Makati City 1226
         <asp:Label ID="paymentProofLbl" CssClass="paymentProofLbl" runat="server" Text="Attach Proof of Payment" style="float:left; padding-top:3px; display:block"></asp:Label><img src="images/xicon.png" style="margin-left:10px; padding-top:5px;display:none;" id="paymentProofx" onclick="$('#<%= paymentProof.ClientID %>').val('');$('#<%= paymentProofLbl.ClientID %>').html('Attach Proof of Payment / Secretary Certificate');$(this).hide();" />
         <input id="paymentProof" name="paymentProof" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#<%= paymentProofFile.ClientID %>').uploadifyUpload();" id="paymentProofFile_btup">Upload Selection</a>
+        <a href="javascript:$('#<%= paymentProofFile.ClientID %>').uploadifyUpload();" id="paymentProofFile_btup" class="uploadselection">Start Upload</a>
             </td>
         </tr>
         <tr>
