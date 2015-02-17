@@ -197,8 +197,8 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
 <asp:Repeater ID="repeaterdsDnbLegalReport" runat="server" DataSourceID="dsDnbLegalReport">
 <ItemTemplate>
   <tr>
-    <td width="120"><input type="text" name="TypeOfCase" id="TypeOfCase" size="40" maxlength="100" value='<%# Eval("TypeOfCase") %>' /></td>
-    <td width="120"><input type="text" name="DateFiled" id="DateFiled" readonly="readonly" class="date" value='<%# Eval("DateFiled").ToString()!="" || Eval("DateFiled").ToString()!="1900-01-01 00:00:00.000" ? string.Format("{0:MM/dd/yyyy}", Eval("DateFiled")) : "1901-01-01 12:00:00.000" %>' /></td>
+    <td width="120"><input type="text" name="TypeOfCase" id="TypeOfCase" size="40" value='<%# Eval("TypeOfCase") %>' /></td>
+    <td width="120"><input type="text" name="DateFiled" id="DateFiled" class="date" value='<%# Eval("DateFiled").ToString()!="" || Eval("DateFiled").ToString()!="1900-01-01 00:00:00.000" ? string.Format("{0:MM/dd/yyyy}", Eval("DateFiled")) : "1901-01-01 12:00:00.000" %>' /></td>
     <td>
         <div style="float:left; width:30px;"><input id="fileUpload"  name="fileUpload"  type="file"/></div> 
         <%--<label id="fileuploadedLbl" name="fileuploadedLbl" class="fileuploadedLbl" style="float:left; padding-top:3px; display:block"><%# Eval("Attachment").ToString() != "" ? "<a href=\""+ Eval("Attachment") +"\" target=\"_blank\" >"+Eval("Attachment")+"</a>" : "File Attachment" %></label>--%>

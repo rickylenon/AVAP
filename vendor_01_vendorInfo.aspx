@@ -98,28 +98,6 @@ Globe Automated Vendor Accreditation :: Vendor Information
             width: 236px;
             height: 27px;
         }
-        .auto-style5
-        {
-            width: 138px;
-        }
-        .uploadselection
-        {
-            display:block;
-            padding: 5px 10px;
-            border: 1px solid #333;
-            width: 80px;
-            text-decoration:none;
-            background:#39C;
-            color:#FFF;
-            text-align:center;
-        }
-        .uploadselection:hover
-        {
-            background:#fff;
-            color:#000;
-            text-decoration:none;
-            
-        }
     </style>
 <div class="content">
 <div class="content_logo">
@@ -154,31 +132,31 @@ Globe Automated Vendor Accreditation :: Vendor Information
     <td><label for="regBldgCode">Building code</label></td>
     <td><label for="regBldgRoom">Room</label></td>
     <td><label for="regBldgFloor">Floor</label></td>
-    <td class="auto-style5"><label for="regBldgHouseNo">House number</label></td>
+    <td><label for="regBldgHouseNo">House number</label></td>
   </tr>
   <tr>
     <td>
-      <input type="text" name="regBldgCode" id="regBldgCode" class="field regBldgCode" runat="server" maxlength="100" />
+      <input type="text" name="regBldgCode" id="regBldgCode" class="field regBldgCode" runat="server"  maxlength="100"/>
     </td>
     <td>
-        <input type="text" name="regBldgRoom" id="regBldgRoom" runat="server" maxlength="100" />
+        <input type="text" name="regBldgRoom" id="regBldgRoom" runat="server" maxlength="100"/>
       </td>
     <td>
-        <input type="text" name="regBldgFloor" id="regBldgFloor" runat="server" maxlength="100" />
+        <input type="text" name="regBldgFloor" id="regBldgFloor" runat="server" maxlength="100"/>
     </td>
-    <td class="auto-style5">
-        <input type="text" name="regBldgHouseNo" id="regBldgHouseNo" runat="server" maxlength="100" />
+    <td>
+        <input type="text" name="regBldgHouseNo" id="regBldgHouseNo" runat="server" maxlength="100"/>
     </td>
   </tr>
   <tr>
     <td><label for="regStreetName">Street name</label></td>
     <td><label for="regCity">City</label></td>
     <td><label for="regProvince">Province</label></td>
-    <td class="auto-style5"><label for="regCountry">country</label></td>
+    <td><label for="regCountry">country</label></td>
   </tr>
   <tr>
     <td>
-        <input type="text" name="regStreetName" id="regStreetName" runat="server"  maxlength="100"/>
+        <input type="text" name="regStreetName" id="regStreetName" runat="server" maxlength="100"/>
     </td>
     <td>
         <input type="text" name="regCity" id="regCity" runat="server" maxlength="100"/>
@@ -186,7 +164,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
     <td>
         <input type="text" name="regProvince" id="regProvince" runat="server" maxlength="100"/>
     </td>
-    <td class="auto-style5">
+    <td>
         <input type="text" name="regCountry" id="regCountry" runat="server" maxlength="100"/>
     </td>
   </tr>
@@ -229,11 +207,8 @@ Globe Automated Vendor Accreditation :: Vendor Information
     <script type="text/javascript">
         // <![CDATA[
         $(document).ready(function () {
-            FieldFile = 'regOwnedAttachmentFile';
-            FieldLbl = 'regOwnedAttachmentLbl';
-            FieldHidden = 'regOwnedAttachment';
-            $('#'+FieldFile+'_btup').hide();
-            $('#ContentPlaceHolder1_' + FieldFile).uploadify({
+            $('#regOwnedAttachmentFile_btup').hide();
+            $('#regOwnedAttachmentFile').uploadify({
                 'uploader': 'uploadify/uploadify.swf',
                 'script': 'upload.ashx',
 
@@ -246,37 +221,39 @@ Globe Automated Vendor Accreditation :: Vendor Information
                 'sizeLimit': 5000000,
                 'folder': 'uploads/<%= Session["VendorId"] %>',
                 'onSelect': function (event, ID, fileObj) {
-                    $('#' + FieldFile + '_btup').show();
+                    $('#regOwnedAttachmentFile_btup').show();
                 },
                 'onCancel': function (event, ID, fileObj, data) {
                     $('#regOwnedAttachmentFile_btup').hide();
                 },
                 'onComplete': function (event, queueID, fileObj, response, data) {
                     //alert(response);
-                    $('#ContentPlaceHolder1_'+FieldLbl).append('<div><a href="' + response + '" target="_blank">Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden + '\').val(), \'' + response + '\', \'' + FieldHidden + '\');\" /><br></div>');
-                    $('#ContentPlaceHolder1_'+FieldHidden).attr('value', $('#ContentPlaceHolder1_'+FieldHidden).val() + ';'+response);
-                    $('#' + FieldFile + '_btup').hide();
+                    $('.regOwnedAttachmentLbl').append('<div><a href="' + response + '" target="_blank">Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"regOwnedAttachmentx\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_regOwnedAttachment\').val(), \'' + response + '\');\" /><br></div>');
+                    $('#ContentPlaceHolder1_regOwnedAttachment').attr('value', $('#ContentPlaceHolder1_regOwnedAttachment').val() + ';'+response);
+                    $('#regOwnedAttachmentFile_btup').hide();
                 }
             });
         });
-        function FileattchValues(Str, StrRemove, FieldHidden1)
+        function FileattchValues(Str, StrRemove)
         {
-            $('#ContentPlaceHolder1_' + FieldHidden1).attr('value', '');
+            $('#ContentPlaceHolder1_regOwnedAttachment').attr('value', '');
             var myArray = Str.split(';');
             for (var i = 0; i < myArray.length; i++) {
                 if (myArray[i] != StrRemove)
                     if (myArray[i] != "") {
-                        $('#ContentPlaceHolder1_' + FieldHidden1).attr('value', $('#ContentPlaceHolder1_' + FieldHidden1).attr('value') + ';' + myArray[i]);
+                        $('#ContentPlaceHolder1_regOwnedAttachment').attr('value', $('#ContentPlaceHolder1_regOwnedAttachment').attr('value') + ';' + myArray[i]);
                     }
-            } //alert($('#ContentPlaceHolder1_'+FieldHidden1).attr('value'));
+            }
+
+            //alert($('#ContentPlaceHolder1_regOwnedAttachment').attr('value'));
         }
         // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="regOwnedAttachmentFile" type="file" runat="server"/></div> 
+        <div style="float:left; width:30px;"><input id="regOwnedAttachmentFile" type="file"/></div> 
         <asp:Label ID="regOwnedAttachmentLbl" CssClass="regOwnedAttachmentLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label> 
         <input id="regOwnedAttachment" name="regOwnedAttachment" runat="server" type="hidden" value="" />
         <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#ContentPlaceHolder1_regOwnedAttachmentFile').uploadifyUpload();" id="regOwnedAttachmentFile_btup" class="uploadselection">Start Upload</a>
+        <a href="javascript:$('#regOwnedAttachmentFile').uploadifyUpload();" id="regOwnedAttachmentFile_btup">Upload Selection</a>
     </td>
   </tr>
 </table>
@@ -545,17 +522,17 @@ Globe Automated Vendor Accreditation :: Vendor Information
   </tr>
   <tr>
     <td><strong>Telephone number</strong><br><span style="font-size:10px; font-style:italic">Country+Area+Phone</span></td>
-    <td class="auto-style3"><input type="text" name="repOfcTelNo" id="repOfcTelNo" runat="server" maxlength="50"/>
+    <td class="auto-style3"><input type="text" name="repOfcTelNo" id="repOfcTelNo" runat="server" />
     </td>
     </tr>
   <tr>
     <td><strong>Fax number</strong><br><span style="font-size:10px; font-style:italic">Country+Area+Phone</span></td>
-    <td class="auto-style3"><input type="text" name="repOfcFaxNo" id="repOfcFaxNo" runat="server" maxlength="50"/>
+    <td class="auto-style3"><input type="text" name="repOfcFaxNo" id="repOfcFaxNo" runat="server" />
     </td>
     </tr>
   <tr>
     <td><strong>Email address</strong></td>
-    <td class="auto-style3"><input type="text" name="repOfcEmail" id="repOfcEmail" runat="server" maxlength="100"/>
+    <td class="auto-style3"><input type="text" name="repOfcEmail" id="repOfcEmail" runat="server" />
     </td>
     </tr>
 </table>

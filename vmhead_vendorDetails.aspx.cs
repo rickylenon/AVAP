@@ -71,7 +71,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                         if (oReader["Status"].ToString() == "4") { Response.Redirect("vmhead_vendorDetails_View.aspx"); }
                         else if (oReader["Status"].ToString() == "7") 
                         {
-                            createBt.Text = "<span>APPROVE &raquo;</span>";
+                            createBt.Text = "<span>CLARIFY &raquo;</span>";
                         }
                     }
                 }
@@ -94,20 +94,8 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                     while (oReader.Read())
                     {
                         //Recommendation.Enabled = false;
-                        if (oReader["FileAttachement"].ToString() != "")
-                        {
-                            string[] FileAttachements1 = oReader["FileAttachement"].ToString().Split(';');
-                            foreach (string FileAttachement1 in FileAttachements1)
-                            {
-                                FileAttachementLbl.Text = FileAttachement1.Trim() != "" ? FileAttachementLbl.Text + "<div><a href='" + FileAttachement1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"FileAttachementx\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_FileAttachement\').val(),\'" + FileAttachement1.Trim() + "\',\'FileAttachement\');\" /><br></div>" : "";
-                            }
-                        }
-                        else
-                        {
-                            FileAttachementLbl.Text = "Attach file<br>";
-                        }
                         FileAttachement.Value = oReader["FileAttachement"].ToString();
-                        //FileAttachementLbl.Text = "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>";
+                        FileAttachementLbl.Text = "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>";
                         AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
                         //Others.InnerText = oReader["Others"].ToString();
                         OverallEvalRemarks.InnerText = oReader["OverallEvalRemarks"].ToString();
@@ -160,34 +148,15 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                         vmoNew_Vendor.SelectedValue = oReader["vmoNew_Vendor"].ToString() == "0" ? "0" : "1";
                         odnbScore = oReader["dnbScore"].ToString() != "" ? Convert.ToInt32(oReader["dnbScore"].ToString()) : Convert.ToInt32(oReader["dnbFinCapScore"].ToString()) + Convert.ToInt32(oReader["dnbLegalConfScore"].ToString()) + Convert.ToInt32(oReader["dnbTechCompScore"].ToString());
                         dnbScore.Text = odnbScore.ToString();
-                        vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                        //if (oReader["vmoOverallScore"].ToString() == "")
-                        //{
-                        //    if (oReader["vmoNew_Vendor"].ToString() == "0")
-                        //    {
-                        //        ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
-                        //        if (oReader["vmoGTPerf_Eval"].ToString() != "" && oReader["vmoGTPerf_Eval"].ToString() != "0")
-                        //        {
-                        //            vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
-                        //            vmoOverallScore1.Value = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
-                        //        }
-                        //        else
-                        //        {
-                        //            vmoOverallScore.Text = odnbScore.ToString();
-                        //            vmoOverallScore1.Value = odnbScore.ToString();
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        vmoOverallScore.Text = odnbScore.ToString();
-                        //        vmoOverallScore1.Value = odnbScore.ToString();
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                        //    vmoOverallScore1.Value = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                        //}
+                        if (oReader["vmoNew_Vendor"].ToString() == "0")
+                        {
+                            ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
+                            vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
+                        }
+                        else
+                        {
+                            vmoOverallScore.Text = odnbScore.ToString();
+                        }
                         dnbSupplierInfoReport.Text = oReader["dnbSupplierInfoReport"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbSupplierInfoReport"].ToString() + "' target='_blank'>" + oReader["dnbSupplierInfoReport"].ToString() + "</a>" : "No attach file";
                         dnbOtherDocumentsLbl.Text = oReader["dnbOtherDocuments"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbOtherDocuments"].ToString() + "' target='_blank'>" + oReader["dnbOtherDocuments"].ToString() + "</a>" : "No attach file";
                     }
@@ -406,7 +375,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                 {
                     //cmd.CommandType = CommandType.StoredProcedure; //##storedProcedure
                     cmd.Parameters.AddWithValue("@vmoNew_Vendor", Convert.ToInt32(vmoNew_Vendor.SelectedValue));
-                    cmd.Parameters.AddWithValue("@vmoOverallScore", vmoOverallScore1.Value != "" ? Convert.ToDecimal(vmoOverallScore1.Value) : 0);
+                    cmd.Parameters.AddWithValue("@vmoOverallScore", Convert.ToDouble(vmoOverallScore.Text));
                     cmd.Parameters.AddWithValue("@vmoIssue_risk_to_Globe", vmoIssue_risk_to_Globe.Checked == true ? 1 : 0);
                     cmd.Parameters.AddWithValue("@vmoConflict_of_Interest", vmoConflict_of_Interest.Checked == true ? 1 : 0);
                     cmd.Parameters.AddWithValue("@vmoWith_Type_Approved_Products", vmoWith_Type_Approved_Products.Checked == true ? 1 : 0);

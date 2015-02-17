@@ -121,23 +121,7 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
                     {
                         AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
                         Others.Text = oReader["Others"].ToString();
-                        //FileAttachementLbl.Text = oReader["FileAttachement"].ToString() != "" ? "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>" : "<h3>n/a</h3>";
-                        if (oReader["FileAttachement"].ToString() != "")
-                        {
-                            FileAttachementLbl.Text = "";
-                            string[] FileAttachements1 = oReader["FileAttachement"].ToString().Split(';');
-                            foreach (string FileAttachement1 in FileAttachements1)
-                            {
-                                if (FileAttachement1 != "")
-                                {
-                                    FileAttachementLbl.Text = FileAttachementLbl.Text + FileAttachement1.Trim() != "" ? FileAttachementLbl.Text + "<a href='" + FileAttachement1.Trim() + "' target='_blank'>Attached file</a><br>" : "";
-                                }
-                            }
-                        }
-                        else
-                        {
-                            FileAttachementLbl.Text = "Attach file<br>";
-                        }
+                        FileAttachementLbl.Text = oReader["FileAttachement"].ToString() != "" ? "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>" : "<h3>n/a</h3>";
 
                         if (oReader["Recommendation"].ToString() == "1")
                         {
@@ -200,16 +184,15 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
                         vmoNew_Vendor.SelectedValue = oReader["vmoNew_Vendor"].ToString() == "0" ? "0" : "1";
                         odnbScore = oReader["dnbScore"].ToString() != "" ? Convert.ToInt32(oReader["dnbScore"].ToString()) : Convert.ToInt32(oReader["dnbFinCapScore"].ToString()) + Convert.ToInt32(oReader["dnbLegalConfScore"].ToString()) + Convert.ToInt32(oReader["dnbTechCompScore"].ToString());
                         dnbScore.Text = odnbScore.ToString();
-                        vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                        //if (oReader["vmoNew_Vendor"].ToString() == "0")
-                        //{
-                        //    ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
-                        //    vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
-                        //}
-                        //else
-                        //{
-                        //    vmoOverallScore.Text = odnbScore.ToString();
-                        //}
+                        if (oReader["vmoNew_Vendor"].ToString() == "0")
+                        {
+                            ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
+                            vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
+                        }
+                        else
+                        {
+                            vmoOverallScore.Text = odnbScore.ToString();
+                        }
                         dnbSupplierInfoReport.Text = oReader["dnbSupplierInfoReport"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbSupplierInfoReport"].ToString() + "' target='_blank'>" + oReader["dnbSupplierInfoReport"].ToString() + "</a>" : "No attach file";
                         dnbOtherDocumentsLbl.Text = oReader["dnbOtherDocuments"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbOtherDocuments"].ToString() + "' target='_blank'>" + oReader["dnbOtherDocuments"].ToString() + "</a>" : "No attach file";
                     }

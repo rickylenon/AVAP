@@ -509,15 +509,15 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	</td>
   </tr>
   <tr>
-	<td><strong>Date registered</strong><div style="font-size:10px">m/d/yyyy</div></td>
+	<td><strong>Date registered</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
 	<td style="width: 138px">
-	  <input type="text" name="legalStrucDateReg" id="legalStrucDateReg" class="date" runat="server" title="m/d/yyyy" readonly="readonly"  /></td>
+	  <input type="text" name="legalStrucDateReg" id="legalStrucDateReg" class="date" runat="server" title="dd/mm/yyyy"  /></td>
   </tr>
   <tr>
 	<td><strong>
 	  <label>Registration number</label>
 	</strong></td>
-	<td style="width: 138px"><input name="legalStrucRegNo" type="text" id="legalStrucRegNo" runat="server" /></td>
+	<td style="width: 138px"><input name="legalStrucRegNo" type="text" id="legalStrucRegNo" runat="server" maxlength="100"/></td>
   </tr>
   <%--<tr>
 	<td><strong>SEC Attachment</strong></td>
@@ -554,8 +554,8 @@ Globe Automated Vendor Accreditation :: Vendor Information
 		&nbsp;</td>
 	</tr>--%>
   <tr>
-	<td><strong>Date started operations</strong><div style="font-size:10px">m/d/yyyy</div></td>
-	<td style="width: 138px"><input type="text" name="legalStrucDateStartedOp" id="legalStrucDateStartedOp" class="date" runat="server" readonly="readonly" /></td>
+	<td><strong>Date started operations</strong></td>
+	<td style="width: 138px"><input type="text" name="legalStrucDateStartedOp" id="legalStrucDateStartedOp" class="date" runat="server" /></td>
   </tr>
   <tr>
 	<td><strong>
@@ -564,8 +564,8 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	<td style="width: 138px"><input name="legalStrucPrevBusName" type="text" id="legalStrucPrevBusName"  runat="server" maxlength="100"/></td>
   </tr>
   <tr>
-	<td><strong>Date of name change</strong><div style="font-size:10px">m/d/yyyy</div></td>
-	<td style="width: 138px"><input type="text" name="legalStrucDateChanged" id="legalStrucDateChanged" class="date" runat="server" readonly="readonly" /></td>
+	<td><strong>Date of name change</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
+	<td style="width: 138px"><input type="text" name="legalStrucDateChanged" id="legalStrucDateChanged" class="date" runat="server" /></td>
   </tr>
   <%--<tr>
 	<td><strong>
@@ -666,7 +666,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 &nbsp;</td>
   </tr>
   <tr>
-	<td><strong>Date registered</strong><div style="font-size:10px">m/d/yyyy</div></td>
+	<td><strong>Date registered</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
 	<td><h3><asp:Label runat="server" ID="legalStrucDateReg_Lbl"></asp:Label></h3></td>
   </tr>
   <tr>
@@ -680,7 +680,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	<td><asp:Label runat="server" ID="legalStrucSECAttachement_Lbl"></asp:Label></td>
 	</tr>--%>
   <tr>
-	<td><strong>Date started operations</strong><div style="font-size:10px">m/d/yyyy</div></td>
+	<td><strong>Date started operations</strong></td>
 	<td><h3><asp:Label runat="server" ID="legalStrucDateStartedOp_Lbl"></asp:Label></h3></td>
   </tr>
   <tr>
@@ -690,7 +690,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	<td><h3><asp:Label runat="server" ID="legalStrucPrevBusName_Lbl"></asp:Label></h3></td>
   </tr>
   <tr>
-	<td><strong>Date of name change</strong><div style="font-size:10px"m/d/yyyy</div></td>
+	<td><strong>Date of name change</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
 	<td><h3><asp:Label runat="server" ID="legalStrucDateChanged_Lbl"></asp:Label></h3></td>
   </tr>
   <%--<tr>
@@ -708,8 +708,8 @@ Globe Automated Vendor Accreditation :: Vendor Information
 <h3 style="margin:10px 0px;">2. Business permit</h3>
 <table border="0" cellpadding="5" cellspacing="0" id="tbl02" runat="server">
   <tr>
-	<td width="180"><strong>Date registered</strong><div style="font-size:10px">m/d/yyyy</div></td>
-	<td><input type="text" name="busPermitDateReg" id="busPermitDateReg" class="date"  runat="server" readonly="readonly" /></td>
+	<td width="180"><strong>Date registered</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
+	<td><input type="text" name="busPermitDateReg" id="busPermitDateReg" class="date"  runat="server" /></td>
   </tr>
   <tr>
 	<td><strong>
@@ -754,7 +754,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	
 <table border="0" cellpadding="5" cellspacing="0" id="tbl02_Lbl" runat="server">
   <tr>
-	<td width="180"><strong>Date registered</strong><div style="font-size:10px">m/d/yyyy</div></td>
+	<td width="180"><strong>Date registered</strong><div style="font-size:10px">dd/dd/mm/yyyy</div></td>
 	<td><h3><asp:Label runat="server" ID="busPermitDateReg_Lbl"></asp:Label></h3></td>
   </tr>
   <tr>
@@ -842,8 +842,8 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	<div class="clearfix"></div>
 	<table cellpadding="5" id="tbl04a" runat="server">
 		<tr>
-			<td><strong>As of</strong><div style="font-size:10px">m/d/yyyy</div></td>
-			<td style="width: 136px"><input type="text" name="corpAsOfDate" id="corpAsOfDate" class="date" runat="server" readonly="readonly" /></td>
+			<td><strong>As of</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
+			<td style="width: 136px"><input type="text" name="corpAsOfDate" id="corpAsOfDate" class="date" runat="server" /></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
@@ -852,7 +852,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	</table>    
 	<table cellpadding="5" id="tbl04a_Lbl" runat="server">
 		<tr>
-			<td><strong>As of</strong><div style="font-size:10px">m/d/yyyy</div></td>
+			<td><strong>As of</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
 			<td style="width: 136px"><h3><asp:Label id="corpAsOfDate_Lbl" runat="server" ></asp:Label></h3></td>
 		</tr>
 		<tr>
@@ -874,7 +874,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	<asp:Repeater ID="repeaterShareHolders" runat="server" DataSourceID="dsVendorShareHolders">
 <ItemTemplate>  
   <tr>
-	<td><input name="shShareHolderName" type="text" id="shShareHolderName" value="<%# Eval("shShareHolderName") %>" maxlength="100"/></td>
+	<td><input name="shShareHolderName" type="text" id="shShareHolderName" value="<%# Eval("shShareHolderName") %>"  maxlength="100"/></td>
 	<td><input name="shNationality" type="text" id="shNationality" value="<%# Eval("shNationality") %>" maxlength="60"/></td>
 	<td><input name="shSubsribedCapital" type="text" id="shSubsribedCapital" class="numeric SubsribedCapital" onfocus="reloadNumeric()" onblur="totalSubsribedCapital(); reloadNumeric();" value="<%# Eval("shSubsribedCapital") %>" /></td>
 	<td align="left"><input name="shPaidupCapital" type="text" id="shPaidupCapital" class="numeric PaidupCapital" onfocus="reloadNumeric()" onblur="totalPaidupCapital(); reloadNumeric();" value="<%# Eval("shPaidupCapital") %>" /></td>
@@ -980,7 +980,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	<td><h3><asp:Label runat="server" ID="corpPerValue_Lbl"></asp:Label></h3></td>
   </tr>--%>
   <%--<tr>
-	<td><strong>As of</strong><div style="font-size:10px">m/d/yyyy</div></td>
+	<td><strong>As of</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
 	<td><h3><asp:Label runat="server" ID="corpAsOfDate_Lbl"></asp:Label></h3></td>
   </tr>--%>
 </table>
@@ -999,7 +999,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 <asp:Repeater ID="repeaterBoardMembers" runat="server" DataSourceID="dsVendorBoardMembers">
 <ItemTemplate> 
   <tr>
-	<td><input name="bmMemberOfTheBoard" type="text" id="bmMemberOfTheBoard"  value="<%# Eval("bmMemberOfTheBoard") %>" maxlength="100"/></td>
+	<td><input name="bmMemberOfTheBoard" type="text" id="bmMemberOfTheBoard"  value="<%# Eval("bmMemberOfTheBoard") %>"  maxlength="100"/></td>
 	<td><input name="bmNationality" type="text" id="bmNationality"  value="<%# Eval("bmNationality") %>" maxlength="100"/></td>
 	<td><input name="bmPostion" type="text" id="bmPostion"  value="<%# Eval("bmPostion") %>" maxlength="100"/></td>
 	<td valign="bottom"><img src="images/trash.png" width="9" height="13" border="0" class="delRow" /></td>
@@ -1056,7 +1056,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	<td><input name="corpPerValue" type="text" id="corpPerValue" runat="server" class="numeric"  /></td>
   </tr>--%>
   <%--<tr>
-	<td><strong>As of</strong><div style="font-size:10px">m/d/yyyy</div></td>
+	<td><strong>As of</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
 	<td><input type="text" name="corpAsOfDate" id="corpAsOfDate" class="date" runat="server" /></td>
   </tr>
 </table>--%>
@@ -1069,15 +1069,15 @@ Globe Automated Vendor Accreditation :: Vendor Information
 <table width="65%" border="0" cellspacing="0" cellpadding="5">
   <tr>
 	<td><strong>Regulatory requirement</strong></td>
-	<td><strong>Date registered</strong><div style="font-size:10px">m/d/yyyy</div></td>
+	<td><strong>Date registered</strong><div style="font-size:10px">dd/mm/yyyy</div></td>
 	<td><strong>Permit number</strong></td>
 	<td><input type="hidden" name="RegulatoryRequirementsCounter" id="RegulatoryRequirementsCounter" class="rowCount" /><a href="javascript:void(0)" value="Add Row" class="alternativeRow" id="add5" runat="server">+Add</a></td>
   </tr>
 <asp:Repeater ID="repeaterRegulatoryRequirements" runat="server" DataSourceID="dsRegulatoryRequirements">
 <ItemTemplate>  
   <tr>
-	<td><input name="RegulatoryRequirement" type="text" id="RegulatoryRequirement" value="<%# Eval("RegulatoryRequirement") %>" maxlength="100"/></td>
-	<td><input name="DateRegistered" type="text" id="DateRegistered" class="date" onfocus="reloadDatepicker()" readonly="readonly"  value="<%# Eval("DateRegistered").ToString() !="1/1/1900 12:00:00 AM" ? string.Format("{0:MM/dd/yyyy}", Eval("DateRegistered")) : "" %>" /></td>
+	<td><input name="RegulatoryRequirement" type="text" id="RegulatoryRequirement" value="<%# Eval("RegulatoryRequirement") %>"  maxlength="100"/></td>
+	<td><input name="DateRegistered" type="text" id="DateRegistered" class="date" onfocus="reloadDatepicker()"  value="<%# Eval("DateRegistered").ToString() !="1/1/1900 12:00:00 AM" ? string.Format("{0:MM/dd/yyyy}", Eval("DateRegistered")) : "" %>" /></td>
 	<td><input name="PermitNo" type="text" id="PermitNo" value="<%# Eval("PermitNo") %>" maxlength="100"/></td>
 	<td valign="bottom"><img src="images/trash.png" width="9" height="13" border="0" class="delRow" /></td>
   </tr>

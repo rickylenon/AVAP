@@ -165,19 +165,7 @@ public partial class vendor_02_productServices : System.Web.UI.Page
                     {
                         prodServ_DescLineOfBusiness.InnerText = oReader["prodServ_DescLineOfBusiness"].ToString();
                         prodServ_DAC_Attachment.Value = oReader["prodServ_DAC_Attachment"].ToString();
-                        //prodServ_DAC_AttachmentLbl.Text = oReader["prodServ_DAC_Attachment"].ToString()!="" ? "<a href='" + oReader["prodServ_DAC_Attachment"].ToString() + "' target='_blank'>" + oReader["prodServ_DAC_Attachment"].ToString() + "</a>" : "Attach file";
-                        if (oReader["prodServ_DAC_Attachment"].ToString() != "")
-                        {
-                            string[] prodServ_DAC_Attachments1 = oReader["prodServ_DAC_Attachment"].ToString().Split(';');
-                            foreach (string prodServ_DAC_Attachment1 in prodServ_DAC_Attachments1)
-                            {
-                                prodServ_DAC_AttachmentLbl.Text = prodServ_DAC_Attachment1.Trim() != "" ? prodServ_DAC_AttachmentLbl.Text + "<div><a href='" + prodServ_DAC_Attachment1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"prodServ_DAC_Attachmentx\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_prodServ_DAC_Attachment\').val(),\'" + prodServ_DAC_Attachment1.Trim() + "\',\'prodServ_DAC_Attachment\');\" /><br></div>" : "";
-                            }
-                        }
-                        else
-                        {
-                            prodServ_DAC_AttachmentLbl.Text = "Attach file<br>";
-                        }
+                        prodServ_DAC_AttachmentLbl.Text = oReader["prodServ_DAC_Attachment"].ToString()!="" ? "<a href='" + oReader["prodServ_DAC_Attachment"].ToString() + "' target='_blank'>" + oReader["prodServ_DAC_Attachment"].ToString() + "</a>" : "Attach file";
                     }
                 }
             }
@@ -204,19 +192,7 @@ public partial class vendor_02_productServices : System.Web.UI.Page
                     {
                         prodServ_DescLineOfBusiness_Lbl.Text = oReader["prodServ_DescLineOfBusiness"].ToString();
                         prodServ_DAC_AttachmentFile.Visible = false;
-                        //prodServ_DAC_AttachmentLbl.Text = oReader["prodServ_DAC_Attachment"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["prodServ_DAC_Attachment"].ToString() + "' target='_blank'>" + oReader["prodServ_DAC_Attachment"].ToString() + "</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div>  No attached file";
-                        if (oReader["prodServ_DAC_Attachment"].ToString() != "")
-                        {
-                            string[] prodServ_DAC_Attachments1 = oReader["prodServ_DAC_Attachment"].ToString().Split(';');
-                            foreach (string prodServ_DAC_Attachment1 in prodServ_DAC_Attachments1)
-                            {
-                                prodServ_DAC_AttachmentLbl.Text = prodServ_DAC_Attachment1.Trim() != "" ? prodServ_DAC_AttachmentLbl.Text + "<div><a href='" + prodServ_DAC_Attachment1.Trim() + "' target='_blank'>Attached file</a> <br></div>" : "";
-                            }
-                        }
-                        else
-                        {
-                            prodServ_DAC_AttachmentLbl.Text = "Attach file<br>";
-                        }
+                        prodServ_DAC_AttachmentLbl.Text = oReader["prodServ_DAC_Attachment"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["prodServ_DAC_Attachment"].ToString() + "' target='_blank'>" + oReader["prodServ_DAC_Attachment"].ToString() + "</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div>  No attached file";
                     }
                 }
             }

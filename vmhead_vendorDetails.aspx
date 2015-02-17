@@ -54,34 +54,7 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
 
     <script src="Scripts/jquery.numeric.js" type="text/javascript"></script>
     <script type="text/javascript">
-        function ComputeOverall() {
-            dnbScore = parseFloat($("#<%= dnbScore.ClientID %>").html());
-            vmoGTPerf_Eval = $("#<%= vmoGTPerf_Eval.ClientID %>").val() != "" ? parseFloat($("#<%= vmoGTPerf_Eval.ClientID %>").val()) : 0;
-            dnbFinCapScore = parseFloat($("#<%= dnbFinCapScore.ClientID %>").html());
-            dnbLegalConfScore = parseFloat($("#<%= dnbLegalConfScore.ClientID %>").html());
-            dnbTechCompScore = parseFloat($("#<%= dnbTechCompScore.ClientID %>").html());
-
-            if ($("#<%= vmoNew_Vendor.ClientID %> input[type='radio']:checked").val() == "1") //renewal is 0
-            {
-                vmoOverallScore = dnbScore;
-            }
-            else {
-                if (vmoGTPerf_Eval > 0) {
-                    dnbLegalConfScore_new = (dnbTechCompScore + (vmoGTPerf_Eval * .4)) / 2;
-                    vmoOverallScore = (dnbFinCapScore + dnbLegalConfScore + dnbLegalConfScore_new);
-                }
-                else {
-                    dnbScore = parseFloat($("#<%= dnbScore.ClientID %>").html());
-                    vmoOverallScore = dnbScore;
-                }
-                $("#<%= vmoOverallScore1.ClientID %>").val(vmoOverallScore);
-                $("#<%= vmoOverallScore.ClientID %>").html(vmoOverallScore);
-            }
-        }
         $(document).ready(function () {
-            ComputeOverall();
-            $("#<%= vmoGTPerf_Eval.ClientID %>").blur(function () { ComputeOverall(); });
-            $("#<%= vmoNew_Vendor.ClientID %>").change(function () { ComputeOverall(); });
             $(".numeric").numeric();
             $(".integer").numeric(false, function () { alert("Integers only"); this.value = ""; this.focus(); });
         });
@@ -171,10 +144,7 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
                 <td style="width: 108px; height: 37px;"><h4><label>D&B Score</label></h4></td>
                 <td style="width: 149px; height: 37px;"><h3><asp:Label runat="server" ID="dnbScore" Text="0"></asp:Label></h3></td>
                 <td style="width: 115px; height: 37px;"><h4><label>Overall Score</label></h4></td>
-                <td style="height: 37px">
-                    <h3><asp:Label runat="server" ID="vmoOverallScore" Text="0"></asp:Label></h3>
-                    <asp:HiddenField ID="vmoOverallScore1" runat="server" />
-                </td> 
+                <td style="height: 37px"><h3><asp:Label runat="server" ID="vmoOverallScore" Text="0"></asp:Label></h3></td> 
             </tr>
         </table>
 <br /><br />
@@ -380,53 +350,31 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
                     <script type="text/javascript">
                         // <![CDATA[
                         $(document).ready(function () {
-                            FieldFile = 'FileAttachementFile';
-                            FieldLbl = 'FileAttachementLbl';
-                            FieldHidden = 'FileAttachement';
-                            $('#' + FieldFile + '_btup').hide();
-                            $('#ContentPlaceHolder1_' + FieldFile).uploadify({
+                            $('#FileAttachementFile').uploadify({
                                 'uploader': 'uploadify/uploadify.swf',
                                 'script': 'upload.ashx',
 
                                 'cancelImg': 'uploadify/cancel.png',
-                                'auto': false,
+                                'auto': true,
                                 'multi': true,
-                                'fileDesc': 'Attach File',
+                                'fileDesc': 'Files',
                                 'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
                                 'queueSizeLimit': 5,
                                 'sizeLimit': 5000000,
                                 'folder': 'uploads/<%= Session["VendorId"] %>',
-                'onSelect': function (event, ID, fileObj) {
-                    $('#' + FieldFile + '_btup').show();
-                },
-                'onCancel': function (event, ID, fileObj, data) {
-                    $('#' + FieldFile + '_btup').hide();
-                },
-                'onComplete': function (event, queueID, fileObj, response, data) {
-                    //alert(response);
-                    $('#ContentPlaceHolder1_' + FieldLbl).append('<div><a href="' + response + '" target="_blank">Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden + '\').val(), \'' + response + '\', \'' + FieldHidden + '\');\" /><br></div>');
-                    $('#ContentPlaceHolder1_' + FieldHidden).attr('value', $('#ContentPlaceHolder1_' + FieldHidden).val() + ';' + response);
-                    $('#' + FieldFile + '_btup').hide();
-                }
-            });
-        });
-        function FileattchValues(Str, StrRemove, FieldHidden1) {
-            $('#ContentPlaceHolder1_' + FieldHidden1).attr('value', '');
-            var myArray = Str.split(';');
-            for (var i = 0; i < myArray.length; i++) {
-                if (myArray[i] != StrRemove)
-                    if (myArray[i] != "") {
-                        $('#ContentPlaceHolder1_' + FieldHidden1).attr('value', $('#ContentPlaceHolder1_' + FieldHidden1).attr('value') + ';' + myArray[i]);
-                    }
-            } //alert($('#ContentPlaceHolder1_'+FieldHidden1).attr('value'));
-        }
-        // ]]>
+                                'onComplete': function (event, queueID, fileObj, response, data) {
+                                    //alert(response);
+                                    $('.FileAttachementLbl').html('<a href="' + response + '" target="_blank">' + response + '</a>');
+                                    $('#ContentPlaceHolder1_FileAttachement').attr('value', response);
+                                    $('#FileAttachementx').show();
+                                }
+                            });
+                        });
+                        // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="FileAttachementFile" type="file" runat="server"/></div> 
-        <asp:Label ID="FileAttachementLbl" CssClass="FileAttachementLbl" runat="server" Text="File Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>  <%--<img src="images/xicon.png" style="margin-left:10px; padding-top:5px;display:none;" id="FileAttachementx" onclick="$('#<%= FileAttachement.ClientID %>').val('');$('#<%= FileAttachementLbl.ClientID %>').html('File Attachment');$(this).hide();" />--%>
+        <div style="float:left; width:30px;"><input id="FileAttachementFile" type="file"/></div> 
+        <asp:Label ID="FileAttachementLbl" CssClass="FileAttachementLbl" runat="server" Text="File Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>  <img src="images/xicon.png" style="margin-left:10px; padding-top:5px;display:none;" id="FileAttachementx" onclick="$('#<%= FileAttachement.ClientID %>').val('');$('#<%= FileAttachementLbl.ClientID %>').html('File Attachment');$(this).hide();" />
         <input id="FileAttachement" name="FileAttachement" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max size each file: 4 MB), click paperclip again to upload multiple files. </div>
-        <a href="javascript:$('#ContentPlaceHolder1_FileAttachementFile').uploadifyUpload();" id="FileAttachementFile_btup">Upload Selection</a>
                     <div class="clearfix"></div>
                 </td>
                 <td valign="top" width="50%">

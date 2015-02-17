@@ -27,7 +27,7 @@ public class Upload : IHttpHandler
           DateTime thisDay = DateTime.Now;
           //Response.Write(thisDay.ToString("yyyyMMddHHmmss"));
           string filename = thisDay.ToString("yyyyMMddHHmmss") + "_" + postedFile.FileName.Replace("'", "");
-          filename = Regex.Replace(filename, "[^a-zA-Z0-9/_/./-]", "");
+          filename = Regex.Replace(filename, "[^a-zA-Z0-9/_]", "");
           //string filename = postedFile.FileName.Replace("'", "");
           if (!Directory.Exists(savepath))
           {

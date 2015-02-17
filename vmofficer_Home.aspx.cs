@@ -132,18 +132,6 @@ public partial class vmofficer_Home : System.Web.UI.Page
             oReader.Read();
             vmofficer_VendorForNotification_List_Count.Text = oReader["totalUsers"].ToString();
         } oReader.Close();
-
-        sCommand = @"SELECT COUNT(*) AS totalUsers
-                    FROM tblVendor, tblVendorInformation t2, tblVendorApprovalbyVmReco t3  
-                    WHERE IsAuthenticated = 1 AND (Status = 6) AND t2.VendorId = tblVendor.VendorId 
-                            AND t3.VendorId = tblVendor.VendorId 
-                            AND tblVendor.renewaldate <= GETDATE()";
-        oReader = SqlHelper.ExecuteReader(connstring, CommandType.Text, sCommand);
-        if (oReader.HasRows)
-        {
-            oReader.Read();
-            vmofficer_VendorForRenewal_List_Count.Text = oReader["totalUsers"].ToString();
-        } oReader.Close();
     }
 
     void SaveToDB()

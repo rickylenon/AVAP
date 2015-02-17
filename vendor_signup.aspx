@@ -28,22 +28,6 @@
 	<!--### DATEPICKER ###-->
 	<script type="text/javascript" src="Scripts/cal.js"></script>
 	<link rel="stylesheet" type="text/css" href="Styles/calendar_picker.css" />
-    <script type="text/javascript">
-        function reloadDatepicker() {
-            $('input.date').click();
-        }
-        jQuery(document).ready(function () {
-            $('input.date').simpleDatepicker({ startdate: '6/10/1900' });
-            $('input.date').keyup(function (e) {
-                console.log('keyup called');
-                var code = e.keyCode || e.which;
-                if (code == '9') {
-                    reloadDatepicker();
-                }
-
-            });
-        });
-	</script> 
 	<script type="text/javascript">
 		jQuery(document).ready(function () {
 			$('input.date').simpleDatepicker({ startdate: '6/10/1900' });
@@ -51,22 +35,6 @@
 		function reloadDatepicker() {
 			$('input.date').simpleDatepicker({ startdate: '6/10/1900' });
 		}
-	</script> 
-    <script type="text/javascript">
-        function reloadDatepicker() {
-            $('input.date').click();
-        }
-        jQuery(document).ready(function () {
-            $('input.date').simpleDatepicker({ startdate: '6/10/1900' });
-            $('input.date').keyup(function (e) {
-                console.log('keyup called');
-                var code = e.keyCode || e.which;
-                if (code == '9') {
-                    reloadDatepicker();
-                }
-
-            });
-        });
 	</script> 
 	<!--### DATEPICKER ENDS###-->
 	<script src="Scripts/jquery.numeric.js" type="text/javascript"></script>
@@ -132,15 +100,15 @@ Logistics</span></li>
   <tr>
 	<td colspan="4" style="width: 378px"><label for="CompanyName"><b>Company name</b></label>
 	  <div class="clearfix"></div>
-<input name="CompanyName" type="text" id="CompanyName" size="60" maxlength="100" runat="server" 
+<input name="CompanyName" type="text" id="CompanyName" size="60" runat="server" 
 			causesvalidation="False" /><div class="clearfix"></div>
 <span style="font-size:12px; font-style:italic;">Registered business name (Exact name as in SEC Registration/DTI)</span></td>
 	</tr>
   <tr>
-	<td colspan="4" style="width: 378px"><label for="CompanyName"><b>Date started</b><span> (d/m/yyyy)</span></label>
+	<td colspan="4" style="width: 378px"><label for="CompanyName"><b>Date started</b></label>
 	  <div class="clearfix"></div>
 <input name="DateStarted" type="text" id="DateStarted"  class="date" runat="server" title="dd/mm/yyyy" 
-			causesvalidation="False" style="background:url(images/calendar_icon1.png) no-repeat center right" readonly="readonly" /><%--<img src="images/calendar_icon1.png" style="height: 22px; width: 21px; margin-bottom:-7px;" /><div class="clearfix">--%></div>
+			causesvalidation="False" style="background:url(images/calendar_icon1.png) no-repeat center right" /><%--<img src="images/calendar_icon1.png" style="height: 22px; width: 21px; margin-bottom:-7px;" /><div class="clearfix">--%></div>
 <%--span style="font-size:12px; font-style:italic;">Registered business name (Exact name as in SEC Registration/DTI)</span>--%>
 	</td>
 	</tr>
@@ -162,7 +130,7 @@ Logistics</span></li>
   <tr>
 	<td colspan="4" style="width: 378px"><label for="EmailAdd"><b>Email</b></label>
 	  <div class="clearfix"></div>
-<input name="EmailAdd" type="text" id="EmailAdd" size="60" runat="server" maxlength="100" />
+<input name="EmailAdd" type="text" id="EmailAdd" size="60" runat="server" />
 
 </td>
 </tr>

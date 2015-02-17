@@ -180,7 +180,7 @@ public partial class vendor_01_vendorInfo : System.Web.UI.Page
                             string[] regOwnedAttachments1 = oReader["regOwnedAttachment"].ToString().Split(';');
                             foreach (string regOwnedAttachment1 in regOwnedAttachments1)
                             {
-                                regOwnedAttachmentLbl.Text = regOwnedAttachment1.Trim() != "" ? regOwnedAttachmentLbl.Text + "<div><a href='" + regOwnedAttachment1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"regOwnedAttachmentx\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_regOwnedAttachment\').val(),\'" + regOwnedAttachment1.Trim() + "\',\'regOwnedAttachment\');\" /><br></div>" : "";
+                                regOwnedAttachmentLbl.Text = regOwnedAttachment1.Trim() != "" ? regOwnedAttachmentLbl.Text + "<div><a href='" + regOwnedAttachment1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"regOwnedAttachmentx\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_regOwnedAttachment\').val(),\'" + regOwnedAttachment1.Trim() + "\');\" /><br></div>" : "";
                             }
                         }
                         else

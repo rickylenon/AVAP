@@ -235,23 +235,3 @@ tbody th {
 .date {
     /*background:url(../images/calendar_icon1.png) no-repeat right center*/
 }
-
-
-        .uploadselection
-        {
-            display:block;
-            padding: 5px 10px;
-            border: 1px solid #333;
-            width: 80px;
-            text-decoration:none;
-            background:#39C;
-            color:#FFF;
-            text-align:center;
-        }
-        .uploadselection:hover
-        {
-            background:#fff;
-            color:#000;
-            text-decoration:none;
-            
-        }

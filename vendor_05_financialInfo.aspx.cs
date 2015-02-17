@@ -138,19 +138,7 @@ public partial class vendor_05_financialInfo : System.Web.UI.Page
             yr1TotalLiabilities.Value = oReader["TotalLiabilities"].ToString();
             yr1CurrentAssets.Value = oReader["CurrentAssets"].ToString();
             yr1CurrentLiabilities.Value = oReader["CurrentLiabilities"].ToString();
-            //yr1FileNameLbl.Text = oReader["FileName"].ToString() != "" ? "<a href='" + oReader["FileName"].ToString() + "' target='_blank'> Attached file</a>" : "Attach file";
-            if (oReader["FileName"].ToString() != "")
-            {
-                string[] yr1FileNames1 = oReader["FileName"].ToString().Split(';');
-                foreach (string yr1FileName1 in yr1FileNames1)
-                {
-                    yr1FileNameLbl.Text = yr1FileName1.Trim() != "" ? yr1FileNameLbl.Text + "<div><a href='" + yr1FileName1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"yr1FileNamex\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_yr1FileName\').val(),\'" + yr1FileName1.Trim() + "\',\'yr1FileName\');\" /><br></div>" : "";
-                }
-            }
-            else
-            {
-                yr1FileNameLbl.Text = "Attach file<br>";
-            }
+            yr1FileNameLbl.Text = oReader["FileName"].ToString() != "" ? "<a href='" + oReader["FileName"].ToString() + "' target='_blank'> Attached file</a>" : "Attach file";
             yr1FileName.Value = oReader["FileName"].ToString();
         }
         oReader.Close();
@@ -228,19 +216,7 @@ public partial class vendor_05_financialInfo : System.Web.UI.Page
             yr1CurrentAssets_Lbl.Text = oReader["CurrentAssets"].ToString();
             yr1CurrentLiabilities_Lbl.Text = oReader["CurrentLiabilities"].ToString();
             //yr1FileName_Lbl.Text = oReader["FileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["FileName"].ToString() + "' target='_blank'> Attached file</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
-            //yr1FileNameLbl_Lbl.Text = oReader["FileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["FileName"].ToString() + "' target='_blank'> Attached file</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
-            if (oReader["FileName"].ToString() != "")
-            {
-                string[] yr1FileNames1 = oReader["FileName"].ToString().Split(';');
-                foreach (string yr1FileName1 in yr1FileNames1)
-                {
-                    yr1FileNameLbl_Lbl.Text = yr1FileName1.Trim() != "" ? yr1FileNameLbl_Lbl.Text + "<div><img src=\"images/attachment.png\" /> <a href='" + yr1FileName1.Trim() + "' target='_blank'>Attached file</a><br></div>" : "";
-                }
-            }
-            else
-            {
-                yr1FileNameLbl.Text = "<img src=\"images/attachment.png\" /> No Attach file<br>";
-            }
+            yr1FileNameLbl_Lbl.Text = oReader["FileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["FileName"].ToString() + "' target='_blank'> Attached file</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
         }
         oReader.Close();
 

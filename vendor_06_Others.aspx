@@ -113,9 +113,9 @@ Globe Automated Vendor Accreditation :: Vendor Information
     <asp:Repeater ID="repeaterVendorCourtCases" runat="server" DataSourceID="dsVendorCourtCases">
 <ItemTemplate>  
   <tr>
-    <td><input name="TypeOfCase" type="text" id="TypeOfCase" value="<%# Eval("TypeOfCase") %>"  maxlength="150"/></td>
-    <td><input name="DateRegistered" type="text" id="DateRegistered" class="date" onfocus="reloadDatepicker()"  value='<%# string.Format("{0:MM/dd/yyyy}", Eval("DateRegistered"))%>' readonly="readonly" /></td>
-    <td><input name="Status" type="text" id="Status" value="<%# Eval("Status") %>"  maxlength="150"/></td>
+    <td><input name="TypeOfCase" type="text" id="TypeOfCase" value="<%# Eval("TypeOfCase") %>" maxlength="150"/></td>
+    <td><input name="DateRegistered" type="text" id="DateRegistered" class="date" onfocus="reloadDatepicker()"  value='<%# string.Format("{0:MM/dd/yyyy}", Eval("DateRegistered"))%>' /></td>
+    <td><input name="Status" type="text" id="Status" value="<%# Eval("Status") %>" maxlength="150"/></td>
     <td style="border-top: thin #CCC dotted;">
         <div style="float:left; width:30px;"><input id="fileUpload"  name="fileUpload"  type="file"/></div> 
         <asp:Label ID="fileuploadedLbl" CssClass="fileuploadedLbl" runat="server" Text='<%# Eval("Attachment").ToString()!="" ? "<a href=\"" + Eval("Attachment").ToString() + "\" target=\"_blank\">Attached file</a>" : "Attach file" %>' style="float:left; padding-top:3px; display:block"></asp:Label>

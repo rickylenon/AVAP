@@ -54,38 +54,7 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
 
     <script src="Scripts/jquery.numeric.js" type="text/javascript"></script>
     <script type="text/javascript">
-        function ComputeOverall()
-        {
-            dnbScore = parseFloat($("#<%= dnbScore.ClientID %>").html());
-            vmoGTPerf_Eval = $("#<%= vmoGTPerf_Eval.ClientID %>").val() != "" ? parseFloat($("#<%= vmoGTPerf_Eval.ClientID %>").val()) : 0;
-            dnbFinCapScore = parseFloat($("#<%= dnbFinCapScore.ClientID %>").html());
-            dnbLegalConfScore = parseFloat($("#<%= dnbLegalConfScore.ClientID %>").html());
-            dnbTechCompScore = parseFloat($("#<%= dnbTechCompScore.ClientID %>").html());
-
-            if ($("#<%= vmoNew_Vendor.ClientID %> input[type='radio']:checked").val() == "1") //renewal is 0
-            {
-                vmoOverallScore = dnbScore;
-            }
-            else
-            {
-                if (vmoGTPerf_Eval > 0)
-                {
-                    dnbLegalConfScore_new = (dnbTechCompScore + (vmoGTPerf_Eval * .4)) / 2;
-                    vmoOverallScore = (dnbFinCapScore + dnbLegalConfScore + dnbLegalConfScore_new);
-                }
-                else
-                {
-                    dnbScore = parseFloat($("#<%= dnbScore.ClientID %>").html());
-                    vmoOverallScore = dnbScore;
-                }
-                $("#<%= vmoOverallScore1.ClientID %>").val(vmoOverallScore);
-                $("#<%= vmoOverallScore.ClientID %>").html(vmoOverallScore);
-            }
-        }
         $(document).ready(function () {
-            ComputeOverall();
-            $("#<%= vmoGTPerf_Eval.ClientID %>").blur(function () { ComputeOverall(); });
-            $("#<%= vmoNew_Vendor.ClientID %>").change(function () { ComputeOverall(); });
             $(".numeric").numeric();
             $(".integer").numeric(false, function () { alert("Integers only"); this.value = ""; this.focus(); });
         });
@@ -175,10 +144,7 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
                 <td style="width: 108px; height: 37px;"><h4><label>D&B Score</label></h4></td>
                 <td style="width: 149px; height: 37px;"><h3><asp:Label runat="server" ID="dnbScore" Text="0"></asp:Label></h3></td>
                 <td style="width: 115px; height: 37px;"><h4><label>Overall Score</label></h4></td>
-                <td style="height: 37px">
-                    <h3><asp:Label runat="server" ID="vmoOverallScore" Text="0"></asp:Label></h3>
-                    <asp:HiddenField ID="vmoOverallScore1" runat="server" />
-                </td> 
+                <td style="height: 37px"><h3><asp:Label runat="server" ID="vmoOverallScore" Text="0"></asp:Label></h3></td> 
             </tr>
         </table>
 <br /><br />

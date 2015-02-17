@@ -25,7 +25,7 @@
 <div class="header">
 <div class="header_inner">
 <div class="header_search">
-<div style="margin-top:5px; width:950px;">
+<div style="display:block; margin-top:5px; float:right">
   <Ava:Headnav ID="Headnav" runat="server" />
   </div>
   </div>
