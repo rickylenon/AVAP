@@ -149,7 +149,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucCorpAttch_geninfoFile" type="file"/></div> 
 									<asp:Label ID="legalStrucCorpAttch_geninfoLbl" CssClass="legalStrucCorpAttch_geninfoLbl" runat="server" Text="General Information Sheet" style="float:left; padding-top:3px; display:block"></asp:Label>
 									<input id="legalStrucCorpAttch_geninfo" name="legalStrucCorpAttch_geninfo" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div>
 							</td>
 						</tr>
@@ -185,7 +185,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucCorpAttch_geninfo2File" type="file"/></div> 
 									<asp:Label ID="legalStrucCorpAttch_geninfo2Lbl" CssClass="legalStrucCorpAttch_geninfo2Lbl" runat="server" Text="SEC Certificate" style="float:left; padding-top:3px; display:block"></asp:Label>
 									<input id="legalStrucCorpAttch_geninfo2" name="legalStrucCorpAttch_geninfo2" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div></td>
 						</tr>
 						
@@ -218,7 +218,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucCorpAttch_geninfo3File" type="file"/></div> 
 									<asp:Label ID="legalStrucCorpAttch_geninfo3Lbl" CssClass="legalStrucCorpAttch_geninfo3Lbl" runat="server" Text="Articles of Incorporation and By Laws" style="float:left; padding-top:3px; display:block"></asp:Label>
 									<input id="legalStrucCorpAttch_geninfo3" name="legalStrucCorpAttch_geninfo3" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div></td>
 						</tr>
 						
@@ -251,7 +251,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucCorpAttch_geninfo4File" type="file"/><input id="legalStrucCorpAttch_geninfo4Text" name="legalStrucCorpAttch_geninfo4Text" runat="server" type="text" value="" /></div> 
 									<asp:Label ID="legalStrucCorpAttch_geninfo4Lbl" CssClass="legalStrucCorpAttch_geninfo4Lbl" runat="server" Text="Others" style="float:left; padding-top:3px; display:block"></asp:Label>
 									<input id="legalStrucCorpAttch_geninfo4" name="legalStrucCorpAttch_geninfo4" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div>
 								</td>
 						</tr>
@@ -290,7 +290,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucCorpAttch_IdentityAuthorizdSignaFile" type="file"/></div> 
 									<asp:Label ID="legalStrucCorpAttch_IdentityAuthorizdSignaLbl" CssClass="legalStrucCorpAttch_IdentityAuthorizdSignaLbl" runat="server" Text="Authorized signatories - Any government issued ID with picture" style="float:left; padding-top:3px; display:block"></asp:Label>
 									<input id="legalStrucCorpAttch_IdentityAuthorizdSigna" name="legalStrucCorpAttch_IdentityAuthorizdSigna" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div>
 							</td>
 						</tr>
@@ -324,7 +324,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucCorpAttch_IdentitytaxcertFile" type="file"/></div> 
 									<asp:Label ID="legalStrucCorpAttch_IdentitytaxcertLbl" CssClass="legalStrucCorpAttch_IdentitytaxcertLbl" runat="server" Text="Company – Community Tax Certificate" style="float:left; padding-top:3px; display:block"></asp:Label>
 									<input id="legalStrucCorpAttch_Identitytaxcert" name="legalStrucCorpAttch_Identitytaxcert" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div>
 							</td>
 						</tr>
@@ -359,7 +359,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucCorpAttch_BoardAuthorizdSignaFile" type="file"/></div> 
 									<asp:Label ID="legalStrucCorpAttch_BoardAuthorizdSignaLbl" CssClass="legalStrucCorpAttch_BoardAuthorizdSignaLbl" runat="server" Text="Board Resolution / Secretary certificate of authorized signatories" style="float:left; padding-top:3px; display:block; font-weight:bold"></asp:Label>
 									<input id="legalStrucCorpAttch_BoardAuthorizdSigna" name="legalStrucCorpAttch_BoardAuthorizdSigna" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div>
 							</td>
 						</tr>
@@ -399,7 +399,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucSoleAttch_DTIRegFile" type="file"/></div> 
 									<asp:Label ID="legalStrucSoleAttch_DTIRegLbl" CssClass="legalStrucSoleAttch_DTIRegLbl" runat="server" Text="DTI Registration – attach letter of certification from Proprietor stating registered / authorized capital" style="float:left; padding-top:3px; display:block; font-weight:bold;"></asp:Label>
 									<input id="legalStrucSoleAttch_DTIReg" name="legalStrucSoleAttch_DTIReg" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div>
 							</td>
 						</tr>
@@ -434,7 +434,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucSoleAttch_OwnersId1File" type="file"/></div> 
 									<asp:Label ID="legalStrucSoleAttch_OwnersId1Lbl" CssClass="legalStrucSoleAttch_OwnersId1Lbl" runat="server" Text="Owner’s Identification ** valid IDs include: Driver’s License, Passport or NBI Clearance" style="float:left; padding-top:3px; display:block; font-weight:bold"></asp:Label>
 									<input id="legalStrucSoleAttch_OwnersId1" name="legalStrucSoleAttch_OwnersId1" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div>
 							</td>
 						</tr>
@@ -469,7 +469,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 									<div style="float:left; width:30px;"><input id="legalStrucSoleAttch_CTCFile" type="file"/></div> 
 									<asp:Label ID="legalStrucSoleAttch_CTCLbl" CssClass="legalStrucSoleAttch_CTCLbl" runat="server" Text="Community Tax Certificate of the owner (CTC)" style="float:left; padding-top:3px; display:block; font-weight:bold"></asp:Label>
 									<input id="legalStrucSoleAttch_CTC" name="legalStrucSoleAttch_CTC" runat="server" type="hidden" value="" />
-                                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 								<div class="clearfix"></div>
 							</td>
 						</tr>
@@ -747,7 +747,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 		<div style="float:left; width:30px;"><input id="fileupload2" type="file"/></div> 
 		<asp:Label ID="fileuploaded2" CssClass="fileuploaded2" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
 		<input id="busPermitAttachement" name="busPermitAttachement" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 	</td>
   </tr>
 </table>
@@ -807,7 +807,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 		<div style="float:left; width:30px;"><input id="fileupload3" type="file"/></div> 
 		<asp:Label ID="fileuploaded3" CssClass="fileuploaded3" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
 		<input id="birRegAttachement" name="birRegAttachement" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 	</td>
   </tr>
   <tr>

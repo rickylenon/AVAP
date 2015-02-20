@@ -282,7 +282,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
     <div style="float:left; width:30px;"><input id="yr1FileNameFile" type="file"/></div> 
         <asp:Label ID="yr1FileNameLbl" CssClass="yr1FileNameLbl" runat="server" Text="Attach file" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="yr1FileName" name="yr1FileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
   </tr>
 </table>

@@ -175,7 +175,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="benefitsPagibigFileNameFile" type="file"/></div> 
         <asp:Label ID="benefitsPagibigFileNameLbl" CssClass="benefitsPagibigFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsPagibigFileName" name="benefitsPagibigFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
         </td>
   </tr>
   <tr>
@@ -214,7 +214,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="benefitsPHICFileNameFile" type="file"/></div> 
         <asp:Label ID="benefitsPHICFileNameLbl" CssClass="benefitsPHICFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsPHICFileName" name="benefitsPHICFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     </tr>
   <tr>
@@ -254,7 +254,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="benefitsSSSFileNameFile" type="file"/></div> 
         <asp:Label ID="benefitsSSSFileNameLbl" CssClass="benefitsSSSFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsSSSFileName"  name="benefitsSSSFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
   </tr>
   <tr>
@@ -308,7 +308,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="benefitsOthersFileNameFile" type="file"/></div> 
         <asp:Label ID="benefitsOthersFileNameLbl" CssClass="benefitsOthersFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsOthersFileName" name="benefitsOthersFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
         </td>
   </tr>
 </table>
@@ -458,7 +458,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="ceoCRFile" type="file"/></div> 
         <asp:Label ID="ceoCRLbl" CssClass="ceoCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="ceoCR" name="ceoCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -488,7 +488,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="cfoCRFile" type="file"/></div> 
         <asp:Label ID="cfoCRLbl" CssClass="cfoCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="cfoCR" name="cfoCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -518,7 +518,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="cooCRFile" type="file"/></div> 
         <asp:Label ID="cooCRLbl" CssClass="cooCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="cooCR" name="cooCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -548,7 +548,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="ptmCRFile" type="file"/></div> 
         <asp:Label ID="ptmCRLbl" CssClass="ptmCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="ptmCR" name="ptmCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td>
         
@@ -660,7 +660,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="fileupload3" type="file"/></div> 
         <asp:Label ID="fileuploaded3" CssClass="fileuploaded3" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsMachineriesFileName" name="assetsMachineriesFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
   </tr>
   <tr>
@@ -693,7 +693,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="fileupload4" type="file"/></div> 
         <asp:Label ID="fileuploaded4" CssClass="fileuploaded4" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsCompanyProfileFileName" name="assetsCompanyProfileFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
   </tr>
   <tr>
@@ -726,7 +726,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="fileupload5" type="file"/></div> 
         <asp:Label ID="fileuploaded5" CssClass="fileuploaded5" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsOthersFileName" name="assetsOthersFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
         </td>
   </tr>
 </table>
@@ -855,7 +855,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="biAttachmentFile" runat="server" class="biAttachmentFile" type="file"/></div> 
         <asp:Label ID="biAttachmentLbl" CssClass="biAttachmentLbl" runat="server" Text='<%# Eval("biAttachment").ToString()!="" ? "<a href=\"" + Eval("biAttachment").ToString() + "\" target=\"_blank\">Attached file</a>" : "Attach file" %>' style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="biAttachment" name="biAttachment" type="hidden" value='<%# Eval("biAttachment") %>' />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;" valign="bottom"><img alt="" src="images/trash.png" width="9" height="13" border="0" class="delRow" /></td>
   </tr>

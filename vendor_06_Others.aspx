@@ -120,7 +120,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="fileUpload"  name="fileUpload"  type="file"/></div> 
         <asp:Label ID="fileuploadedLbl" CssClass="fileuploadedLbl" runat="server" Text='<%# Eval("Attachment").ToString()!="" ? "<a href=\"" + Eval("Attachment").ToString() + "\" target=\"_blank\">Attached file</a>" : "Attach file" %>' style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="Attachment" name="Attachment" type="hidden" value="<%# Eval("Attachment") %>" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td valign="bottom"><img src="images/trash.png" width="9" height="13" border="0" class="delRow" /></td>
     </tr>
@@ -317,7 +317,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
             <input id="othersQltyMangmtSys_File2File" type="file"/></div> 
         <asp:Label ID="othersQltyMangmtSys_File2Lbl" CssClass="othersQltyMangmtSys_File2Lbl" runat="server" Text="Attach file" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="othersQltyMangmtSys_File2" name="othersQltyMangmtSys_File2" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </div>
       <br />
         <div class="clearfix"></div>

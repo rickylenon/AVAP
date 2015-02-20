@@ -324,7 +324,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="prodServ_DAC_AttachmentFile"  class="prodServ_DAC_AttachmentFile" type="file" runat="server"/></div> 
         <asp:Label ID="prodServ_DAC_AttachmentLbl" CssClass="prodServ_DAC_AttachmentLbl" runat="server" Text="File Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="prodServ_DAC_Attachment" name="prodServ_DAC_Attachment" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
 <div class="clearfix"></div>
 
 

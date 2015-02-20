@@ -168,7 +168,7 @@ Globe Automated Vendor Accreditation :: Vendor
         <div style="float:left; width:30px;"><input id="CertAndWarranty_AttachedSignedFile" class="CertAndWarranty_AttachedSignedFile" type="file" runat="server"/></div> 
         <asp:Label ID="CertAndWarranty_AttachedSignedLbl" CssClass="CertAndWarranty_AttachedSignedLbl" runat="server" Text="Attach signed form" style="float:left; padding-top:3px; display:block"></asp:Label>  <img src="images/xicon.png" style="margin-left:10px; padding-top:5px;display:none;" id="CertAndWarranty_AttachedSignedx" onclick="$('#<%= CertAndWarranty_AttachedSigned.ClientID %>').val('');$('#<%= CertAndWarranty_AttachedSignedLbl.ClientID %>').html('Attach signed form');$(this).hide();" />
         <input id="CertAndWarranty_AttachedSigned" name="CertAndWarranty_AttachedSigned" runat="server" type="hidden" value="" />
-                    <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                    <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
                 </td>
             </tr>
         </table>
@@ -300,7 +300,7 @@ Makati City 1226
         <div style="float:left; width:30px;"><input id="paymentProofFile" class="paymentProofFile" type="file" runat="server"/></div> 
         <asp:Label ID="paymentProofLbl" CssClass="paymentProofLbl" runat="server" Text="Attach Proof of Payment" style="float:left; padding-top:3px; display:block"></asp:Label><img src="images/xicon.png" style="margin-left:10px; padding-top:5px;display:none;" id="paymentProofx" onclick="$('#<%= paymentProof.ClientID %>').val('');$('#<%= paymentProofLbl.ClientID %>').html('Attach Proof of Payment');$(this).hide();" />
         <input id="paymentProof" name="paymentProof" runat="server" type="hidden" value="" />
-                <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+                <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
             </td>
         </tr>
         <tr>
