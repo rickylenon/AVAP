@@ -510,7 +510,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="ceoCRFile" type="file"/></div> 
         <asp:Label ID="ceoCRLbl" CssClass="ceoCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="ceoCR" name="ceoCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -540,7 +540,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="cfoCRFile" type="file"/></div> 
         <asp:Label ID="cfoCRLbl" CssClass="cfoCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="cfoCR" name="cfoCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -570,7 +570,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="cooCRFile" type="file"/></div> 
         <asp:Label ID="cooCRLbl" CssClass="cooCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="cooCR" name="cooCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -600,7 +600,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="ptmCRFile" type="file"/></div> 
         <asp:Label ID="ptmCRLbl" CssClass="ptmCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="ptmCR" name="ptmCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td>
         

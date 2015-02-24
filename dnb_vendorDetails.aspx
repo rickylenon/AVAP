@@ -204,7 +204,7 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
         <%--<label id="fileuploadedLbl" name="fileuploadedLbl" class="fileuploadedLbl" style="float:left; padding-top:3px; display:block"><%# Eval("Attachment").ToString() != "" ? "<a href=\""+ Eval("Attachment") +"\" target=\"_blank\" >"+Eval("Attachment")+"</a>" : "File Attachment" %></label>--%>
         <asp:Label ID="fileuploadedLbl" CssClass="fileuploadedLbl" runat="server" Text='<%# Eval("Attachment").ToString()!="" ? "<a href=\"" + Eval("Attachment").ToString() + "\" target=\"_blank\">Attached file</a>" : "Attach file" %>' style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="Attachment" name="Attachment" type="hidden" value="<%# Eval("Attachment") %>" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
     </td>
     <td><img alt="" src="images/trash.png" width="9" height="13" border="0" class="delRow" style="display:none" /></td>
   </tr>
@@ -318,7 +318,7 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
         <div style="float:left; width:30px;"><input id="dnbSupplierInfoReportFile" type="file"/></div> 
         <asp:Label ID="dnbSupplierInfoReportLbl" CssClass="dnbSupplierInfoReportLbl" runat="server" Text="File Attachment" style="float:left; padding-top:3px; display:block;"></asp:Label>  <img src="images/xicon.png" style="margin-left:10px; padding-top:5px; display:none;" id="dnbSupplierInfoReportx" onclick="$('#<%= dnbSupplierInfoReport.ClientID %>').val('');$('#<%= dnbSupplierInfoReportLbl.ClientID %>').html('Attach file');$(this).hide();" />
         <input id="dnbSupplierInfoReport" name="dnbSupplierInfoReport" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
         <div class="clearfix"></div> 
 
 
@@ -352,7 +352,7 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
         <div style="float:left; width:30px;"><input id="dnbOtherDocumentsFile" type="file"/></div> 
         <asp:Label ID="dnbOtherDocumentsLbl" CssClass="dnbOtherDocumentsLbl" runat="server" Text="File Attachment" style="float:left; padding-top:3px; display:block;"></asp:Label>  <img src="images/xicon.png" style="margin-left:10px; padding-top:5px; display:none;" id="dnbOtherDocumentsx" onclick="$('#<%= dnbOtherDocuments.ClientID %>').val('');$('#<%= dnbOtherDocumentsLbl.ClientID %>').html('Attach file');$(this).hide();" />
         <input id="dnbOtherDocuments" name="dnbOtherDocuments" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
         <div class="clearfix"></div> 
 <br />
 
