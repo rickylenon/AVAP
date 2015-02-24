@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSubPage.master" AutoEventWireup="true" CodeFile="vendor_03_businessOperational.aspx.cs" Inherits="vendor_03_businessOperational" %>
+﻿ï»¿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSubPage.master" AutoEventWireup="true" CodeFile="vendor_03_businessOperational.aspx.cs" Inherits="vendor_03_businessOperational" %>
 <%@ Register TagPrefix="Ava" TagName="Tabsnav" Src="usercontrols/tabs.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitlePlaceHolder1" runat="Server">
 Globe Automated Vendor Accreditation :: Vendor Information
@@ -18,6 +18,17 @@ Globe Automated Vendor Accreditation :: Vendor Information
 	            fade: 250
 	        });
 	    });
+
+	    function FileattchValues(Str, StrRemove, FieldHidden1) {
+	        $('#ContentPlaceHolder1_' + FieldHidden1).attr('value', '');
+	        var myArray = Str.split(';');
+	        for (var i = 0; i < myArray.length; i++) {
+	            if (myArray[i] != StrRemove)
+	                if (myArray[i] != "") {
+	                    $('#ContentPlaceHolder1_' + FieldHidden1).attr('value', $('#ContentPlaceHolder1_' + FieldHidden1).attr('value') + ';' + myArray[i]);
+	                }
+	        } //alert($('#ContentPlaceHolder1_'+FieldHidden1).attr('value'));
+	    }
     </script>
 	<!--### TOOLTIP ENDS ###-->
     
@@ -68,6 +79,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
             })
         }
     </script>
+
 	<script type="text/javascript" src="Scripts/jquery.table.addrow.js" ></script>
 <link href="Styles/ava_pages.css" rel="stylesheet" type="text/css" />
 <div class="content">
@@ -137,7 +149,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 <!--Business activities STARTS-->
 
 <h3 style="margin:10px 0px;">2. Benefits received</h3>
-<table width="484"  border="0" cellpadding="5" cellspacing="0" id="tbl02" runat="server">
+<table width="584"  border="0" cellpadding="5" cellspacing="0" id="tbl02" runat="server">
   <tr>
     <td style="border-top: thin #CCC dotted; width: 129px;"><strong>Pag-IBIG/HDMF</strong></td>
     <td style="border-top: thin #CCC dotted; width: 67px;">
@@ -149,33 +161,43 @@ Globe Automated Vendor Accreditation :: Vendor Information
     </td>
     <td width="137" style="border-top: thin #CCC dotted;">
     <script type="text/javascript">
-    // <![CDATA[
+        // <![CDATA[
         $(document).ready(function () {
-            $('#benefitsPagibigFileNameFile').uploadify({
+            FieldHidden4 = 'benefitsPagibigFileName';
+            $('#' + FieldHidden4 + 'File_btup').hide();
+            $('#ContentPlaceHolder1_' + FieldHidden4 + 'File').uploadify({
                 'uploader': 'uploadify/uploadify.swf',
                 'script': 'upload.ashx',
 
                 'cancelImg': 'uploadify/cancel.png',
-                'auto': true,
+                'auto': false,
                 'multi': true,
                 'fileDesc': 'Attach File',
                 'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
                 'queueSizeLimit': 5,
-                'sizeLimit': 5000000,
+                'sizeLimit': 20000000,
                 'folder': 'uploads/<%= Session["VendorId"] %>',
+                'onSelect': function (event, ID, fileObj) {
+                    $('#' + FieldHidden4 + 'File_btup').show();
+                },
+                'onCancel': function (event, ID, fileObj, data) {
+                    $('#' + FieldHidden4 + '_btup').hide();
+                },
                 'onComplete': function (event, queueID, fileObj, response, data) {
                     //alert(response);
-                    $('.benefitsPagibigFileNameLbl').html('<a href="' + response + '" target="_blank">' + response + '</a>');
-                    $('#ContentPlaceHolder1_benefitsPagibigFileName').attr('value', response);
+                    $('#ContentPlaceHolder1_' + FieldHidden4 + 'Lbl').append('<div><a href="' + response + '" target="_blank">PAG-IBIG Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden4 + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden4 + '\').val(), \'' + response + '\', \'' + FieldHidden4 + '\');\" /><br></div>');
+                    $('#ContentPlaceHolder1_' + FieldHidden4).attr('value', $('#ContentPlaceHolder1_' + FieldHidden4).val() + ';' + response);
+                    $('#' + FieldHidden4 + 'File_btup').hide();
                 }
             });
         });
     // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="benefitsPagibigFileNameFile" type="file"/></div> 
+        <div style="float:left; width:30px;"><input id="benefitsPagibigFileNameFile" type="file" runat="server"/></div> 
         <asp:Label ID="benefitsPagibigFileNameLbl" CssClass="benefitsPagibigFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsPagibigFileName" name="benefitsPagibigFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max size each file: 20 MB), click paperclip again to upload multiple files. </div>
+        <a href="javascript:$('#<%= benefitsPagibigFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsPagibigFileNameFile_btup" class="uploadselection">Start Upload</a>
         </td>
   </tr>
   <tr>
@@ -188,33 +210,43 @@ Globe Automated Vendor Accreditation :: Vendor Information
         </asp:RadioButtonList></td>
     <td style="border-top: thin #CCC dotted;">
     <script type="text/javascript">
-    // <![CDATA[
+        // <![CDATA[
         $(document).ready(function () {
-            $('#benefitsPHICFileNameFile').uploadify({
+            FieldHidden5 = 'benefitsPHICFileName';
+            $('#' + FieldHidden5 + 'File_btup').hide();
+            $('#ContentPlaceHolder1_' + FieldHidden5 + 'File').uploadify({
                 'uploader': 'uploadify/uploadify.swf',
                 'script': 'upload.ashx',
 
                 'cancelImg': 'uploadify/cancel.png',
-                'auto': true,
+                'auto': false,
                 'multi': true,
                 'fileDesc': 'Attach File',
                 'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
                 'queueSizeLimit': 5,
-                'sizeLimit': 5000000,
+                'sizeLimit': 20000000,
                 'folder': 'uploads/<%= Session["VendorId"] %>',
+                'onSelect': function (event, ID, fileObj) {
+                    $('#' + FieldHidden5 + 'File_btup').show();
+                },
+                'onCancel': function (event, ID, fileObj, data) {
+                    $('#' + FieldHidden5 + '_btup').hide();
+                },
                 'onComplete': function (event, queueID, fileObj, response, data) {
                     //alert(response);
-                    $('.benefitsPHICFileNameLbl').html('<a href="' + response + '" target="_blank">' + response + '</a>');
-                    $('#ContentPlaceHolder1_benefitsPHICFileName').attr('value', response);
+                    $('#ContentPlaceHolder1_' + FieldHidden5 + 'Lbl').append('<div><a href="' + response + '" target="_blank">PHILHEALTH Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden5 + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden5 + '\').val(), \'' + response + '\', \'' + FieldHidden5 + '\');\" /><br></div>');
+                    $('#ContentPlaceHolder1_' + FieldHidden5).attr('value', $('#ContentPlaceHolder1_' + FieldHidden5).val() + ';' + response);
+                    $('#' + FieldHidden5 + 'File_btup').hide();
                 }
             });
         });
     // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="benefitsPHICFileNameFile" type="file"/></div> 
+        <div style="float:left; width:30px;"><input id="benefitsPHICFileNameFile" type="file" runat="server"/></div> 
         <asp:Label ID="benefitsPHICFileNameLbl" CssClass="benefitsPHICFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsPHICFileName" name="benefitsPHICFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max size each file: 20 MB), click paperclip again to upload multiple files. </div>
+        <a href="javascript:$('#<%= benefitsPHICFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsPHICFileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
     </tr>
   <tr>
@@ -228,33 +260,43 @@ Globe Automated Vendor Accreditation :: Vendor Information
     </td>
     <td style="border-top: thin #CCC dotted;">
     <script type="text/javascript">
-    // <![CDATA[
+        // <![CDATA[
         $(document).ready(function () {
-            $('#benefitsSSSFileNameFile').uploadify({
+            FieldHidden6 = 'benefitsSSSFileName';
+            $('#' + FieldHidden6 + 'File_btup').hide();
+            $('#ContentPlaceHolder1_' + FieldHidden6 + 'File').uploadify({
                 'uploader': 'uploadify/uploadify.swf',
                 'script': 'upload.ashx',
 
                 'cancelImg': 'uploadify/cancel.png',
-                'auto': true,
+                'auto': false,
                 'multi': true,
                 'fileDesc': 'Attach File',
                 'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
                 'queueSizeLimit': 5,
-                'sizeLimit': 5000000,
+                'sizeLimit': 20000000,
                 'folder': 'uploads/<%= Session["VendorId"] %>',
+                'onSelect': function (event, ID, fileObj) {
+                    $('#' + FieldHidden6 + 'File_btup').show();
+                },
+                'onCancel': function (event, ID, fileObj, data) {
+                    $('#' + FieldHidden6 + '_btup').hide();
+                },
                 'onComplete': function (event, queueID, fileObj, response, data) {
                     //alert(response);
-                    $('.benefitsSSSFileNameLbl').html('<a href="' + response + '" target="_blank">' + response + '</a>');
-                    $('#ContentPlaceHolder1_benefitsSSSFileName').attr('value', response);
+                    $('#ContentPlaceHolder1_' + FieldHidden6 + 'Lbl').append('<div><a href="' + response + '" target="_blank">SSS Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden6 + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden6 + '\').val(), \'' + response + '\', \'' + FieldHidden6 + '\');\" /><br></div>');
+                    $('#ContentPlaceHolder1_' + FieldHidden6).attr('value', $('#ContentPlaceHolder1_' + FieldHidden6).val() + ';' + response);
+                    $('#' + FieldHidden6 + 'File_btup').hide();
                 }
             });
         });
     // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="benefitsSSSFileNameFile" type="file"/></div> 
+        <div style="float:left; width:30px;"><input id="benefitsSSSFileNameFile" type="file" runat="server"/></div> 
         <asp:Label ID="benefitsSSSFileNameLbl" CssClass="benefitsSSSFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
-        <input id="benefitsSSSFileName"  name="benefitsSSSFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <input id="benefitsSSSFileName" name="benefitsSSSFileName" runat="server" type="hidden" value="" />
+        <div style="font-size:9px; clear:both;">(Max size each file: 20 MB), click paperclip again to upload multiple files. </div>
+        <a href="javascript:$('#<%= benefitsSSSFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsSSSFileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
   </tr>
   <tr>
@@ -279,36 +321,46 @@ Globe Automated Vendor Accreditation :: Vendor Information
   </tr>
   <tr>
     <td style="border-top: thin #CCC dotted;"><strong>Others</strong></td>
-    <td style="border-top: thin #CCC dotted;"><input name="benefitsOthers" type="text" id="benefitsOthers" size="10" runat="server" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="benefitsOthers" type="text" id="benefitsOthers" size="10" runat="server" maxlength="100" /></td>
     <td style="border-top: thin #CCC dotted;">
     <script type="text/javascript">
-    // <![CDATA[
-    $(document).ready(function () {
-        $('#benefitsOthersFileNameFile').uploadify({
-            'uploader': 'uploadify/uploadify.swf',
-            'script': 'upload.ashx',
+        // <![CDATA[
+        $(document).ready(function () {
+            FieldHidden0 = 'benefitsOthersFileName';
+            $('#' + FieldHidden0 + 'File_btup').hide();
+            $('#ContentPlaceHolder1_' + FieldHidden0 + 'File').uploadify({
+                'uploader': 'uploadify/uploadify.swf',
+                'script': 'upload.ashx',
 
-            'cancelImg': 'uploadify/cancel.png',
-            'auto': true,
-            'multi': true,
-            'fileDesc': 'Files',
-            'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
-            'queueSizeLimit': 5,
-            'sizeLimit': 5000000,
-            'folder': 'uploads/<%= Session["VendorId"] %>',
-            'onComplete': function (event, queueID, fileObj, response, data) {
-                //alert(response);
-                $('.benefitsOthersFileNameLbl').html('<a href="' + response + '" target="_blank">' + response + '</a>');
-                $('#ContentPlaceHolder1_benefitsOthersFileName').attr('value', response);
-            }
+                'cancelImg': 'uploadify/cancel.png',
+                'auto': false,
+                'multi': true,
+                'fileDesc': 'Attach File',
+                'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
+                'queueSizeLimit': 5,
+                'sizeLimit': 20000000,
+                'folder': 'uploads/<%= Session["VendorId"] %>',
+                'onSelect': function (event, ID, fileObj) {
+                    $('#' + FieldHidden0 + 'File_btup').show();
+                },
+                'onCancel': function (event, ID, fileObj, data) {
+                    $('#' + FieldHidden0 + '_btup').hide();
+                },
+                'onComplete': function (event, queueID, fileObj, response, data) {
+                    //alert(response);
+                    $('#ContentPlaceHolder1_' + FieldHidden0 + 'Lbl').append('<div><a href="' + response + '" target="_blank">Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden0 + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden0 + '\').val(), \'' + response + '\', \'' + FieldHidden0 + '\');\" /><br></div>');
+                    $('#ContentPlaceHolder1_' + FieldHidden0).attr('value', $('#ContentPlaceHolder1_' + FieldHidden0).val() + ';' + response);
+                    $('#' + FieldHidden0 + 'File_btup').hide();
+                }
+            });
         });
-    });
     // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="benefitsOthersFileNameFile" type="file"/></div> 
+        <div style="float:left; width:30px;"><input id="benefitsOthersFileNameFile" type="file" runat="server"/></div> 
         <asp:Label ID="benefitsOthersFileNameLbl" CssClass="benefitsOthersFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="benefitsOthersFileName" name="benefitsOthersFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max size each file: 20 MB), click paperclip again to upload multiple files. </div>
+        <a href="javascript:$('#<%= benefitsOthersFileNameFile.ClientID %>').uploadifyUpload();" id="benefitsOthersFileNameFile_btup" class="uploadselection">Start Upload</a>
         </td>
   </tr>
 </table>
@@ -366,50 +418,50 @@ Globe Automated Vendor Accreditation :: Vendor Information
     </tr>
   <tr>
     <td style="border-top: thin #CCC dotted;"><label>Name</label></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ceoName" type="text" id="ceoName" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cfoName" type="text" id="cfoName" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cooName" type="text" id="cooName" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ptmName" type="text" id="ptmName" runat="server" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ceoName" type="text" id="ceoName" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cfoName" type="text" id="cfoName" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cooName" type="text" id="cooName" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ptmName" type="text" id="ptmName" runat="server" maxlength="100" /></td>
     <td>&nbsp;</td>
     </tr>
   <tr >
     <td style="border-top: thin #CCC dotted;"><label>Degree earned</label></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ceoDegreeEarned" type="text" id="ceoDegreeEarned" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cfoDegreeEarned" type="text" id="cfoDegreeEarned" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cooDegreeEarned" type="text" id="cooDegreeEarned" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ptmDegreeEarned" type="text" id="ptmDegreeEarned" runat="server" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ceoDegreeEarned" type="text" id="ceoDegreeEarned" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cfoDegreeEarned" type="text" id="cfoDegreeEarned" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cooDegreeEarned" type="text" id="cooDegreeEarned" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ptmDegreeEarned" type="text" id="ptmDegreeEarned" runat="server" maxlength="100" /></td>
     <td>&nbsp;</td>
     </tr>
   <tr >
     <td style="border-top: thin #CCC dotted;"><label>Educational institution</label></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ceoEducInstitution" type="text" id="ceoEducInstitution" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cfoEducInstitution" type="text" id="cfoEducInstitution" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cooEducInstitution" type="text" id="cooEducInstitution" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ptmEducInstitution" type="text" id="ptmEducInstitution" runat="server" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ceoEducInstitution" type="text" id="ceoEducInstitution" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cfoEducInstitution" type="text" id="cfoEducInstitution" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cooEducInstitution" type="text" id="cooEducInstitution" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ptmEducInstitution" type="text" id="ptmEducInstitution" runat="server" maxlength="100" /></td>
     <td>&nbsp;</td>
     </tr>
   <tr >
     <td style="border-top: thin #CCC dotted;"><label>Year graduated</label></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ceoYearGraduated" type="text" id="ceoYearGraduated" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cfoYearGraduated" type="text" id="cfoYearGraduated" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cooYearGraduated" type="text" id="cooYearGraduated" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ptmYearGraduated" type="text" id="ptmYearGraduated" runat="server" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ceoYearGraduated" type="text" id="ceoYearGraduated" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cfoYearGraduated" type="text" id="cfoYearGraduated" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cooYearGraduated" type="text" id="cooYearGraduated" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ptmYearGraduated" type="text" id="ptmYearGraduated" runat="server" maxlength="100" /></td>
     <td>&nbsp;</td>
   </tr>
   <tr >
     <td style="border-top: thin #CCC dotted;"><label>Nationality</label></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ceoNationality" type="text" id="ceoNationality" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cfoNationality" type="text" id="cfoNationality" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cooNationality" type="text" id="cooNationality" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ptmNationality" type="text" id="ptmNationality" runat="server" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ceoNationality" type="text" id="ceoNationality" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cfoNationality" type="text" id="cfoNationality" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cooNationality" type="text" id="cooNationality" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ptmNationality" type="text" id="ptmNationality" runat="server" maxlength="100" /></td>
     <td>&nbsp;</td>
   </tr>
   <tr >
     <td style="border-top: thin #CCC dotted;"><label>Age</label></td> 
-    <td style="border-top: thin #CCC dotted;"><input name="ceoAge" type="text" id="ceoAge" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cfoAge" type="text" id="cfoAge" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="cooAge" type="text" id="cooAge" runat="server" /></td>
-    <td style="border-top: thin #CCC dotted;"><input name="ptmAge" type="text" id="ptmAge" runat="server" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ceoAge" type="text" id="ceoAge" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cfoAge" type="text" id="cfoAge" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="cooAge" type="text" id="cooAge" runat="server" maxlength="100" /></td>
+    <td style="border-top: thin #CCC dotted;"><input name="ptmAge" type="text" id="ptmAge" runat="server" maxlength="100" /></td>
     <td>&nbsp;</td>
   </tr>
   <tr >
@@ -458,7 +510,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="ceoCRFile" type="file"/></div> 
         <asp:Label ID="ceoCRLbl" CssClass="ceoCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="ceoCR" name="ceoCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -488,7 +540,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="cfoCRFile" type="file"/></div> 
         <asp:Label ID="cfoCRLbl" CssClass="cfoCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="cfoCR" name="cfoCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -518,7 +570,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="cooCRFile" type="file"/></div> 
         <asp:Label ID="cooCRLbl" CssClass="cooCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="cooCR" name="cooCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
     </td>
     <td style="border-top: thin #CCC dotted;">
         <script type="text/javascript">
@@ -548,7 +600,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <div style="float:left; width:30px;"><input id="ptmCRFile" type="file"/></div> 
         <asp:Label ID="ptmCRLbl" CssClass="ptmCRLbl" runat="server" Text="Attachment" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="ptmCR" name="ptmCR" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max file size: 4 MB)</div>
     </td>
     <td>
         
@@ -634,99 +686,129 @@ Globe Automated Vendor Accreditation :: Vendor Information
     <td width="220px" style="border-top: thin #CCC dotted;"><strong>Machineries/Equipment/Vehicles</strong></td>
     <td style="border-top: thin #CCC dotted;">
     <script type="text/javascript">
-    // <![CDATA[
+        // <![CDATA[
         $(document).ready(function () {
-            $('#fileupload3').uploadify({
+            FieldHidden1 = 'assetsMachineriesFileName';
+            $('#' + FieldHidden1 + 'File_btup').hide();
+            $('#ContentPlaceHolder1_' + FieldHidden1 + 'File').uploadify({
                 'uploader': 'uploadify/uploadify.swf',
                 'script': 'upload.ashx',
 
                 'cancelImg': 'uploadify/cancel.png',
-                'auto': true,
+                'auto': false,
                 'multi': true,
-                'fileDesc': 'Files',
+                'fileDesc': 'Attach File',
                 'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
                 'queueSizeLimit': 5,
-                'sizeLimit': 5000000,
+                'sizeLimit': 20000000,
                 'folder': 'uploads/<%= Session["VendorId"] %>',
+                'onSelect': function (event, ID, fileObj) {
+                    $('#' + FieldHidden1 + 'File_btup').show();
+                },
+                'onCancel': function (event, ID, fileObj, data) {
+                    $('#' + FieldHidden1 + '_btup').hide();
+                },
                 'onComplete': function (event, queueID, fileObj, response, data) {
                     //alert(response);
-                    $('.fileuploaded3').html('<a href="' + response + '" target="_blank">' + response + '</a>');
-                    $('#ContentPlaceHolder1_assetsMachineriesFileName').attr('value', response);
+                    $('#ContentPlaceHolder1_' + FieldHidden1 + 'Lbl').append('<div><a href="' + response + '" target="_blank">Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden1 + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden1 + '\').val(), \'' + response + '\', \'' + FieldHidden1 + '\');\" /><br></div>');
+                    $('#ContentPlaceHolder1_' + FieldHidden1).attr('value', $('#ContentPlaceHolder1_' + FieldHidden1).val() + ';' + response);
+                    $('#' + FieldHidden1 + 'File_btup').hide();
                 }
             });
         });
     // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="fileupload3" type="file"/></div> 
-        <asp:Label ID="fileuploaded3" CssClass="fileuploaded3" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
+        <div style="float:left; width:30px;"><input id="assetsMachineriesFileNameFile" type="file" runat="server"/></div> 
+        <asp:Label ID="assetsMachineriesFileNameLbl" CssClass="assetsMachineriesFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsMachineriesFileName" name="assetsMachineriesFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max size each file: 20 MB), click paperclip again to upload multiple files. </div>
+        <a href="javascript:$('#<%= assetsMachineriesFileNameFile.ClientID %>').uploadifyUpload();" id="assetsMachineriesFileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
   </tr>
   <tr>
     <td style="border-top: thin #CCC dotted;"><strong>Company Profile</strong></td>
     <td style="border-top: thin #CCC dotted;">
     <script type="text/javascript">
-    // <![CDATA[
+        // <![CDATA[
         $(document).ready(function () {
-            $('#fileupload4').uploadify({
+            FieldHidden2 = 'assetsCompanyProfileFileName';
+            $('#' + FieldHidden2 + 'File_btup').hide();
+            $('#ContentPlaceHolder1_' + FieldHidden2 + 'File').uploadify({
                 'uploader': 'uploadify/uploadify.swf',
                 'script': 'upload.ashx',
 
                 'cancelImg': 'uploadify/cancel.png',
-                'auto': true,
+                'auto': false,
                 'multi': true,
-                'fileDesc': 'Files',
+                'fileDesc': 'Attach File',
                 'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
                 'queueSizeLimit': 5,
-                'sizeLimit': 5000000,
+                'sizeLimit': 20000000,
                 'folder': 'uploads/<%= Session["VendorId"] %>',
+                'onSelect': function (event, ID, fileObj) {
+                    $('#' + FieldHidden2 + 'File_btup').show();
+                },
+                'onCancel': function (event, ID, fileObj, data) {
+                    $('#' + FieldHidden2 + '_btup').hide();
+                },
                 'onComplete': function (event, queueID, fileObj, response, data) {
                     //alert(response);
-                    $('.fileuploaded4').html('<a href="' + response + '" target="_blank">' + response + '</a>');
-                    $('#ContentPlaceHolder1_assetsCompanyProfileFileName').attr('value', response);
+                    $('#ContentPlaceHolder1_' + FieldHidden2 + 'Lbl').append('<div><a href="' + response + '" target="_blank">Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden2 + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden2 + '\').val(), \'' + response + '\', \'' + FieldHidden2 + '\');\" /><br></div>');
+                    $('#ContentPlaceHolder1_' + FieldHidden2).attr('value', $('#ContentPlaceHolder1_' + FieldHidden2).val() + ';' + response);
+                    $('#' + FieldHidden2 + 'File_btup').hide();
                 }
             });
         });
     // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="fileupload4" type="file"/></div> 
-        <asp:Label ID="fileuploaded4" CssClass="fileuploaded4" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
+        <div style="float:left; width:30px;"><input id="assetsCompanyProfileFileNameFile" type="file" runat="server"/></div> 
+        <asp:Label ID="assetsCompanyProfileFileNameLbl" CssClass="assetsCompanyProfileFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsCompanyProfileFileName" name="assetsCompanyProfileFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max size each file: 20 MB), click paperclip again to upload multiple files. </div>
+        <a href="javascript:$('#<%= assetsCompanyProfileFileNameFile.ClientID %>').uploadifyUpload();" id="assetsCompanyProfileFileNameFile_btup" class="uploadselection">Start Upload</a>
     </td>
   </tr>
   <tr>
     <td style="border-top: thin #CCC dotted;"><strong>Others</strong></td>
     <td style="border-top: thin #CCC dotted;">
     <script type="text/javascript">
-    // <![CDATA[
+        // <![CDATA[
         $(document).ready(function () {
-            $('#fileupload5').uploadify({
+            FieldHidden3 = 'assetsOthersFileName';
+            $('#' + FieldHidden3 + 'File_btup').hide();
+            $('#ContentPlaceHolder1_' + FieldHidden3 + 'File').uploadify({
                 'uploader': 'uploadify/uploadify.swf',
                 'script': 'upload.ashx',
 
                 'cancelImg': 'uploadify/cancel.png',
-                'auto': true,
+                'auto': false,
                 'multi': true,
-                'fileDesc': 'Files',
+                'fileDesc': 'Attach File',
                 'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
                 'queueSizeLimit': 5,
-                'sizeLimit': 5000000,
+                'sizeLimit': 20000000,
                 'folder': 'uploads/<%= Session["VendorId"] %>',
+                'onSelect': function (event, ID, fileObj) {
+                    $('#' + FieldHidden3 + 'File_btup').show();
+                },
+                'onCancel': function (event, ID, fileObj, data) {
+                    $('#' + FieldHidden3 + '_btup').hide();
+                },
                 'onComplete': function (event, queueID, fileObj, response, data) {
                     //alert(response);
-                    $('.fileuploaded5').html('<a href="' + response + '" target="_blank">' + response + '</a>');
-                    $('#ContentPlaceHolder1_assetsOthersFileName').attr('value', response);
+                    $('#ContentPlaceHolder1_' + FieldHidden3 + 'Lbl').append('<div><a href="' + response + '" target="_blank">Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"' + FieldHidden3 + 'x\" onclick=\"$(this).parent(\'div\').html(\'\'); FileattchValues($(\'#ContentPlaceHolder1_' + FieldHidden3 + '\').val(), \'' + response + '\', \'' + FieldHidden3 + '\');\" /><br></div>');
+                    $('#ContentPlaceHolder1_' + FieldHidden3).attr('value', $('#ContentPlaceHolder1_' + FieldHidden3).val() + ';' + response);
+                    $('#' + FieldHidden3 + 'File_btup').hide();
                 }
             });
         });
     // ]]>
     </script>
-        <div style="float:left; width:30px;"><input id="fileupload5" type="file"/></div> 
-        <asp:Label ID="fileuploaded5" CssClass="fileuploaded5" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
+        <div style="float:left; width:30px;"><input id="assetsOthersFileNameFile" type="file" runat="server"/></div> 
+        <asp:Label ID="assetsOthersFileNameLbl" CssClass="assetsOthersFileNameLbl" runat="server" Text="" style="float:left; padding-top:3px; display:block"></asp:Label>
         <input id="assetsOthersFileName" name="assetsOthersFileName" runat="server" type="hidden" value="" />
-        <div style="font-size:9px; clear:both;">(Max file size: 20 MB)</div>
+        <div style="font-size:9px; clear:both;">(Max size each file: 20 MB), click paperclip again to upload multiple files. </div>
+        <a href="javascript:$('#<%= assetsOthersFileNameFile.ClientID %>').uploadifyUpload();" id="assetsOthersFileNameFile_btup" class="uploadselection">Start Upload</a>
         </td>
   </tr>
 </table>
@@ -756,7 +838,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
     <table cellpadding="5" id="tbl04a" runat="server">
         <tr>
             <td width="180" style="border-top: thin #CCC dotted;"><b>Land Area</b></td>
-            <td width="220" style="border-top: thin #CCC dotted;"><input type="text" name="facltyLandTxt" id="facltyLandTxt" runat="server" value="" size="20" /></td>
+            <td width="220" style="border-top: thin #CCC dotted;"><input type="text" name="facltyLandTxt" id="facltyLandTxt" runat="server" value="" size="20" maxlength="100" /></td>
             <td width="120" style="border-top: thin #CCC dotted;">
                 <asp:DropDownList ID="facltyLandOwned" runat="server">
                     <asp:ListItem>Owned</asp:ListItem>
@@ -766,7 +848,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
         </tr>
         <tr>
             <td style="border-top: thin #CCC dotted;"><b>Building Area</b></td>
-            <td style="border-top: thin #CCC dotted;"><input type="text" name="facltyBldgTxt" id="facltyBldgTxt" runat="server" value="" size="20" /></td>
+            <td style="border-top: thin #CCC dotted;"><input type="text" name="facltyBldgTxt" id="facltyBldgTxt" runat="server" value="" size="20" maxlength="100" /></td>
             <td style="border-top: thin #CCC dotted;">
                 <asp:DropDownList ID="facltyBldgOwned" runat="server">
                     <asp:ListItem>Owned</asp:ListItem>
@@ -844,7 +926,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 <ItemTemplate>
   <tr>
     <td style="border-top: thin #CCC dotted;">
-      <input type="text" name="biBranch" id="biBranch" value="<%# Eval("biBranch")%>"  maxlength="100"/></td>
+      <input type="text" name="biBranch" id="biBranch" value="<%# Eval("biBranch")%>" maxlength="100"/></td>
     <td style="border-top: thin #CCC dotted;">
       <input type="text" name="biBankName" id="biBankName"  value="<%# Eval("biBankName")%>" maxlength="100"/></td>
     <td style="border-top: thin #CCC dotted;">
@@ -884,6 +966,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
   </table>
   <asp:SqlDataSource ID="dsVendorBankInformation" runat="server" ConnectionString="<%$ ConnectionStrings:AVAConnectionString %>"
             SelectCommand="IF ((SELECT COUNT(*) FROM tblVendorBankInformation WHERE VendorId = @VendorId) >= 1 AND (SELECT COUNT(*) FROM tblVendorBankInformation WHERE VendorId = @VendorId) < 3) BEGIN SELECT BankId, VendorId, biBankName, biBranch, biAccountType, biContact, DateCreated, biAttachment FROM tblVendorBankInformation WHERE VendorId = @VendorId UNION SELECT 1 AS BankId, NULL AS VendorId, '' AS biBankName, '' AS biBranch, '' AS biAccountType, '' AS biContact, NULL AS DateCreated, '' AS biAttachment END ELSE IF ((SELECT COUNT(*) FROM tblVendorBankInformation WHERE VendorId = @VendorId) = 3) BEGIN SELECT BankId, VendorId, biBankName, biBranch, biAccountType, biContact, DateCreated, biAttachment FROM tblVendorBankInformation WHERE VendorId = @VendorId END ELSE BEGIN SELECT 1 AS BankId,'' AS VendorId, '' AS biBankName, '' AS biBranch, '' AS biAccountType, '' AS biContact, '' AS DateCreated, '' AS biAttachment UNION SELECT 2 AS BankId,'' AS VendorId, '' AS biBankName, '' AS biBranch, '' AS biAccountType, '' AS biContact, '' AS DateCreated, '' AS biAttachment UNION SELECT 3 AS BankId,'' AS VendorId, '' AS biBankName, '' AS biBranch, '' AS biAccountType, '' AS biContact, '' AS DateCreated, '' AS biAttachment END" OnSelecting="rptGeneral_Selecting"  >
+      <%--SelectCommand="IF ((SELECT COUNT(*) FROM tblVendorBankInformation WHERE VendorId = @VendorId) >= 1 AND (SELECT COUNT(*) FROM tblVendorBankInformation WHERE VendorId = @VendorId) < 3) BEGIN SELECT BankId, VendorId, biBankName, biBranch, biAccountType, biContact, DateCreated, biAttachment FROM tblVendorBankInformation WHERE VendorId = @VendorId UNION SELECT 1 AS BankId, NULL AS VendorId, '' AS biBankName, '' AS biBranch, '' AS biAccountType, '' AS biContact, NULL AS DateCreated, '' AS biAttachment END ELSE IF ((SELECT COUNT(*) FROM tblVendorBankInformation WHERE VendorId = @VendorId) = 3) BEGIN SELECT BankId, VendorId, biBankName, biBranch, biAccountType, biContact, DateCreated, biAttachment FROM tblVendorBankInformation WHERE VendorId = @VendorId END ELSE BEGIN SELECT 1 AS BankId,'' AS VendorId, '' AS biBankName, '' AS biBranch, '' AS biAccountType, '' AS biContact, '' AS DateCreated, '' AS biAttachment UNION SELECT 2 AS BankId,'' AS VendorId, '' AS biBankName, '' AS biBranch, '' AS biAccountType, '' AS biContact, '' AS DateCreated, '' AS biAttachment UNION SELECT 3 AS BankId,'' AS VendorId, '' AS biBankName, '' AS biBranch, '' AS biAccountType, '' AS biContact, '' AS DateCreated, '' AS biAttachment END"--%>
       <%-- SelectCommand="IF ((SELECT COUNT(*) FROM tblDnbLegalReport WHERE VendorId = @VendorId) >= 1 AND (SELECT COUNT(*) FROM tblDnbLegalReport WHERE VendorId = @VendorId) < 3) BEGIN SELECT ID, VendorId, TypeOfCase, DateFiled, Attachment, DateCreated FROM tblDnbLegalReport WHERE VendorId = @VendorId UNION SELECT NULL as ID,  '' AS VendorId, '' AS TypeOfCase, '' AS DateFiled, '' AS Attachment, '' AS DateCreated END ELSE IF ((SELECT COUNT(*) FROM tblDnbLegalReport WHERE VendorId = @VendorId) = 3) BEGIN SELECT ID, VendorId, TypeOfCase, DateFiled, Attachment, DateCreated FROM tblDnbLegalReport WHERE VendorId = @VendorId END ELSE BEGIN SELECT 1 as ID, '' AS VendorId, '' AS TypeOfCase, '' AS DateFiled, '' AS Attachment, '' AS DateCreated UNION SELECT 2 as ID,  '' AS VendorId, '' AS TypeOfCase, '' AS DateFiled, '' AS Attachment, '' AS DateCreated UNION SELECT 3 as ID,  '' AS VendorId, '' AS TypeOfCase, '' AS DateFiled, '' AS Attachment, '' AS DateCreated END" --%>
     <SelectParameters>
         <asp:Parameter Name="VendorId" Type="Int32" />
@@ -908,7 +991,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
                 'fileDesc': 'Files',
                 'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
                 'queueSizeLimit': 5,
-                'sizeLimit': 5000000,
+                'sizeLimit': 20000000,
                 'folder': 'uploads/<%= Session["VendorId"] %>',
             'onComplete': function (event, queueID, fileObj, response, data) {
                 $('#ContentPlaceHolder1_repeaterBankInformation_biAttachmentLbl_0').html('<a href="' + response + '" target="_blank">Attached file</a>');
@@ -925,7 +1008,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
             'fileDesc': 'Files',
             'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
             'queueSizeLimit': 5,
-            'sizeLimit': 5000000,
+            'sizeLimit': 20000000,
             'folder': 'uploads/<%= Session["VendorId"] %>',
             'onComplete': function (event, queueID, fileObj, response, data) {
                 $('#ContentPlaceHolder1_repeaterBankInformation_biAttachmentLbl_0').html('<a href="' + response + '" target="_blank">Attached file</a>');
@@ -942,7 +1025,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
             'fileDesc': 'Files',
             'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
             'queueSizeLimit': 5,
-            'sizeLimit': 5000000,
+            'sizeLimit': 20000000,
             'folder': 'uploads/<%= Session["VendorId"] %>',
             'onComplete': function (event, queueID, fileObj, response, data) {
                 $('#ContentPlaceHolder1_repeaterBankInformation_biAttachmentLbl_1').html('<a href="' + response + '" target="_blank">Attached file</a>');
@@ -959,7 +1042,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
             'fileDesc': 'Files',
             'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
             'queueSizeLimit': 5,
-            'sizeLimit': 5000000,
+            'sizeLimit': 20000000,
             'folder': 'uploads/<%= Session["VendorId"] %>',
             'onComplete': function (event, queueID, fileObj, response, data) {
                 $('#ContentPlaceHolder1_repeaterBankInformation_biAttachmentLbl_2').html('<a href="' + response + '" target="_blank">Attached file</a>');
@@ -976,7 +1059,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
             'fileDesc': 'Files',
             'fileExt': '*.jpg;*.png;*.gif;*bmp;*.jpeg;*.doc;*.docx;*.xls;*.xlsx;*.zip;*.rar;*.ppt;*.pdf',
             'queueSizeLimit': 5,
-            'sizeLimit': 5000000,
+            'sizeLimit': 20000000,
             'folder': 'uploads/<%= Session["VendorId"] %>',
             'onComplete': function (event, queueID, fileObj, response, data) {
                 $('#ContentPlaceHolder1_repeaterBankInformation_biAttachmentLbl_3').html('<a href="' + response + '" target="_blank">Attached file</a>');
@@ -1017,14 +1100,14 @@ Globe Automated Vendor Accreditation :: Vendor Information
         <tr>
             <td style="border-top: thin #CCC dotted;"><label>Third Party Liability</label></td>
             <td style="border-top: thin #CCC dotted;">
-                <input type="text" runat="server" name="insurInfoPartyLia_Limit" id="insurInfoPartyLia_Limit"  value="" size="20" maxlength="150"/></td>
+                <input type="text" runat="server" name="insurInfoPartyLia_Limit" id="insurInfoPartyLia_Limit"  value="" size="20" maxlength="150" /></td>
             <td style="border-top: thin #CCC dotted;"><input type="text" runat="server" name="insurInfoPartyLia_InsuCo" id="insurInfoPartyLia_InsuCo"  value="" size="20" maxlength="150"/></td>
         </tr>
         <tr>
             <td style="border-top: thin #CCC dotted;"><label>Others</label></td>
             <td style="border-top: thin #CCC dotted;">
                 <input type="text" runat="server" name="insurInfoOthers_Limit" id="insurInfoOthers_Limit"  value="" size="20" maxlength="150"/></td>
-            <td style="border-top: thin #CCC dotted;"><input type="text" runat="server" name="insurInfoOthers_InsuCo" id="insurInfoOthers_InsuCo"  value="" size="20" maxlength="150"/></td>
+            <td style="border-top: thin #CCC dotted;"><input type="text" runat="server" name="insurInfoOthers_InsuCo" id="insurInfoOthers_InsuCo"  value="" size="20" maxlength="150" /></td>
         </tr>
     </table>
 
@@ -1081,7 +1164,7 @@ Globe Automated Vendor Accreditation :: Vendor Information
 <br />
 <br />
 <br />
-<asp:LinkButton ID="createBt" runat="server" CssClass="bt1"  onclientclick="javascript: __doPostBack('continueStp', ''); return false;"><span>SAVE &amp; CONTINUE STEP 4 »</span></asp:LinkButton>
+<asp:LinkButton ID="createBt" runat="server" CssClass="bt1"  onclientclick="javascript: __doPostBack('continueStp', ''); return false;"><span>SAVE &amp; CONTINUE STEP 4 Â»</span></asp:LinkButton>
 &nbsp;<asp:LinkButton ID="createBt1" runat="server" CssClass="bt1"  onclientclick="javascript: __doPostBack('justSave', ''); return false;"><span>SAVE</span></asp:LinkButton>
 &nbsp;<a href="vendor_02_productServices.aspx<%= queryString %>" class="bt1"><span>BACK</span></a>
 <br />
