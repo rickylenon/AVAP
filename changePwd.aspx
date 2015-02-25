@@ -27,7 +27,7 @@ Globe Automated Vendor Accreditation :: Change Password
         <div class="clearfix"></div>
 	<br />
         <div style="float:none">
-             <input id="Image1" name="" type="image" src="images/002_11a.png" runat="server" onserverclick="btnChangePwd_Click"/>
+             <input id="Image1" name="" type="image" src="images/002_11b.png" runat="server" onserverclick="btnChangePwd_Click"/>
         </div>
             *You will be logged out after changing password.
 <%--        <div style="float:none; margin:5px 20px 0 0; font-size:14px;"> <a href="login.aspx" style="font-size:14px">Back to Login Page</a></div>--%>

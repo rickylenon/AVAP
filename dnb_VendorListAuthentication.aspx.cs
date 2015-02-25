@@ -152,7 +152,7 @@ public partial class dnb_VendorListAuthentication : System.Web.UI.Page
                 LinkBt.Attributes["onclick"] = "javascript: return confirm('Are you sure you want to Authenticate this vendor?');";
                 LinkBt2 = ((HyperLink)e.Row.FindControl("lnkClarify"));
                 //LinkBt2.NavigateUrl = "javascript:__doPostBack('ctl00$ContentPlaceHolder1$GridView1$ctl04$lnkClarify','')";
-                LinkBt2.Attributes["onclick"] = "javascript:ShowClarify('" + VendorId.ToString() + "','" + CompanyName.Replace("'","''") + "')";
+                LinkBt2.Attributes["onclick"] = "javascript:ShowClarify('" + VendorId.ToString() + "','" + CompanyName.Replace("'", "&quot;") + "')";
                 //LinkBt.Attributes["onclick"] = "javascript: return confirm('Are you sure you want to Clarify with this vendor?');";
             }
         }

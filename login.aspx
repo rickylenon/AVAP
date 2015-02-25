@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="login.aspx.cs" Inherits="login" %>
+
 <%-- Add content controls here --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="content">
@@ -16,12 +17,12 @@
       <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CausesValidation="True" value="" onclick="$(this).select();" onblur="if($(this).val()==''){ $(this).val(''); }" ></asp:TextBox>
       <div class="clearfix"></div>
       <div style="margin-top:25px;">
-      <div style="float:left; margin:5px 20px 0 0;"> <a href="forgotPwd.aspx" style="font-size:12px">Forgot your password?</a></div>
+      <%--<div style="float:left; margin:5px 20px 0 0;"> <a href="#" style="font-size:12px">Forgot your password?</a></div>--%>
       <div style="float:none">
       <input name="" type="image" src="images/002_11.png" runat="server"  onserverclick="btnLogin_Click" />
 
       </div>
-         <!-- <div style="float:none; margin:5px 20px 0 0; font-size:18px;"> <a href="#" style="font-size:18px">Forgot your password?</a></div>-->
+          <div style="float:none; margin:5px 20px 0 0; font-size:18px;"> <a href="forgotPwd.aspx" style="font-size:18px">Forgot your password?</a></div>
       </div>
       <div class="clearfix" style="font-size:18px;"><br /><br /><p>New Vendor? <a href="vendor_signup.aspx" style="text-decoration:none;">Sign up here.</a></p>
           <div style="float:none; width:400px; margin:5px 0 0 0px; padding-top:30px; padding-right:10px; font-size:14px;">
@@ -64,12 +65,12 @@ It is recommended that the prospective Vendor check first if its product/service
         <%--Dont have Globe Automated Vendor Accreditation <br />
         account yet? <a href="#" style="text-decoration:none;">Sign up here.</a>--%></div>
     </div>
-	<!--<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
+	<table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose Symantec SSL for secure e-commerce and confidential communications.">
 <tr>
 <td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name=https://gtva.globe.com.ph/&amp;size=L&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script><br />
 <a href="http://www.symantec.com/ssl-certificates" target="_blank"  style="color:#000000; text-decoration:none; font:bold 7px verdana,sans-serif; letter-spacing:.5px; text-align:center; margin:0px; padding:0px;">ABOUT SSL CERTIFICATES</a></td>
 </tr>
-</table>-->
+</table>
         
     <div class="clearfix"></div>
     </div>

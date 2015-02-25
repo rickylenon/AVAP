@@ -840,11 +840,11 @@ Globe Automated Vendor Accreditation :: Vendor Information
     </tr>
     <tr>
         <td style="width: 138px"><label for="CompanyName">Printed Name</label></td>
-        <td style="width: 138px"><input name="DateofEvaluation" type="text" id="PrintedName" runat="server"    /></td>
+        <td style="width: 138px"><input name="DateofEvaluation" type="text" id="PrintedName" runat="server" maxlength="150"    /></td>
     </tr>
     <tr>
         <td style="width: 138px"><label for="CompanyName">Position</label></td>
-        <td style="width: 138px"><input type="text" id="Position" runat="server"    /></td>
+        <td style="width: 138px"><input type="text" id="Position" runat="server" maxlength="150"    /></td>
     </tr>
   </table>
 <table border="0" cellspacing="0" cellpadding="5" id="tbl09_Lbl" runat="server">

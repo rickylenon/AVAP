@@ -121,7 +121,23 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
                     {
                         AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
                         Others.Text = oReader["Others"].ToString();
-                        FileAttachementLbl.Text = oReader["FileAttachement"].ToString() != "" ? "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>" : "<h3>n/a</h3>";
+                        //FileAttachementLbl.Text = oReader["FileAttachement"].ToString() != "" ? "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>" : "<h3>n/a</h3>";
+                        if (oReader["FileAttachement"].ToString() != "")
+                        {
+                            FileAttachementLbl.Text = "";
+                            string[] FileAttachements1 = oReader["FileAttachement"].ToString().Split(';');
+                            foreach (string FileAttachement1 in FileAttachements1)
+                            {
+                                if (FileAttachement1 != "")
+                                {
+                                    FileAttachementLbl.Text = FileAttachementLbl.Text + FileAttachement1.Trim() != "" ? FileAttachementLbl.Text + "<a href='" + FileAttachement1.Trim() + "' target='_blank'>Attached file</a><br>" : "";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            FileAttachementLbl.Text = "Attach file<br>";
+                        }
 
                         if (oReader["Recommendation"].ToString() == "1")
                         {
@@ -184,15 +200,16 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
                         vmoNew_Vendor.SelectedValue = oReader["vmoNew_Vendor"].ToString() == "0" ? "0" : "1";
                         odnbScore = oReader["dnbScore"].ToString() != "" ? Convert.ToInt32(oReader["dnbScore"].ToString()) : Convert.ToInt32(oReader["dnbFinCapScore"].ToString()) + Convert.ToInt32(oReader["dnbLegalConfScore"].ToString()) + Convert.ToInt32(oReader["dnbTechCompScore"].ToString());
                         dnbScore.Text = odnbScore.ToString();
-                        if (oReader["vmoNew_Vendor"].ToString() == "0")
-                        {
-                            ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
-                            vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
-                        }
-                        else
-                        {
-                            vmoOverallScore.Text = odnbScore.ToString();
-                        }
+                        vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
+                        //if (oReader["vmoNew_Vendor"].ToString() == "0")
+                        //{
+                        //    ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
+                        //    vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
+                        //}
+                        //else
+                        //{
+                        //    vmoOverallScore.Text = odnbScore.ToString();
+                        //}
                         dnbSupplierInfoReport.Text = oReader["dnbSupplierInfoReport"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbSupplierInfoReport"].ToString() + "' target='_blank'>" + oReader["dnbSupplierInfoReport"].ToString() + "</a>" : "No attach file";
                         dnbOtherDocumentsLbl.Text = oReader["dnbOtherDocuments"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbOtherDocuments"].ToString() + "' target='_blank'>" + oReader["dnbOtherDocuments"].ToString() + "</a>" : "No attach file";
                     }
@@ -373,6 +390,26 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
             //CLEAR tblVendorApprovalbyVmTech FROM VendorId
             sCommand = "UPDATE tblVendor SET approvedbyFAAFinance = " + Session["UserId"] + ", approvedbyFAAFinanceDate = getdate(), Status = 6 WHERE VendorId = " + Session["VendorId"];
             SqlHelper.ExecuteNonQuery(connstring, CommandType.Text, sCommand);
+
+
+            // update vendor renewaldate
+            sCommand = @"
+                        UPDATE t1 
+                        SET t1.renewaldate = 
+	                        CASE 
+		                        WHEN t2.AccreDuration = '2 years' THEN DATEADD(month, 22, t1.approvedbyFAALogisticsDate)
+		                        WHEN t2.AccreDuration = '1 year' THEN DATEADD(month, 10, t1.approvedbyFAALogisticsDate)
+		                        WHEN t2.AccreDuration = '6 months' THEN DATEADD(month, 4, t1.approvedbyFAALogisticsDate)
+		                        ELSE NULL
+	                        END
+                        FROM tblVendor t1		
+                        INNER JOIN tblVendorApprovalbyVmReco t2 ON t2.VendorId = t1.VendorId
+                        WHERE t1.VendorId = " + Session["VendorId"];
+            SqlHelper.ExecuteNonQuery(connstring, CommandType.Text, sCommand);
+
+
+
+
 
             // SEND EMAIL NOTIFICATION TO VENDOR
             query = "SELECT t3.FirstName + ' ' + t3.LastName as fromName, t3.EmailAdd as fromEmail, t1.FirstName + ' ' + t1.LastName as toName, t1.EmailAdd as toEmail, t4.CompanyName, t4.AuthenticationTicket FROM tblUsers t1, tblUsersForVendors t2, tblUsers t3, tblVendor t4 WHERE t1.UserId = t2.UserId AND t2.VendorId = @VendorId AND t3.UserId = @UserId AND t4.Status = 6 AND t4.VendorId = @VendorId";

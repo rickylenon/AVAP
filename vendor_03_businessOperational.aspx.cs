@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -148,19 +147,103 @@ public partial class vendor_03_businessOperational : System.Web.UI.Page
                         benefits13th.SelectedValue = oReader["benefits13th"].ToString();
                         benefitsOtherMed.SelectedValue = oReader["benefitsOtherMed"].ToString();
                         benefitsOthers.Value = oReader["benefitsOthers"].ToString();
-                        benefitsPagibigFileNameLbl.Text = oReader["benefitsPagibigFileName"].ToString()!="" ? "<a href='" + oReader["benefitsPagibigFileName"].ToString() + "' target='_blank'>" + oReader["benefitsPagibigFileName"].ToString() + "</a>" : "Attach file";
+                        //benefitsPagibigFileNameLbl.Text = oReader["benefitsPagibigFileName"].ToString()!="" ? "<a href='" + oReader["benefitsPagibigFileName"].ToString() + "' target='_blank'>" + oReader["benefitsPagibigFileName"].ToString() + "</a>" : "Attach file";
+                        if (oReader["benefitsPagibigFileName"].ToString() != "")
+                        {
+                            string[] benefitsPagibigFileNames1 = oReader["benefitsPagibigFileName"].ToString().Split(';');
+                            foreach (string benefitsPagibigFileName1 in benefitsPagibigFileNames1)
+                            {
+                                benefitsPagibigFileNameLbl.Text = benefitsPagibigFileName1.Trim() != "" ? benefitsPagibigFileNameLbl.Text + "<div><a href='" + benefitsPagibigFileName1.Trim() + "' target='_blank'>PAG-IBIG Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"benefitsPagibigFileNamex\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_benefitsPagibigFileName\').val(),\'" + benefitsPagibigFileName1.Trim() + "\',\'benefitsPagibigFileName\');\" /><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            benefitsPagibigFileNameLbl.Text = "PAG-IBIG Attach file<br>";
+                        }
                         benefitsPagibigFileName.Value = oReader["benefitsPagibigFileName"].ToString();
-                        benefitsPHICFileNameLbl.Text = oReader["benefitsPHICFileName"].ToString() !="" ? "<a href='" + oReader["benefitsPHICFileName"].ToString() + "' target='_blank'>" + oReader["benefitsPHICFileName"].ToString() + "</a>" : "Attach file";
+                        //benefitsPHICFileNameLbl.Text = oReader["benefitsPHICFileName"].ToString() !="" ? "<a href='" + oReader["benefitsPHICFileName"].ToString() + "' target='_blank'>" + oReader["benefitsPHICFileName"].ToString() + "</a>" : "Attach file";
+                        if (oReader["benefitsPHICFileName"].ToString() != "")
+                        {
+                            string[] benefitsPHICFileNames1 = oReader["benefitsPHICFileName"].ToString().Split(';');
+                            foreach (string benefitsPHICFileName1 in benefitsPHICFileNames1)
+                            {
+                                benefitsPHICFileNameLbl.Text = benefitsPHICFileName1.Trim() != "" ? benefitsPHICFileNameLbl.Text + "<div><a href='" + benefitsPHICFileName1.Trim() + "' target='_blank'>PHILHEALTH Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"benefitsPHICFileNamex\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_benefitsPHICFileName\').val(),\'" + benefitsPHICFileName1.Trim() + "\',\'benefitsPHICFileName\');\" /><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            benefitsPHICFileNameLbl.Text = "PHILHEALTH Attach file<br>";
+                        }
                         benefitsPHICFileName.Value = oReader["benefitsPHICFileName"].ToString();
-                        benefitsSSSFileNameLbl.Text = oReader["benefitsSSSFileName"].ToString()!="" ? "<a href='" + oReader["benefitsSSSFileName"].ToString() + "' target='_blank'>" + oReader["benefitsSSSFileName"].ToString() + "</a>" : "Attach file";
+                        //benefitsSSSFileNameLbl.Text = oReader["benefitsSSSFileName"].ToString()!="" ? "<a href='" + oReader["benefitsSSSFileName"].ToString() + "' target='_blank'>" + oReader["benefitsSSSFileName"].ToString() + "</a>" : "Attach file";
+                        if (oReader["benefitsSSSFileName"].ToString() != "")
+                        {
+                            string[] benefitsSSSFileNames1 = oReader["benefitsSSSFileName"].ToString().Split(';');
+                            foreach (string benefitsSSSFileName1 in benefitsSSSFileNames1)
+                            {
+                                benefitsSSSFileNameLbl.Text = benefitsSSSFileName1.Trim() != "" ? benefitsSSSFileNameLbl.Text + "<div><a href='" + benefitsSSSFileName1.Trim() + "' target='_blank'>SSS Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"benefitsSSSFileNamex\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_benefitsSSSFileName\').val(),\'" + benefitsSSSFileName1.Trim() + "\',\'benefitsSSSFileName\');\" /><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            benefitsSSSFileNameLbl.Text = "SSS Attach file<br>";
+                        }
                         benefitsSSSFileName.Value = oReader["benefitsSSSFileName"].ToString();
-                        benefitsOthersFileNameLbl.Text = oReader["benefitsOthersFileName"].ToString()!="" ? "<a href='" + oReader["benefitsOthersFileName"].ToString() + "' target='_blank'>" + oReader["benefitsOthersFileName"].ToString() + "</a>" : "Attach file";
+                        //benefitsOthersFileNameLbl.Text = oReader["benefitsOthersFileName"].ToString()!="" ? "<a href='" + oReader["benefitsOthersFileName"].ToString() + "' target='_blank'>" + oReader["benefitsOthersFileName"].ToString() + "</a>" : "Attach file";
+                        if (oReader["benefitsOthersFileName"].ToString() != "")
+                        {
+                            string[] benefitsOthersFileNames1 = oReader["benefitsOthersFileName"].ToString().Split(';');
+                            foreach (string benefitsOthersFileName1 in benefitsOthersFileNames1)
+                            {
+                                benefitsOthersFileNameLbl.Text = benefitsOthersFileName1.Trim() != "" ? benefitsOthersFileNameLbl.Text + "<div><a href='" + benefitsOthersFileName1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"benefitsOthersFileNamex\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_benefitsOthersFileName\').val(),\'" + benefitsOthersFileName1.Trim() + "\',\'benefitsOthersFileName\');\" /><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            benefitsOthersFileNameLbl.Text = "Attach file<br>";
+                        }
                         benefitsOthersFileName.Value = oReader["benefitsOthersFileName"].ToString();
-                        fileuploaded3.Text = oReader["assetsMachineriesFileName"].ToString()!="" ? "<a href='" + oReader["assetsMachineriesFileName"].ToString() + "' target='_blank'>" + oReader["assetsMachineriesFileName"].ToString() + "</a>" : "Attach file";
+                        //assetsMachineriesFileNameLbl.Text = oReader["assetsMachineriesFileName"].ToString() != "" ? "<a href='" + oReader["assetsMachineriesFileName"].ToString() + "' target='_blank'>" + oReader["assetsMachineriesFileName"].ToString() + "</a>" : "Attach file";
+                        if (oReader["assetsMachineriesFileName"].ToString() != "")
+                        {
+                            string[] assetsMachineriesFileNames1 = oReader["assetsMachineriesFileName"].ToString().Split(';');
+                            foreach (string assetsMachineriesFileName1 in assetsMachineriesFileNames1)
+                            {
+                                assetsMachineriesFileNameLbl.Text = assetsMachineriesFileName1.Trim() != "" ? assetsMachineriesFileNameLbl.Text + "<div><a href='" + assetsMachineriesFileName1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"assetsMachineriesFileNamex\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_assetsMachineriesFileName\').val(),\'" + assetsMachineriesFileName1.Trim() + "\',\'assetsMachineriesFileName\');\" /><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            assetsMachineriesFileNameLbl.Text = "Attach file<br>";
+                        }
                         assetsMachineriesFileName.Value = oReader["assetsMachineriesFileName"].ToString();
-                        fileuploaded4.Text = oReader["assetsCompanyProfileFileName"].ToString()!="" ? "<a href='" + oReader["assetsCompanyProfileFileName"].ToString() + "' target='_blank'>" + oReader["assetsCompanyProfileFileName"].ToString() + "</a>" : "Attach file";
+                        //assetsCompanyProfileFileNameLbl.Text = oReader["assetsCompanyProfileFileName"].ToString() != "" ? "<a href='" + oReader["assetsCompanyProfileFileName"].ToString() + "' target='_blank'>" + oReader["assetsCompanyProfileFileName"].ToString() + "</a>" : "Attach file";
+                        if (oReader["assetsCompanyProfileFileName"].ToString() != "")
+                        {
+                            string[] assetsCompanyProfileFileNames1 = oReader["assetsCompanyProfileFileName"].ToString().Split(';');
+                            foreach (string assetsCompanyProfileFileName1 in assetsCompanyProfileFileNames1)
+                            {
+                                assetsCompanyProfileFileNameLbl.Text = assetsCompanyProfileFileName1.Trim() != "" ? assetsCompanyProfileFileNameLbl.Text + "<div><a href='" + assetsCompanyProfileFileName1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"assetsCompanyProfileFileNamex\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_assetsCompanyProfileFileName\').val(),\'" + assetsCompanyProfileFileName1.Trim() + "\',\'assetsCompanyProfileFileName\');\" /><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            assetsCompanyProfileFileNameLbl.Text = "Attach file<br>";
+                        }
                         assetsCompanyProfileFileName.Value = oReader["assetsCompanyProfileFileName"].ToString();
-                        fileuploaded5.Text = oReader["assetsOthersFileName"].ToString()!="" ? "<a href='" + oReader["assetsOthersFileName"].ToString() + "' target='_blank'>" + oReader["assetsOthersFileName"].ToString() + "</a>": "Attach file";
+                        //assetsOthersFileNameLbl.Text = oReader["assetsOthersFileName"].ToString() != "" ? "<a href='" + oReader["assetsOthersFileName"].ToString() + "' target='_blank'>" + oReader["assetsOthersFileName"].ToString() + "</a>" : "Attach file";
+                        if (oReader["assetsOthersFileName"].ToString() != "")
+                        {
+                            string[] assetsOthersFileNames1 = oReader["assetsOthersFileName"].ToString().Split(';');
+                            foreach (string assetsOthersFileName1 in assetsOthersFileNames1)
+                            {
+                                assetsOthersFileNameLbl.Text = assetsOthersFileName1.Trim() != "" ? assetsOthersFileNameLbl.Text + "<div><a href='" + assetsOthersFileName1.Trim() + "' target='_blank'>Attached file</a> <img src=\"images/xicon.png\" style=\"margin-left:10px; padding-top:5px; \" id=\"assetsOthersFileNamex\" onclick=\"$(this).parent(\'div\').html(\'\');FileattchValues($(\'#ContentPlaceHolder1_assetsOthersFileName\').val(),\'" + assetsOthersFileName1.Trim() + "\',\'assetsOthersFileName\');\" /><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            assetsOthersFileNameLbl.Text = "Attach file<br>";
+                        }
                         assetsOthersFileName.Value = oReader["assetsOthersFileName"].ToString();
 
                         facltyLandTxt.Value = oReader["facltyLandTxt"].ToString();
@@ -334,10 +417,58 @@ public partial class vendor_03_businessOperational : System.Web.UI.Page
                         benefits13th_Lbl.Text = oReader["benefits13th"].ToString() == "1" ? "Yes" : "No";
                         benefitsOtherMed_Lbl.Text = oReader["benefitsOtherMed"].ToString() == "1" ? "Yes" : "No";
                         benefitsOthers_Lbl.Text = oReader["benefitsOthers"].ToString() == "1" ? "Yes" : "No";
-                        benefitsPagibigFileName_Lbl.Text = oReader["benefitsPagibigFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["benefitsPagibigFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
-                        benefitsPHICFileName_Lbl.Text = oReader["benefitsPHICFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["benefitsPHICFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
-                        benefitsSSSFileName_Lbl.Text = oReader["benefitsSSSFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["benefitsSSSFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
-                        benefitsOthersFilename_Lbl.Text = oReader["benefitsOthersFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["benefitsOthersFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        //benefitsPagibigFileName_Lbl.Text = oReader["benefitsPagibigFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["benefitsPagibigFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        if (oReader["benefitsPagibigFileName"].ToString() != "")
+                        {
+                            string[] benefitsPagibigFileNames1 = oReader["benefitsPagibigFileName"].ToString().Split(';');
+                            foreach (string benefitsPagibigFileName1 in benefitsPagibigFileNames1)
+                            {
+                                benefitsPagibigFileName_Lbl.Text = benefitsPagibigFileName1.Trim() != "" ? benefitsPagibigFileName_Lbl.Text + "<div><img src=\"images/attachment.png\" /> <a href='" + benefitsPagibigFileName1.Trim() + "' target='_blank'>PAG-IBIG Attached file</a><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            benefitsPagibigFileName_Lbl.Text = "<img src=\"images/attachment.png\" /> No PAG-IBIG Attached file<br>";
+                        }
+                        //benefitsPHICFileName_Lbl.Text = oReader["benefitsPHICFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["benefitsPHICFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        if (oReader["benefitsPHICFileName"].ToString() != "")
+                        {
+                            string[] benefitsPHICFileNames1 = oReader["benefitsPHICFileName"].ToString().Split(';');
+                            foreach (string benefitsPHICFileName1 in benefitsPHICFileNames1)
+                            {
+                                benefitsPHICFileName_Lbl.Text = benefitsPHICFileName1.Trim() != "" ? benefitsPHICFileName_Lbl.Text + "<div><img src=\"images/attachment.png\" /> <a href='" + benefitsPHICFileName1.Trim() + "' target='_blank'>PHILHEALTH Attached file</a><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            benefitsPHICFileName_Lbl.Text = "<img src=\"images/attachment.png\" /> No PHILHEALTH Attached file<br>";
+                        }
+                        //benefitsSSSFileName_Lbl.Text = oReader["benefitsSSSFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["benefitsSSSFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        if (oReader["benefitsSSSFileName"].ToString() != "")
+                        {
+                            string[] benefitsSSSFileNames1 = oReader["benefitsSSSFileName"].ToString().Split(';');
+                            foreach (string benefitsSSSFileName1 in benefitsSSSFileNames1)
+                            {
+                                benefitsSSSFileName_Lbl.Text = benefitsSSSFileName1.Trim() != "" ? benefitsSSSFileName_Lbl.Text + "<div><img src=\"images/attachment.png\" /> <a href='" + benefitsSSSFileName1.Trim() + "' target='_blank'>SSS Attached file</a><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            benefitsSSSFileName_Lbl.Text = "<img src=\"images/attachment.png\" /> No SSS Attached file<br>";
+                        }
+                        //benefitsOthersFilename_Lbl.Text = oReader["benefitsOthersFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["benefitsOthersFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        if (oReader["benefitsOthersFileName"].ToString() != "")
+                        {
+                            string[] benefitsOthersFileNames1 = oReader["benefitsOthersFileName"].ToString().Split(';');
+                            foreach (string benefitsOthersFileName1 in benefitsOthersFileNames1)
+                            {
+                                benefitsOthersFilename_Lbl.Text = benefitsOthersFileName1.Trim() != "" ? benefitsOthersFilename_Lbl.Text + "<div><img src=\"images/attachment.png\" /> <a href='" + benefitsOthersFileName1.Trim() + "' target='_blank'>Attached file</a><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            benefitsOthersFilename_Lbl.Text = "<img src=\"images/attachment.png\" /> No Attached file<br>";
+                        }
                         //benefitsPagibigFileName.Value = oReader["benefitsPagibigFileName"].ToString();
                         //benefitsPHICFileNameLbl.Text = "<a href='" + oReader["benefitsPHICFileName"].ToString() + "' target='_blank'>" + oReader["benefitsPHICFileName"].ToString() + "</a>";
                         //benefitsPHICFileName.Value = oReader["benefitsPHICFileName"].ToString();
@@ -346,11 +477,47 @@ public partial class vendor_03_businessOperational : System.Web.UI.Page
                         //benefitsOthersFileNameLbl.Text = "<a href='" + oReader["benefitsOthersFileName"].ToString() + "' target='_blank'>" + oReader["benefitsOthersFileName"].ToString() + "</a>";
                         //benefitsOthersFileName.Value = oReader["benefitsOthersFileName"].ToString();
                         //fileuploaded3.Text = "<a href='" + oReader["assetsMachineriesFileName"].ToString() + "' target='_blank'>" + oReader["assetsMachineriesFileName"].ToString() + "</a>";
-                        assetsMachineriesFileName_Lbl.Text = oReader["assetsMachineriesFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["assetsMachineriesFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        //assetsMachineriesFileName_Lbl.Text = oReader["assetsMachineriesFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["assetsMachineriesFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        if (oReader["assetsMachineriesFileName"].ToString() != "")
+                        {
+                            string[] assetsMachineriesFileNames1 = oReader["assetsMachineriesFileName"].ToString().Split(';');
+                            foreach (string assetsMachineriesFileName1 in assetsMachineriesFileNames1)
+                            {
+                                assetsMachineriesFileName_Lbl.Text = assetsMachineriesFileName1.Trim() != "" ? assetsMachineriesFileName_Lbl.Text + "<div><img src=\"images/attachment.png\" /> <a href='" + assetsMachineriesFileName1.Trim() + "' target='_blank'>Attached file</a><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            assetsMachineriesFileName_Lbl.Text = "<img src=\"images/attachment.png\" /> No Attached file<br>";
+                        }
                         //fileuploaded4.Text = "<a href='" + oReader["assetsCompanyProfileFileName"].ToString() + "' target='_blank'>" + oReader["assetsCompanyProfileFileName"].ToString() + "</a>";
-                        assetsCompanyProfileFileName_Lbl.Text = oReader["assetsCompanyProfileFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["assetsCompanyProfileFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        //assetsCompanyProfileFileName_Lbl.Text = oReader["assetsCompanyProfileFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["assetsCompanyProfileFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        if (oReader["assetsCompanyProfileFileName"].ToString() != "")
+                        {
+                            string[] assetsCompanyProfileFileNames1 = oReader["assetsCompanyProfileFileName"].ToString().Split(';');
+                            foreach (string assetsCompanyProfileFileName1 in assetsCompanyProfileFileNames1)
+                            {
+                                assetsCompanyProfileFileName_Lbl.Text = assetsCompanyProfileFileName1.Trim() != "" ? assetsCompanyProfileFileName_Lbl.Text + "<div><img src=\"images/attachment.png\" /> <a href='" + assetsCompanyProfileFileName1.Trim() + "' target='_blank'>Attached file</a><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            assetsCompanyProfileFileName_Lbl.Text = "<img src=\"images/attachment.png\" /> No Attached file<br>";
+                        }
                         //fileuploaded5.Text = "<a href='" + oReader["assetsOthersFileName"].ToString() + "' target='_blank'>" + oReader["assetsOthersFileName"].ToString() + "</a>";
-                        assetsOthersFileName_Lbl.Text = oReader["assetsOthersFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["assetsOthersFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        //assetsOthersFileName_Lbl.Text = oReader["assetsOthersFileName"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["assetsOthersFileName"].ToString() + "' target='_blank'>Attachment</a>" : "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> No attached file";
+                        if (oReader["assetsOthersFileName"].ToString() != "")
+                        {
+                            string[] assetsOthersFileNames1 = oReader["assetsOthersFileName"].ToString().Split(';');
+                            foreach (string assetsOthersFileName1 in assetsOthersFileNames1)
+                            {
+                                assetsOthersFileName_Lbl.Text = assetsOthersFileName1.Trim() != "" ? assetsOthersFileName_Lbl.Text + "<div><img src=\"images/attachment.png\" /> <a href='" + assetsOthersFileName1.Trim() + "' target='_blank'>Attached file</a><br></div>" : "";
+                            }
+                        }
+                        else
+                        {
+                            assetsOthersFileName_Lbl.Text = "<img src=\"images/attachment.png\" /> No Attached file<br>";
+                        }
 
                         facltyLandTxt_Lbl.Text = oReader["facltyLandTxt"].ToString();
                         facltyLandOwned_Lbl.Text = oReader["facltyLandOwned"].ToString();

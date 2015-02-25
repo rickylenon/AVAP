@@ -229,16 +229,16 @@ Globe Automated Vendor Accreditation :: Vendor Information
     <td colspan="2"><label>12. Please list the major laws and other legal requirements that your company comply with.</label></td>
   </tr>
   <tr>
-    <td colspan="2"><input name="Q12a" type="text" id="Q12a" size="60" runat="server"   /></td>
+    <td colspan="2"><input name="Q12a" type="text" id="Q12a" size="60" runat="server" maxlength="250"   /></td>
   </tr>
   <tr>
-    <td colspan="2"><input name="Q12b" type="text" id="Q12b" size="60" runat="server"   /></td>
+    <td colspan="2"><input name="Q12b" type="text" id="Q12b" size="60" runat="server" maxlength="250"   /></td>
   </tr>
   <tr>
-    <td colspan="2"><input name="Q12c" type="text" id="Q12c" size="60" runat="server"   /></td>
+    <td colspan="2"><input name="Q12c" type="text" id="Q12c" size="60" runat="server" maxlength="250"   /></td>
   </tr>
   <tr>
-    <td colspan="2"><input name="Q12d" type="text" id="Q12d" size="60" runat="server"   /></td>
+    <td colspan="2"><input name="Q12d" type="text" id="Q12d" size="60" runat="server" maxlength="250"   /></td>
   </tr>
 </table>
 
@@ -314,11 +314,11 @@ Globe Automated Vendor Accreditation :: Vendor Information
     </tr>
     <tr>
         <td><label for="CompanyName">Printed Name</label></td>
-        <td><input name="PrintedName" type="text" id="PrintedName" runat="server"    /></td>
+        <td><input name="PrintedName" type="text" id="PrintedName" runat="server" maxlength="150"    /></td>
     </tr>
     <tr>
         <td><label for="CompanyName">Position</label></td>
-        <td><input name="Position" type="text" id="Position" runat="server"    /></td>
+        <td><input name="Position" type="text" id="Position" runat="server" maxlength="150"    /></td>
     </tr>
   </table>
     <table border="0" cellspacing="0" cellpadding="5" id="tbl03_Lbl" runat="server">

@@ -115,22 +115,22 @@ Globe Automated Vendor Accreditation :: Vendor Information
 <table border="0" cellpadding="5" cellspacing="0">
   <tr>
     <td><strong>I,</strong></td>
-    <td style="width: 186px"><input name="step8FullName" type="text" id="step8FullName" runat="server" value="Full name" size="28" maxlength="100"/></td>
+    <td style="width: 186px"><input name="step8FullName" type="text" id="step8FullName" runat="server" value="Full name" size="28" maxlength="100"  /></td>
     <td><strong>, in my capability as </strong></td>
-    <td><input name="step8OfficialTitle" type="text" id="step8OfficialTitle" runat="server" value="Official Title" size="28" maxlength="100"/></td>
+    <td><input name="step8OfficialTitle" type="text" id="step8OfficialTitle" runat="server" value="Official Title" size="28" maxlength="100"  /></td>
   </tr>
 </table>
 <table border="0" cellpadding="5" cellspacing="0">
   <tr>
     <td><strong>of</strong></td>
-    <td><input name="step8OfCompanyName" type="text" id="step8OfCompanyName" runat="server" value="Company name" size="28"  readonly="readonly"  maxlength="100"/></td>
+    <td><input name="step8OfCompanyName" type="text" id="step8OfCompanyName" runat="server" value="Company name" size="28"  readonly="readonly" /></td>
     <td><strong>acknowledge that I am duly authorized and I have full authority to sign this undertakings </strong></td>
     </tr>
 </table>
 <table border="0" cellpadding="5" cellspacing="0">
   <tr>
     <td><strong>and bind</strong></td>
-    <td><input name="step8bindCompanyName" type="text" id="step8bindCompanyName" runat="server" value="Company name" size="28" readonly="readonly" maxlength="100"/></td>
+    <td><input name="step8bindCompanyName" type="text" id="step8bindCompanyName" runat="server" value="Company name" size="28" readonly="readonly"  /></td>
     <td><strong>.</strong></td>
   </tr>
 </table>

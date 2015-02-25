@@ -266,6 +266,7 @@ public partial class vendor_04_Legal : System.Web.UI.Page
         string connstring = ConfigurationManager.ConnectionStrings["AVAConnectionString"].ConnectionString;
         string sCommand = "";
 
+
         query = "UPDATE tblVendorInformation SET legalStrucOrgType=@legalStrucOrgType, legalStrucDateReg=@legalStrucDateReg, legalStrucRegNo=@legalStrucRegNo, legalStrucDateStartedOp=@legalStrucDateStartedOp, legalStrucPrevBusName=@legalStrucPrevBusName, legalStrucDateChanged=@legalStrucDateChanged, legalStrucTIN=@legalStrucTIN, busPermitDateReg=@busPermitDateReg, busPermitNo=@busPermitNo, busPermitAttachement=@busPermitAttachement, birRegTIN=@birRegTIN, birRegAttachement=@birRegAttachement, corpAuthorizedCapital=@corpAuthorizedCapital, corpSubscribedCapital=@corpSubscribedCapital, corpPaidUpCapital=@corpPaidUpCapital, corpPerValue=@corpPerValue, corpAsOfDate=@corpAsOfDate, legalStrucCorpAttch_geninfo=@legalStrucCorpAttch_geninfo, legalStrucCorpAttch_geninfo2=@legalStrucCorpAttch_geninfo2, legalStrucCorpAttch_geninfo3=@legalStrucCorpAttch_geninfo3, legalStrucCorpAttch_geninfo4=@legalStrucCorpAttch_geninfo4, legalStrucCorpAttch_IdentityAuthorizdSigna=@legalStrucCorpAttch_IdentityAuthorizdSigna, legalStrucCorpAttch_Identitytaxcert=@legalStrucCorpAttch_Identitytaxcert, legalStrucCorpAttch_BoardAuthorizdSigna=@legalStrucCorpAttch_BoardAuthorizdSigna, legalStrucSoleAttch_DTIReg=@legalStrucSoleAttch_DTIReg, legalStrucSoleAttch_OwnersId1=@legalStrucSoleAttch_OwnersId1, legalStrucSoleAttch_CTC=@legalStrucSoleAttch_CTC  WHERE VendorId = @VendorId";
         //query = "sp_GetVendorInformation"; //##storedProcedure
         using (conn = new SqlConnection(connstring))
@@ -289,10 +290,14 @@ public partial class vendor_04_Legal : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@birRegTIN", birRegTIN.Value.Trim().ToString());
                 cmd.Parameters.AddWithValue("@birRegAttachement", birRegAttachement.Value.Trim().ToString());
 
-                cmd.Parameters.AddWithValue("@corpAuthorizedCapital", corpAuthorizedCapital.Value.Trim().ToString() != "" ? Convert.ToDouble(corpAuthorizedCapital.Value.Trim().ToString()) : 0);
-                cmd.Parameters.AddWithValue("@corpSubscribedCapital", corpSubscribedCapital.Value.Trim().ToString() != "" ? Convert.ToDouble(corpSubscribedCapital.Value.Trim().ToString()) : 0);
-                cmd.Parameters.AddWithValue("@corpPaidUpCapital", corpPaidUpCapital.Value.Trim().ToString() != "" ? Convert.ToDouble(corpPaidUpCapital.Value.Trim().ToString()) : 0);
-                cmd.Parameters.AddWithValue("@corpPerValue", corpPerValue.Value.Trim().ToString() != "" ? Convert.ToDouble(corpPerValue.Value.Trim().ToString()) : 0);
+                decimal corpAuthorizedCapital0;
+                cmd.Parameters.AddWithValue("@corpAuthorizedCapital", decimal.TryParse(corpAuthorizedCapital.Value.Trim().ToString(), out corpAuthorizedCapital0) == true ? corpAuthorizedCapital0 : 0);
+                decimal corpSubscribedCapital0;
+                cmd.Parameters.AddWithValue("@corpSubscribedCapital", decimal.TryParse(corpSubscribedCapital.Value.Trim().ToString(), out corpSubscribedCapital0) == true ? corpSubscribedCapital0 : 0);
+                decimal corpPaidUpCapital0;
+                cmd.Parameters.AddWithValue("@corpPaidUpCapital", decimal.TryParse(corpPaidUpCapital.Value.Trim().ToString(), out corpPaidUpCapital0) == true ? corpPaidUpCapital0 : 0);
+                decimal corpPerValue0;
+                cmd.Parameters.AddWithValue("@corpPerValue", decimal.TryParse(corpPerValue.Value.Trim().ToString(), out corpPerValue0) == true ? corpPerValue0 : 0);
                 cmd.Parameters.AddWithValue("@corpAsOfDate", corpAsOfDate.Value.Trim().ToString());
                 cmd.Parameters.AddWithValue("@legalStrucCorpAttch_geninfo", legalStrucCorpAttch_geninfo.Value.Trim().ToString());
                 cmd.Parameters.AddWithValue("@legalStrucCorpAttch_geninfo2", legalStrucCorpAttch_geninfo2.Value.Trim().ToString());
@@ -326,8 +331,10 @@ public partial class vendor_04_Legal : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@VendorId", VendorId);
                     cmd.Parameters.AddWithValue("@shShareHolderName", Request.Form["shShareHolderName" + i].ToString());
                     cmd.Parameters.AddWithValue("@shNationality", Request.Form["shNationality" + i].ToString());
-                    cmd.Parameters.AddWithValue("@shSubsribedCapital", Request.Form["shSubsribedCapital" + i].ToString() != "" ? Convert.ToDouble(Request.Form["shSubsribedCapital" + i].ToString()) : 0 );
-                    cmd.Parameters.AddWithValue("@shPaidupCapital", Request.Form["shPaidupCapital" + i].ToString() != "" ? Convert.ToDouble(Request.Form["shPaidupCapital" + i].ToString()) : 0);
+                    decimal shSubsribedCapital0;
+                    cmd.Parameters.AddWithValue("@shSubsribedCapital", decimal.TryParse(Request.Form["shSubsribedCapital" + i].ToString(), out shSubsribedCapital0) == true ? shSubsribedCapital0 : 0);
+                    decimal shPaidupCapital0;
+                    cmd.Parameters.AddWithValue("@shPaidupCapital", decimal.TryParse(Request.Form["shPaidupCapital" + i].ToString(), out shPaidupCapital0) == true ? shSubsribedCapital0 : 0);
                     cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
                     conn.Open(); cmd.ExecuteNonQuery();
                 }

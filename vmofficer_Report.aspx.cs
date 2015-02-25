@@ -111,6 +111,15 @@ public partial class vmofficer_Report : System.Web.UI.Page
         ws.Cells["AC" + i].Value = "Authorized Representative";
         ws.Cells["AH" + i].Value = "Parent Company";
         ws.Cells["AI" + i].Value = "Parent Company Address";
+        ws.Cells["AJ" + i].Value = "Nature of Business";
+        ws.Cells["AK" + i].Value = "Description of Line of Business";
+        ws.Cells["AL" + i].Value = "Products/Services";
+        ws.Cells["AM" + i].Value = "Organization Type";
+        ws.Cells["AN" + i].Value = "Registration Date";
+        ws.Cells["AO" + i].Value = "Registration Number";
+        ws.Cells["AP" + i].Value = "Business Permit Registration Date";
+        ws.Cells["AQ" + i].Value = "Business Permit Number";
+        ws.Cells["AR" + i].Value = "TIN";
         i = i + 1;
 
 
@@ -140,7 +149,28 @@ public partial class vmofficer_Report : System.Web.UI.Page
             t5.dnbMaxExposureLimit, t5.vmoOverallScore,
             t6.DateCreated as DateLOISubmitted,
                 case when t6.Status = 2 THEN 'Approved'
-                     ELSE 'Rejected' END AS 'LOIStatus'
+                     ELSE 'Rejected' END AS 'LOIStatus', 
+            (
+				SELECT t8.NatureOfBusinessName + ', ' AS 'data()'
+				FROM tblVendorNatureOfBusiness t7 
+				LEFT JOIN rfcNatureOfBusiness t8 ON t8.NatureOfBusinessId=t7.NatureOfBusinessId
+				WHERE t7.VendorId = t1.VendorId
+				FOR XML PATH('')
+            )   AS 'NatureOfBusiness',
+            CASE t4.AccreDuration
+				WHEN '2 years' THEN DATEADD(month, 22, t1.approvedbyFAALogisticsDate)
+				WHEN '1 year' THEN DATEADD(month, 10, t1.approvedbyFAALogisticsDate)
+				WHEN '6 months' THEN DATEADD(month, 4, t1.approvedbyFAALogisticsDate)
+				ELSE NULL
+			END as 'DueDate', 
+            (
+				SELECT t10.CategoryName + ' - ' + t11.SubCategoryName + '; ' AS 'data()'
+				FROM tblVendorProductsAndServices t9 
+				LEFT JOIN rfcProductCategory t10 ON t10.CategoryId=t9.CategoryId
+				LEFT JOIN rfcProductSubCategory t11 ON t11.SubCategoryId=t9.SubCategoryId
+				WHERE t9.VendorId = t1.VendorId
+				FOR XML PATH('')
+            )   AS 'Products/Services'
             
             FROM tblVendor t1
             LEFT JOIN tblVendorInformation t0 ON t0.VendorId=t1.VendorId
@@ -179,7 +209,7 @@ public partial class vmofficer_Report : System.Web.UI.Page
                         ws.Cells["N" + i].Value = oReader["StatusTxt"];
                         ws.Cells["O" + i].Value = oReader["NotificationSent"]; ws.Cells["O" + i].Style.Numberformat.Format = "mm-dd-yy";
                         ws.Cells["P" + i].Value = oReader["EmailSentTo"];
-                        ws.Cells["Q" + i].Value = oReader["renewaldate"]; ws.Cells["Q" + i].Style.Numberformat.Format = "mm-dd-yy";
+                        ws.Cells["Q" + i].Value = oReader["DueDate"]; ws.Cells["Q" + i].Style.Numberformat.Format = "mm-dd-yy";
                         ws.Cells["R" + i].Value = oReader["VendorCode"];
                         ws.Cells["S" + i].Value = oReader["dnbMaxExposureLimit"];
                         ws.Cells["T" + i].Value = oReader["vmoOverallScore"];
@@ -215,6 +245,15 @@ public partial class vmofficer_Report : System.Web.UI.Page
 
                         ws.Cells["AH" + i].Value = oReader["parentCompanyName"];
                         ws.Cells["AI" + i].Value = oReader["parentCompanyAddr"];
+                        ws.Cells["AJ" + i].Value = oReader["NatureOfBusiness"];
+                        ws.Cells["AK" + i].Value = oReader["prodServ_DescLineOfBusiness"];
+                        ws.Cells["AL" + i].Value = oReader["Products/Services"];
+                        ws.Cells["AM" + i].Value = oReader["legalStrucOrgType"];
+                        ws.Cells["AN" + i].Value = oReader["legalStrucDateReg"]; ws.Cells["AN" + i].Style.Numberformat.Format = "mm-dd-yy";
+                        ws.Cells["AO" + i].Value = oReader["legalStrucRegNo"];
+                        ws.Cells["AP" + i].Value = oReader["busPermitDateReg"]; ws.Cells["AP" + i].Style.Numberformat.Format = "mm-dd-yy";
+                        ws.Cells["AQ" + i].Value = oReader["busPermitNo"];
+                        ws.Cells["AR" + i].Value = oReader["birRegTIN"];
 
                         i = i + 1;
                     }

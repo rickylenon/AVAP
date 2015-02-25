@@ -81,7 +81,7 @@ Globe Automated Vendor Accreditation :: Vendor
     
 
     <table border="0" cellspacing="0" cellpadding="5" id="tblForm" runat="server">
-  <tr>
+  <tr style="display:none;">
 	<td style="width: 378px">
         <label for="VendorType"><b>Vendor</b></label>
 	  <div class="clearfix"></div>
@@ -101,6 +101,7 @@ Globe Automated Vendor Accreditation :: Vendor
 	</tr>--%>
   <tr>
 	<td style="width: 378px"><label for="CompanyName"><b>LOI date submitted</b><span> (d/m/yyyy)</span></label>
+
 	  <div class="clearfix"></div> 
         From: 
 <input name="DateSubmittedFr" type="text" id="DateSubmittedFr"  class="date" runat="server" title="dd/mm/yyyy" 

@@ -15,7 +15,7 @@ using Ava.lib.constant;
 using System.Text;
 using System.Text.RegularExpressions;
 
-public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
+public partial class vmofficer_VendorForRenewal_List : System.Web.UI.Page
 {
     SqlDataReader oReader;
     string connstring = ConfigurationManager.ConnectionStrings["AVAConnectionString"].ConnectionString;
@@ -40,7 +40,7 @@ public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
                 string VendorAlias = "";
                 int SendToSAP_Status = 0;
 
-                query = "SELECT CompanyName FROM tblVendor WHERE VendorId=@VendorId AND NotificationSent IS NULL";
+                query = "SELECT CompanyName FROM tblVendor WHERE VendorId=@VendorId";
                 using (conn = new SqlConnection(connstring))
                 {
                     using (cmd = new SqlCommand(query, conn))
@@ -57,21 +57,31 @@ public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
                             }
                             SendMail(Arr[0].ToString(), Arr[1].ToString());
 			    if(Arr[1].ToString()=="6"){ SendToSAP_Status = 1; }
-                            query = "UPDATE tblVendor SET NotificationSent=@NotificationSent, SendToSAP_Status=@SendToSAP_Status, AccGroup=@AccGroup, VendorAlias=@VendorAlias, VendorCode=@VendorCode, PurchasingOrg=@PurchasingOrg, CountryCode=@CountryCode, Currency=@Currency, VAT=@Vat WHERE VendorId=@VendorId";
+
+                        query = @"UPDATE tblVendor SET NotificationSent=NULL, SendToSAP_Status=NULL, Status=0, 
+                            IsAuthenticated = NULL, AuthenticationTicket = NULL,
+                            approvedbyDnb = NULL, approvedbyDnbDate=NULL,
+                            approvedbyVMOfficer = NULL, approvedbyVMOfficerDate = NULL,
+                            approvedbyVMReco = NULL, approvedbyVMRecoDate = NULL, 
+                            approvedbyFAALogistics = NULL, approvedbyFAALogisticsDate = NULL,
+                            approvedbyFAAFinance = NULL, approvedbyFAAFinanceDate = NULL
+                            WHERE VendorId=@VendorId";
                             using (conn = new SqlConnection(connstring))
                             {
                                 using (cmd = new SqlCommand(query, conn))
                                 {
                                     cmd.Parameters.AddWithValue("@VendorId", Convert.ToInt32(Arr[0].ToString()));
-                                    cmd.Parameters.AddWithValue("@NotificationSent", DateTime.Now);
-                                    cmd.Parameters.AddWithValue("@SendToSAP_Status", SendToSAP_Status);
-                                    cmd.Parameters.AddWithValue("@AccGroup", Arr[2].Trim().ToString());
-                                    cmd.Parameters.AddWithValue("@VendorAlias", VendorAlias);
-                                    cmd.Parameters.AddWithValue("@VendorCode", Arr[3].Trim().ToString());
-                                    cmd.Parameters.AddWithValue("@PurchasingOrg", Arr[4].Trim().ToString());
-                                    cmd.Parameters.AddWithValue("@CountryCode", Arr[5].Trim().ToString());
-                                    cmd.Parameters.AddWithValue("@Currency", Arr[6].Trim().ToString());
-				    cmd.Parameters.AddWithValue("@Vat", Arr[7].Trim().ToString());
+                                    conn.Open(); cmd.ExecuteNonQuery();
+                                }
+                            }
+                        }
+
+                        query = @"UPDATE tblDnbReport SET vmoNew_Vendor = 0  WHERE VendorId=@VendorId";
+                            using (conn = new SqlConnection(connstring))
+                            {
+                                using (cmd = new SqlCommand(query, conn))
+                                {
+                                    cmd.Parameters.AddWithValue("@VendorId", Convert.ToInt32(Arr[0].ToString()));
                                     conn.Open(); cmd.ExecuteNonQuery();
                                 }
                             }
@@ -140,7 +150,7 @@ public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
 		
         try
         {
-            subject = "Globe Telecom Vendor Accreditation application approved.";
+            subject = "Globe Telecom Vendor Accreditation for renewal.";
             if (!MailHelper.SendEmail(MailTemplate.GetDefaultSMTPServer(),
                     from,
                     to,
@@ -260,12 +270,35 @@ public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
         sb.Append("<tr><td>");
         sb.Append("<p>");
         sb.Append("Dear " + cCeo + ":<br><br>");
-        sb.Append("We are pleased to inform you that Globe Telecom Vendor Management has approved your accreditation.<br><br>");
-        sb.Append("Please inform us immediately should there be any change in your products and services, organization, management, ownership, contact numbers, address and other material information which will affect our business relationship.<br><br>");
-        sb.Append("This certification is valid for " + cAccreDuration + " from date of issuance. Globe reserves the right to invite and select suppliers, determine allocation and volume of orders in accordance with the company's procurement policies and objectives. Globe is also not committed to place an order upon accreditation. <br><br>");
-        sb.Append("Your continuing status as an accredited supplier of Globe Telecom depends on your performance as a vendor/service provider subject to regular review and your compliance to company requirements. Consequently, Globe reserves the right to invite and require you to undergo an accreditation renewal process 60 days prior to the lapse of the " + cAccreDuration + " period.<br><br>");
-        sb.Append("As part of Globe's program for good governance, we would like to take this opportunity to remind you, our business partner, of Globe's Gifts and Inducement Policy. Our policy strongly prohibits Globe employees from soliciting gifts from business partners; and conversely prohibits business partners from giving Globe employees gifts of any kind in consideration of business, or as an inducement for the award of business.  And as we are committed to compliance with law and regulations to which it is subject and to conduct our business in accordance with ethical standards, the company has a Whistleblower Policy that provides a formal mechanism for employee, suppliers and third parties to submit reports of improper activities perpetrated by the Company's employees, officers and directors. Please see below for the contact channels<br><br>");
-        sb.Append("We congratulate you and we look forward to a mutually beneficial and long-lasting business relationship with you. <br><br>");
+        sb.Append("Please consider this email as reminders to renew/update your accreditation status with Globe Telecom.<br><br>");
+        sb.Append("Looking forward for your compliance on this request before your accreditation expired. Failure to comply will temporarily suspend your company to participate on any upcoming bid events.<br><br>");
+        sb.Append("Following are the general steps for Globe Vendor accreditation renewal: <br><br>");
+        sb.Append("<ul>");
+        sb.Append("<li>Access this site - <a href='https://gtva.globe.com.ph' target='_blank'>https://gtva.globe.com.ph</a> and log in using your username and password. Accreditation guidelines and list of required documents are available online.</li>");
+        sb.Append("<li>Upon Vendor’s submission of the complete requirements and payment of the service fee, our accreditation service partner, Dun and Bradstreet, will typically have 7 days to prepare a report.");
+            sb.Append("<ul>");
+            sb.Append("<li>Service fee is P3,950 for Metro Manila applicants, Php5,600 for provincial</li>");
+            sb.Append("<li>For Foreign Vendors, please directly coordinate with Dun and Bradstreet Phils. for the Service fee.");
+                sb.Append("<ul>");
+                sb.Append("<li>Mr. Rolan M. Sebastian</li>");
+                sb.Append("<li>Dun & Bradstreet Philippines, Inc.</li>");
+                sb.Append("<li>Unit 507 5/F Rufino Pacific Tower</li>");
+                sb.Append("<li>6784 Ayala Ave., Cor. VA Rufino Makati City, 1226</li>");
+                sb.Append("<li>tel.632.504.4537</li>");
+                sb.Append("<li>mobile.63905.551.3668</li>");
+                sb.Append("<li>Cebu Office:</li>");
+                sb.Append("<li>tel.6332.233.6053:</li>");
+                sb.Append("<li>fax. 6332.233.6051</li>");
+                sb.Append("<li><a href='mailto:SebastianR@dnb.com.ph'>SebastianR@dnb.com.ph</a></li>");
+                sb.Append("</ul>");
+                sb.Append("</li>");
+            sb.Append("</ul>");
+            sb.Append("</li>");
+            sb.Append("<li>Another 4 days evaluation period within Globe after receipt of D&B's report.</li>");
+        sb.Append("</ul>");
+        sb.Append("We encourage you to renew your accreditation and continue to be a business partner of Globe Telecom.<br><br>");
+        sb.Append("Hope to receive positive response from your end.<br><br>");
+        sb.Append("Please get in touch with Russel Toribio of Vendor Management for any clarifications.<br><br>");
         sb.Append("</p>");
         sb.Append("<br><br>");
         sb.Append("Very truly yours,<br><br>");
@@ -274,8 +307,8 @@ public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
         sb.Append("Whistleblower Contact Channels:<br>");
         sb.Append("Whistleblower Hotline : 0917-8189934<br>");
         sb.Append("Globe Corporate Site: www.globe.com.ph<br>");
-        sb.Append("Send Email to:  gt_whistleblower@globe.com.ph<br>");
-        sb.Append("Send  letter to Employee Relations, HR Department, 19th Floor, The Globe Tower 32nd Street cor 7th Avenue, Bonifacio Global City, Taguig<br><br><br><br>");
+        sb.Append("Send Email to:  gt_whistleblower@globetel.com.ph<br>");
+        sb.Append("Send  letter to Employee Relations, HR Department, 3rd Floor, GT Tower 1, Mandaluyong City<br><br><br><br>");
         //sb.Append("<b>Globe Telecom Admin<br><br>");
         sb.Append("</td></tr>");
         sb.Append("<tr><td>");
