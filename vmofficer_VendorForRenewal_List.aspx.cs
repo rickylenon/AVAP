@@ -66,7 +66,8 @@ public partial class vmofficer_VendorForRenewal_List : System.Web.UI.Page
                 SqlHelper.ExecuteNonQuery(connstring, CommandType.Text, sCommand);
 
                 query = @"UPDATE tblVendor SET NotificationSent=NULL, SendToSAP_Status=NULL, Status=0, 
-                            IsAuthenticated = NULL, AuthenticationTicket = NULL, DateAuthenticatedByDnb = NULL,
+                            IsAuthenticated = NULL, AuthenticationTicket = NULL, 
+                            DateSubmittedToDnb = NULL, DateAuthenticatedByDnb = NULL,
                             approvedbyDnb = NULL, approvedbyDnbDate=NULL,
                             approvedbyVMOfficer = NULL, approvedbyVMOfficerDate = NULL,
                             approvedbyVMReco = NULL, approvedbyVMRecoDate = NULL, 
