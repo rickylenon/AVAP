@@ -37,7 +37,7 @@ Logistics</span></li>
 <div style="background:#FFF; min-height:445px; padding:10px;" class="rounded-corners-bottom2 menu">
 <!--##################-->
 <!--BODY CONTENT STARTS-->
-<div class="topnav"><a href="admin_Home.aspx?UserId=0">Create a User</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_UsersList.aspx">List of Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_VendorUsersList.aspx">Vendor Users</a></div>
+<div class="topnav"><a href="admin_Home.aspx?UserId=0">Create a User</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_UsersList.aspx">List of Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_VendorUsersList.aspx">Vendor Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_EditContent.aspx">Home Content</a></div>
 <div style="float:left; width:400px; margin:25px 0 0 30px; padding-top:0px; font-size:14px;" >
 <form action="" method="post" name="formVendorInfo" id="formVendorInfo" runat="server">
   <h3><asp:Label ID="Label1" runat="server" Text="Create a user"></asp:Label></h3><br />

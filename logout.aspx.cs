@@ -39,49 +39,21 @@ public partial class logout : System.Web.UI.Page
         Session["UserId"] = "";
         Session["VendorId"] = "";
         Session["UserIdDetails"] = "";
+        getLandingContent();
     }
 
 
-    private void UpdateUserLoginStatus(string vUserId, int vLoginStatus, string vSessionId)
+    private void getLandingContent()
     {
-        SqlParameter[] sqlParams = new SqlParameter[3];
-        sqlParams[0] = new SqlParameter("@UserId", SqlDbType.Int);
-        sqlParams[0].Value = Int32.Parse(vUserId);
-        sqlParams[1] = new SqlParameter("@SessionId", SqlDbType.NVarChar);
-        sqlParams[1].Value = vSessionId;
-        sqlParams[2] = new SqlParameter("@LoginStatus", SqlDbType.Int);
-        sqlParams[2].Value = vLoginStatus;
+        SqlDataReader oReader;
+        connstring = ConfigurationManager.ConnectionStrings["AVAConnectionString"].ConnectionString;
+        string sCommand = "SELECT content FROM rfcLandingContent WHERE active = 1";
+        oReader = SqlHelper.ExecuteReader(connstring, CommandType.Text, sCommand);
 
-        //SqlHelper.ExecuteNonQuery(connstring, CommandType.StoredProcedure, "sp_UpdateUserLoginStatus", sqlParams);
-    }
-
-
-    protected void btnLogin_Click(object sender, EventArgs e)
-    {
-        //string username = txtUserName.Text.Trim();
-        //string password = EncryptionHelper.Encrypt(txtPassword.Text.Trim());
-        //SqlDataReader oReader;
-
-        //string connstring = ConfigurationManager.ConnectionStrings["AVAConnectionString"].ConnectionString;
-        //string sCommand = "SELECT * FROM tblUsers WHERE UserName='" + username + "' AND UserPassword='" + password + "' ";
-        //oReader = SqlHelper.ExecuteReader(connstring, CommandType.Text, sCommand);
-        //if (oReader.HasRows)
-        //{
-        //    oReader.Read();
-        //    Session["SESSION_USERNAME"] = oReader["UserName"].ToString();
-        //    Session["SESSION_PASSWORD"] = oReader["UserPassword"].ToString();
-        //    Session["SESSION_FULLNAME"] = oReader["FirstName"].ToString() + " " + oReader["LastName"].ToString();
-        //    txtNote.Text = "";
-        //    //Session["SESSION_USERNAME"] = username;
-        //    Response.Redirect("vendor_Home.aspx");
-        //}
-        //else
-        //{
-        //    Session["SESSION_USERNAME"] = "";
-        //    Session["SESSION_PASSWORD"] = "";
-        //    Session["SESSION_FULLNAME"] = "";
-        //    txtNote.Text = "Invalid Username/Password";
-        //}
-        //oReader.Close();
+        if (oReader.HasRows)
+        {
+            oReader.Read();
+            contentLanding.Text = contentLanding.Text + oReader["content"].ToString().Replace(System.Environment.NewLine, "<br>") + "<br><br>";
+        }
     }
 }

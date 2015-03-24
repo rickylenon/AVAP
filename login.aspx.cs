@@ -40,6 +40,7 @@ public partial class login : System.Web.UI.Page
         Session["SESSION_USERTYPE"] = "";
         Session["SESSION_FULLNAME"] = "";
         Session["UserIdDetails"] = "";
+        getLandingContent();
     }
 
 
@@ -111,5 +112,19 @@ public partial class login : System.Web.UI.Page
             txtNote.Text = "Invalid Username/Password";
         }
         oReader.Close();
+    }
+
+    private void getLandingContent()
+    {
+        SqlDataReader oReader;
+        connstring = ConfigurationManager.ConnectionStrings["AVAConnectionString"].ConnectionString;
+        string sCommand = "SELECT content FROM rfcLandingContent WHERE active = 1";
+        oReader = SqlHelper.ExecuteReader(connstring, CommandType.Text, sCommand);
+
+        if (oReader.HasRows)
+        {
+            oReader.Read();
+            contentLanding.Text = contentLanding.Text + oReader["content"].ToString().Replace(System.Environment.NewLine, "<br>") + "<br><br>";
+        }
     }
 }

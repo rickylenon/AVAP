@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterSubPage.master" AutoEventWireup="true" CodeFile="admin_Home.aspx.cs" Inherits="admin_Home" %>
+﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/MasterSubPage.master" AutoEventWireup="true" CodeFile="admin_Home.aspx.cs" Inherits="admin_Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitlePlaceHolder1" runat="Server">
 Globe Automated Vendor Accreditation :: Vendor
@@ -37,7 +37,7 @@ Logistics</span></li>
 <div style="background:#FFF; min-height:445px; padding:10px;" class="rounded-corners-bottom2 menu">
 <!--##################-->
 <!--BODY CONTENT STARTS-->
-<div class="topnav"><a href="admin_Home.aspx?UserId=0">Create a User</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_UsersList.aspx">List of Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_VendorUsersList.aspx">Vendor Users</a></div>
+<div class="topnav"><a href="admin_Home.aspx?UserId=0">Create a User</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_UsersList.aspx">List of Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_VendorUsersList.aspx">Vendor Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_EditContent.aspx">Home Content</a></div>
 <div style="float:left; width:350px; min-height:300px; border-right:#ccc 1px solid; margin:25px 0 0 0px; padding-top:0px;">
   <div style="margin-top:5px;">
     <div style="float:left; margin:5px 20px 0 0;"> 
