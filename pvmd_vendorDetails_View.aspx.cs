@@ -68,6 +68,7 @@ public partial class pvmd_vendorDetails_View : System.Web.UI.Page
                     while (oReader.Read())
                     {
                         //if (oReader["Status"].ToString() == "5") { Response.Redirect("vmhead_vendorDetails_Endorsed_View.aspx"); }
+                        accrediteddatelbl.Text = oReader["accrediteddate"].ToString();
                     }
                 }
             }
@@ -118,7 +119,7 @@ public partial class pvmd_vendorDetails_View : System.Web.UI.Page
                 {
                     while (oReader.Read())
                     {
-                        AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
+                        AccreDuration.Text = oReader["AccreDuration"].ToString();
                         Others.Text = oReader["Others"].ToString();
                         //FileAttachementLbl.Text = oReader["FileAttachement"].ToString() != "" ? "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>" : "<h3>n/a</h3>";
                         if (oReader["FileAttachement"].ToString() != "")

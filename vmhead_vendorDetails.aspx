@@ -97,7 +97,17 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
 
 <link rel="stylesheet" type="text/css" href="Styles/jquery-ui.css" />
 <script type="text/javascript" src="Scripts/jquery-ui.js"></script>
-    <script>
+     <script type="text/javascript">
+         $(function () {
+             $(".datepicker").datepicker({
+                 changeMonth: true,
+                 changeYear: true,
+                 dateFormat: "yy-mm-dd"
+             });
+             $(".datepicker").datepicker("option", "defaultDate", + 7);
+         });
+    </script>
+    <script type="text/javascript">
         $(function () {
             $("#dialog-form").dialog({
                 autoOpen: false,
@@ -502,16 +512,46 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
         <a href="javascript:$('#ContentPlaceHolder1_FileAttachementFile').uploadifyUpload();" id="FileAttachementFile_btup">Upload Selection</a>
                     <div class="clearfix"></div>
                 </td>
-                <td valign="top" width="50%">
+                <td valign="top" width="50%" style="background:none">
                 <h3 style="margin:10px 0px;">CONDITIONS</h3>
                 <br />
+                    <label>Accreditation Date</label>
+                    <div class="clearfix"></div>
+                    <input name="accrediteddate" type="text" id="accrediteddate"  class="datepicker" runat="server" title="dd/mm/yyyy" 
+			causesvalidation="False" style="background:url(images/calendar_icon1.png) no-repeat center right;" readonly="readonly" />
+                    <div class="clearfix"></div>
+                    <br /><br />
+
                     <label>Accreditation Duration</label>
                     <div class="clearfix"></div>
                     <asp:DropDownList ID="AccreDuration" runat="server">
                         <asp:ListItem Selected="True">2 years</asp:ListItem>
                         <asp:ListItem>1 year</asp:ListItem>
                         <asp:ListItem>6 months</asp:ListItem>
+                        <asp:ListItem>Specify</asp:ListItem>
                     </asp:DropDownList>
+                    <div class="clearfix">
+                    <input name="renewaldate" type="text" id="renewaldate"  class="datepicker" runat="server" title="dd/mm/yyyy" 
+			causesvalidation="False" style="background:url(images/calendar_icon1.png) no-repeat center right;" readonly="readonly" />
+                        <script type="text/javascript">
+                            function showhideRenewalDate() {
+                                //alert($("#<%= AccreDuration.ClientID %>").val());
+                                if($("#<%= AccreDuration.ClientID %>").val() == "Specify")
+                                {
+                                    $("#<%= renewaldate.ClientID %>").parents().filter('div.jqTransformInputWrapper').show();
+                                }
+                                else
+                                {
+                                    $("#<%= renewaldate.ClientID %>").parents().filter('div.jqTransformInputWrapper').hide();
+                                }
+                            }
+                            $(document).ready(function () {
+                                showhideRenewalDate();
+                                $("#<%= AccreDuration.ClientID %>").on("change", function () {
+                                    showhideRenewalDate();
+                                });
+                            });
+                        </script>
                     <div class="clearfix"><br /><br /></div>
                     
 <%--<div class="separator1"></div>--%>

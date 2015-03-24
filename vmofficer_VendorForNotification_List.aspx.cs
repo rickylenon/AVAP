@@ -169,7 +169,7 @@ public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
     {
         SqlDataReader oReader;
         string connstring = ConfigurationManager.ConnectionStrings["AVAConnectionString"].ConnectionString;
-        string cCeo = "", cCeoEmail = "", cAddress = "", cServices = "", cAccreDuration = "";
+        string cCeo = "", cCeoEmail = "", cAddress = "", cServices = "", cAccreDuration = "", cAccreDate="";
         query = "SELECT * FROM tblVendorInformation WHERE VendorId = @VendorId";
         using (conn = new SqlConnection(connstring))
         {
@@ -232,7 +232,36 @@ public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
                 {
                     while (oReader.Read())
                     {
-                        cAccreDuration = oReader["AccreDuration"].ToString();
+                        //cAccreDuration = oReader["AccreDuration"].ToString();
+                    }
+                }
+            }
+        }
+
+        query = @"SELECT  convert(date, t1.accrediteddate) accrediteddate,
+	                CASE 	 
+                        WHEN t2.AccreDuration = '2 years' THEN t2.AccreDuration
+                        WHEN t2.AccreDuration = '1 year' THEN t2.AccreDuration
+                        WHEN t2.AccreDuration = '6 months' THEN t2.AccreDuration
+                        ELSE CONVERT(varchar(10), datediff(month, t1.accrediteddate, t1.renewaldate)) + ' months'
+	                END renewaldate
+                FROM tblVendor t1		
+                INNER JOIN tblVendorApprovalbyVmReco t2 ON t2.VendorId = t1.VendorId
+                WHERE t1.VendorId = @VendorId";
+        using (conn = new SqlConnection(connstring))
+        {
+            using (cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@VendorId", Convert.ToInt32(VendorIdx));
+                conn.Open();
+                //Process results
+                oReader = cmd.ExecuteReader();
+                if (oReader.HasRows)
+                {
+                    while (oReader.Read())
+                    {
+                        cAccreDuration = oReader["renewaldate"].ToString();
+                        cAccreDate = oReader["accrediteddate"].ToString().Replace("12:00:00 AM","");
                     }
                 }
             }
@@ -252,7 +281,7 @@ public partial class vmofficer_VendorForNotification_List : System.Web.UI.Page
 
         sb.Append("<tr><td>");
         sb.Append("<p>");
-        sb.Append("Date: " + DateTime.Now.ToLongDateString() + "<br><br>");
+        sb.Append("Date: " + cAccreDate + "<br><br>");
         sb.Append(cCeo + "<br>");
         sb.Append("<b>" + cVendorName + "</b><br>");
         sb.Append(cAddress + "<br><br>");

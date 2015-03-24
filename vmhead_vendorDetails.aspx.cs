@@ -81,6 +81,17 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                         {
                             createBt.Text = "<span>APPROVE &raquo;</span>";
                         }
+                        if (oReader["accrediteddate"].ToString() == "")
+                        {
+                            DateTime accrediteddt = DateTime.Now;
+                            string accrediteddtStr = accrediteddt.ToString("yyyy-MM-dd");
+                            accrediteddate.Value = accrediteddtStr;
+                        }
+                        else
+                        {
+                            DateTime accrediteddt = Convert.ToDateTime(oReader["accrediteddate"].ToString());
+                            accrediteddate.Value = string.Format("{0:yyyy-MM-dd}", accrediteddt);
+                        }
                     }
                 }
             }
@@ -116,7 +127,27 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                         }
                         FileAttachement.Value = oReader["FileAttachement"].ToString();
                         //FileAttachementLbl.Text = "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>";
-                        AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
+                        if (oReader["AccreDuration"].ToString() == "2 years" || oReader["AccreDuration"].ToString() == "1 year" || oReader["AccreDuration"].ToString() == "6 months")
+                        {
+                            //Response.Write("itwenthere");
+                            AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
+                        }
+                        else
+                        {
+                            if (oReader["AccreDuration"].ToString() == "")
+                            {
+                                AccreDuration.SelectedValue = "2 years";
+                                DateTime renewaldt = DateTime.Now.AddYears(1);
+                                string renewaldtStr = renewaldt.ToString("yyyy-MM-dd");
+                                renewaldate.Value = renewaldtStr;
+                            }
+                            else
+                            {
+                                AccreDuration.SelectedValue = "Specify";
+                                renewaldate.Value = oReader["AccreDuration"].ToString();
+                            }
+                        }
+
                         //Others.InnerText = oReader["Others"].ToString();
                         OverallEvalRemarks.InnerText = oReader["OverallEvalRemarks"].ToString();
                     }
@@ -169,33 +200,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                         odnbScore = oReader["dnbScore"].ToString() != "" ? Convert.ToInt32(oReader["dnbScore"].ToString()) : Convert.ToInt32(oReader["dnbFinCapScore"].ToString()) + Convert.ToInt32(oReader["dnbLegalConfScore"].ToString()) + Convert.ToInt32(oReader["dnbTechCompScore"].ToString());
                         dnbScore.Text = odnbScore.ToString();
                         vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                        //if (oReader["vmoOverallScore"].ToString() == "")
-                        //{
-                        //    if (oReader["vmoNew_Vendor"].ToString() == "0")
-                        //    {
-                        //        ovmoGTPerf_Eval = oReader["vmoGTPerf_Eval"].ToString() != "" ? Convert.ToInt32(oReader["vmoGTPerf_Eval"].ToString()) : 0;
-                        //        if (oReader["vmoGTPerf_Eval"].ToString() != "" && oReader["vmoGTPerf_Eval"].ToString() != "0")
-                        //        {
-                        //            vmoOverallScore.Text = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
-                        //            vmoOverallScore1.Value = ((odnbScore + ovmoGTPerf_Eval) / 2).ToString();
-                        //        }
-                        //        else
-                        //        {
-                        //            vmoOverallScore.Text = odnbScore.ToString();
-                        //            vmoOverallScore1.Value = odnbScore.ToString();
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        vmoOverallScore.Text = odnbScore.ToString();
-                        //        vmoOverallScore1.Value = odnbScore.ToString();
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    vmoOverallScore.Text = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                        //    vmoOverallScore1.Value = oReader["vmoOverallScore"].ToString() != "" ? oReader["vmoOverallScore"].ToString() : "0";
-                        //}
+                        
                         dnbSupplierInfoReport.Text = oReader["dnbSupplierInfoReport"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbSupplierInfoReport"].ToString() + "' target='_blank'>" + oReader["dnbSupplierInfoReport"].ToString() + "</a>" : "No attach file";
                         dnbOtherDocumentsLbl.Text = oReader["dnbOtherDocuments"].ToString() != "" ? "<div style=\"float:left; width:30px;\"><img src=\"images/attachment.png\" /></div> <a href='" + oReader["dnbOtherDocuments"].ToString() + "' target='_blank'>" + oReader["dnbOtherDocuments"].ToString() + "</a>" : "No attach file";
                     }
@@ -276,7 +281,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
 
 
 
-        query = "SELECT * FROM tblVendor WHERE VendorId = @VendorId";
+        query = "SELECT *, CONVERT(DATE, renewaldate) AS renewaldate1 FROM tblVendor WHERE VendorId = @VendorId";
         //query = "sp_GetVendorInformation"; //##storedProcedure
         using (conn = new SqlConnection(connstring))
         {
@@ -293,6 +298,11 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                     {
                         CompanyNameLbl.Text = oReader["CompanyName"].ToString() != "" ? "<a href='vendor_Home.aspx?VendorId=" + Session["VendorId"] + "' target='_blank'>" + oReader["CompanyName"].ToString() + "</a>" : "n/a";
                         //AuthenticationTicketLbl.Text = oReader["AuthenticationTicket"].ToString();
+                        if (oReader["renewaldate"].ToString() != "")
+                        {
+                            //DateTime renewaldt = Convert.ToDateTime(oReader["renewaldate"].ToString());
+                            //renewaldate.Value = string.Format("{0:yyyy-MM-dd}", renewaldt);
+                        }
                     }
                 }
             }
@@ -364,7 +374,15 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@vendorApproved", 1);
                     cmd.Parameters.AddWithValue("@FileAttachement", FileAttachement.Value.ToString());
                     //cmd.Parameters.AddWithValue("@Others", Others.InnerText);
-                    cmd.Parameters.AddWithValue("@AccreDuration", AccreDuration.SelectedValue);
+                    if (AccreDuration.SelectedValue != "Specify")
+                    {
+                        cmd.Parameters.AddWithValue("@AccreDuration", AccreDuration.SelectedValue);
+                    }
+                    else
+                    {
+                        //string renewaldt = renewaldate.Value != "" ? "'" + renewaldate.Value + "'" : "NULL";
+                        cmd.Parameters.AddWithValue("@AccreDuration", renewaldate.Value);
+                    }
                     cmd.Parameters.AddWithValue("@OverallEvalRemarks", OverallEvalRemarks.InnerText);
 
                     if (Request.Form["__EVENTTARGET"] == "Approve")
@@ -385,8 +403,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
             }
 
 
-
-            sCommand = "UPDATE tblVendor SET Status = 4, approvedbyVMReco = " + Session["UserId"] + ", approvedbyVMRecoDate = getdate() WHERE VendorId = " + Session["VendorId"];
+            sCommand = "UPDATE tblVendor SET Status = 4, approvedbyVMReco = " + Session["UserId"] + ", approvedbyVMRecoDate = getdate(), accrediteddate='" + accrediteddate.Value + "'  WHERE VendorId = " + Session["VendorId"];
             SqlHelper.ExecuteNonQuery(connstring, CommandType.Text, sCommand);
 
 
@@ -419,7 +436,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@vmoConflict_of_Interest", vmoConflict_of_Interest.Checked == true ? 1 : 0);
                     cmd.Parameters.AddWithValue("@vmoWith_Type_Approved_Products", vmoWith_Type_Approved_Products.Checked == true ? 1 : 0);
                     cmd.Parameters.AddWithValue("@vmoWith_Approved_Proof_of_Concept", vmoWith_Approved_Proof_of_Concept.Checked == true ? 1 : 0);
-                    cmd.Parameters.AddWithValue("@vmoGTPerf_Eval", Convert.ToInt32(vmoGTPerf_Eval.Text));
+                    cmd.Parameters.AddWithValue("@vmoGTPerf_Eval", vmoGTPerf_Eval.Text!="" ? Convert.ToInt32(vmoGTPerf_Eval.Text):0);
                     cmd.Parameters.AddWithValue("@vmoNo_POs", vmoNo_POs.Text);
                     cmd.Parameters.AddWithValue("@vmoSpend", vmoSpend.Text);
                     cmd.Parameters.AddWithValue("@vmoWith_Existing_Frame_Arg", vmoWith_Existing_Frame_Arg.SelectedValue == "1" ? 1 : 0);

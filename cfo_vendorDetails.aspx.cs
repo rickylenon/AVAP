@@ -68,6 +68,7 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
                     while (oReader.Read())
                     {
                         if (oReader["Status"].ToString() == "6") { Response.Redirect("cfo_vendorDetails_View.aspx"); }
+                        accrediteddatelbl.Text = oReader["accrediteddate"].ToString();
                     }
                 }
             }
@@ -119,7 +120,7 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
                 {
                     while (oReader.Read())
                     {
-                        AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
+                        AccreDuration.Text = oReader["AccreDuration"].ToString();
                         Others.Text = oReader["Others"].ToString();
                         //FileAttachementLbl.Text = oReader["FileAttachement"].ToString() != "" ? "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>" : "<h3>n/a</h3>";
                         if (oReader["FileAttachement"].ToString() != "")
@@ -387,9 +388,10 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
             }
 
 
-            //CLEAR tblVendorApprovalbyVmTech FROM VendorId
+            //UPDATE approvedbyFAAFinance AND Status to approved
             sCommand = "UPDATE tblVendor SET approvedbyFAAFinance = " + Session["UserId"] + ", approvedbyFAAFinanceDate = getdate(), Status = 6 WHERE VendorId = " + Session["VendorId"];
             SqlHelper.ExecuteNonQuery(connstring, CommandType.Text, sCommand);
+
 
 
             // update vendor renewaldate
@@ -397,14 +399,26 @@ public partial class cfo_vendorDetails : System.Web.UI.Page
                         UPDATE t1 
                         SET t1.renewaldate = 
 	                        CASE 
-		                        WHEN t2.AccreDuration = '2 years' THEN DATEADD(month, 22, t1.approvedbyFAALogisticsDate)
-		                        WHEN t2.AccreDuration = '1 year' THEN DATEADD(month, 10, t1.approvedbyFAALogisticsDate)
-		                        WHEN t2.AccreDuration = '6 months' THEN DATEADD(month, 4, t1.approvedbyFAALogisticsDate)
-		                        ELSE NULL
+		                        WHEN t2.AccreDuration = '2 years' THEN DATEADD(month, 22, t1.accrediteddate)
+		                        WHEN t2.AccreDuration = '1 year' THEN DATEADD(month, 10, t1.accrediteddate)
+		                        WHEN t2.AccreDuration = '6 months' THEN DATEADD(month, 4, t1.accrediteddate)
+		                        ELSE 
+		                            CASE
+		                            WHEN t1.accrediteddate IS NULL
+			                            THEN DATEADD(day, DATEDIFF(day, GETDATE(), t2.AccreDuration), GETDATE())
+			                            ELSE DATEADD(day, DATEDIFF(day, t1.accrediteddate, t2.AccreDuration), t1.accrediteddate)	
+		                            END	
 	                        END
                         FROM tblVendor t1		
                         INNER JOIN tblVendorApprovalbyVmReco t2 ON t2.VendorId = t1.VendorId
                         WHERE t1.VendorId = " + Session["VendorId"];
+            SqlHelper.ExecuteNonQuery(connstring, CommandType.Text, sCommand);
+
+            //update accrediteddate if null, set current date
+            sCommand = @"UPDATE tblVendor SET accrediteddate = 
+                            CASE WHEN accrediteddate IS NULL THEN GETDATE() 
+                            ELSE accrediteddate END 
+                        WHERE VendorId = " + Session["VendorId"];
             SqlHelper.ExecuteNonQuery(connstring, CommandType.Text, sCommand);
 
 

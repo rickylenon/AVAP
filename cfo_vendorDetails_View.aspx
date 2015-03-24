@@ -341,13 +341,20 @@ Globe Automated Vendor Accreditation :: Vendor Information</asp:Content>
                 <td valign="top" width="50%">
                 <h3 style="margin:10px 0px;">CONDITIONS</h3>
                 <br />
+                    <label>Accreditation Date</label>
+                    <div class="clearfix"></div>
+                    <asp:Label ID="accrediteddatelbl" runat="server" Text=""></asp:Label>
+                    <div class="clearfix"></div>
+                    <br /><br />
+
                     <label>Accreditation Duration</label>
                     <div class="clearfix"></div>
-                    <asp:DropDownList ID="AccreDuration" runat="server" Enabled="false">
+                    <%--<asp:DropDownList ID="AccreDuration" runat="server" Enabled="false" Visible="False">
                         <asp:ListItem Selected="True">2 years</asp:ListItem>
                         <asp:ListItem>1 year</asp:ListItem>
                         <asp:ListItem>6 months</asp:ListItem>
-                    </asp:DropDownList>
+                    </asp:DropDownList>--%>
+                    <asp:Label ID="AccreDuration" runat="server" Text=""></asp:Label>
                     <div class="clearfix"><br /><br /></div>
                     <label>Others</label>
                     <div class="clearfix"></div>

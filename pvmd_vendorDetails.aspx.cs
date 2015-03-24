@@ -68,6 +68,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                     while (oReader.Read())
                     {
                         if (oReader["Status"].ToString() == "5" || oReader["Status"].ToString() == "8") { Response.Redirect("pvmd_vendorDetails_View.aspx"); }
+                        accrediteddatelbl.Text = oReader["accrediteddate"].ToString();
                     }
                 }
             }
@@ -91,7 +92,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                     while (oReader.Read())
                     {
                         //Recommendation.Enabled = false;
-                        AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
+                        AccreDuration.Text = oReader["AccreDuration"].ToString();
                         Others.Text = oReader["Others"].ToString();
                         
                         //FileAttachementLbl.Text = oReader["FileAttachement"].ToString() != "" ? "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>" : "<h3>n/a</h3>";
@@ -325,7 +326,7 @@ public partial class vmhead_vendorDetails : System.Web.UI.Page
                     {
                         while (oReader.Read())
                         {
-                            AccreDuration.SelectedValue = oReader["AccreDuration"].ToString();
+                            AccreDuration.Text = oReader["AccreDuration"].ToString();
                             Others.Text = oReader["Others"].ToString();
                             //FileAttachementLbl.Text = oReader["FileAttachement"].ToString() != "" ? "<a href='" + oReader["FileAttachement"].ToString() + "' target='_blank'>" + oReader["FileAttachement"].ToString() + "</a>" : "<h3>n/a</h3>";
                             if (oReader["FileAttachement"].ToString() != "")
