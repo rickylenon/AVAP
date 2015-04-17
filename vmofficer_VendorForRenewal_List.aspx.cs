@@ -14,6 +14,7 @@ using Ava.lib;
 using Ava.lib.constant;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 public partial class vmofficer_VendorForRenewal_List : System.Web.UI.Page
 {
@@ -246,73 +247,108 @@ public partial class vmofficer_VendorForRenewal_List : System.Web.UI.Page
             }
         }
 
+
         StringBuilder sb = new StringBuilder();
-        string sTxt = "<table border='1' style='font-size:12px'>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Vendor ID</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + VendorIdx + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Company Name</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + cVendorName + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "</table>";
+
+        string text = string.Empty;
+        using (StreamReader streamReader = new StreamReader(Server.MapPath("~/email_templates/accreditation_renewal.txt"), Encoding.UTF8))
+        {
+            while (streamReader.Peek() >= 0)
+            {
+                text = text + streamReader.ReadLine() + "<br>";
+            }
+        }
+
+        //VARIABLES
+        text = text.Replace("{VarCurrDate}", DateTime.Now.ToLongDateString());
+        text = text.Replace("{VarcfromName}", cfromName);
+        text = text.Replace("{VarctoName}", ctoName);
+        text = text.Replace("{VarcVendorName}", cVendorName);
+        //text = text.Replace("{VarcVendorEmail}", cVendorEmail);
+        text = text.Replace("{VarURL}", System.Configuration.ConfigurationManager.AppSettings["ServerUrl"]);
+        //text = text.Replace("{VarcUserName}", cUserName);
+        //text = text.Replace("{VarcPassword}", cPassword);
+        text = text.Replace("{VarcAuthenticationNumber}", cAuthenticationNumber);
+        text = text.Replace("{VarVendorId}", Session["VendorId"].ToString());
+        text = text.Replace("{VarcServices}", cServices);
+        //text = text.Replace("{VarcAccreDate}", cAccreDate);
+        text = text.Replace("{VarcAccreDuration}", cAccreDuration);
+        text = text.Replace("{VarcCeo}", cCeo);
+        text = text.Replace("{VarcAddress}", cAddress);
 
         sb.Append("<tr><td>");
-        sb.Append("<p>");
-        sb.Append("Date: " + DateTime.Now.ToLongDateString() + "<br><br>");
-        sb.Append(cCeo + "<br>");
-        sb.Append("<b>" + cVendorName + "</b><br>");
-        sb.Append(cAddress + "<br><br>");
-        sb.Append("</p>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>");
-        sb.Append("Dear " + cCeo + ":<br><br>");
-        sb.Append("Please consider this email as reminders to renew/update your accreditation status with Globe Telecom.<br><br>");
-        sb.Append("Looking forward for your compliance on this request before your accreditation expired. Failure to comply will temporarily suspend your company to participate on any upcoming bid events.<br><br>");
-        sb.Append("Following are the general steps for Globe Vendor accreditation renewal: <br><br>");
-        sb.Append("<ul>");
-        sb.Append("<li>Access this site - <a href='https://gtva.globe.com.ph' target='_blank'>https://gtva.globe.com.ph</a> and log in using your username and password. Accreditation guidelines and list of required documents are available online.</li>");
-        sb.Append("<li>Upon Vendor’s submission of the complete requirements and payment of the service fee, our accreditation service partner, Dun and Bradstreet, will typically have 7 days to prepare a report.");
-            sb.Append("<ul>");
-            sb.Append("<li>Service fee is P3,950 for Metro Manila applicants, Php5,600 for provincial</li>");
-            sb.Append("<li>For Foreign Vendors, please directly coordinate with Dun and Bradstreet Phils. for the Service fee.");
-                sb.Append("<ul>");
-                sb.Append("<li>Mr. Rolan M. Sebastian</li>");
-                sb.Append("<li>Dun & Bradstreet Philippines, Inc.</li>");
-                sb.Append("<li>Unit 507 5/F Rufino Pacific Tower</li>");
-                sb.Append("<li>6784 Ayala Ave., Cor. VA Rufino Makati City, 1226</li>");
-                sb.Append("<li>tel.632.504.4537</li>");
-                sb.Append("<li>mobile.63905.551.3668</li>");
-                sb.Append("<li>Cebu Office:</li>");
-                sb.Append("<li>tel.6332.233.6053:</li>");
-                sb.Append("<li>fax. 6332.233.6051</li>");
-                sb.Append("<li><a href='mailto:SebastianR@dnb.com.ph'>SebastianR@dnb.com.ph</a></li>");
-                sb.Append("</ul>");
-                sb.Append("</li>");
-            sb.Append("</ul>");
-            sb.Append("</li>");
-            sb.Append("<li>Another 4 days evaluation period within Globe after receipt of D&B's report.</li>");
-        sb.Append("</ul>");
-        sb.Append("We encourage you to renew your accreditation and continue to be a business partner of Globe Telecom.<br><br>");
-        sb.Append("Hope to receive positive response from your end.<br><br>");
-        sb.Append("Please get in touch with Russel Toribio of Vendor Management for any clarifications.<br><br>");
-        sb.Append("</p>");
-        sb.Append("<br><br>");
-        sb.Append("Very truly yours,<br><br>");
-        sb.Append("<b>Honesto P. Oliva</b><br>");
-        sb.Append("Head - Vendor Management<br><br><br><br>");
-        sb.Append("Whistleblower Contact Channels:<br>");
-        sb.Append("Whistleblower Hotline : 0917-8189934<br>");
-        sb.Append("Globe Corporate Site: www.globe.com.ph<br>");
-        sb.Append("Send Email to:  gt_whistleblower@globetel.com.ph<br>");
-        sb.Append("Send  letter to Employee Relations, HR Department, 3rd Floor, GT Tower 1, Mandaluyong City<br><br><br><br>");
-        //sb.Append("<b>Globe Telecom Admin<br><br>");
+        sb.Append(text);
         sb.Append("</td></tr>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>&nbsp;</p><span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span>");
-        sb.Append("</td></tr>");
-        //Response.Write(sb.ToString());
+
+
+
+        //StringBuilder sb = new StringBuilder();
+        //string sTxt = "<table border='1' style='font-size:12px'>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Vendor ID</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + VendorIdx + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Company Name</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + cVendorName + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "</table>";
+
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>");
+        //sb.Append("Date: " + DateTime.Now.ToLongDateString() + "<br><br>");
+        //sb.Append(cCeo + "<br>");
+        //sb.Append("<b>" + cVendorName + "</b><br>");
+        //sb.Append(cAddress + "<br><br>");
+        //sb.Append("</p>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>");
+        //sb.Append("Dear " + cCeo + ":<br><br>");
+        //sb.Append("Please consider this email as reminders to renew/update your accreditation status with Globe Telecom.<br><br>");
+        //sb.Append("Looking forward for your compliance on this request before your accreditation expired. Failure to comply will temporarily suspend your company to participate on any upcoming bid events.<br><br>");
+        //sb.Append("Following are the general steps for Globe Vendor accreditation renewal: <br><br>");
+        //sb.Append("<ul>");
+        //sb.Append("<li>Access this site - <a href='https://gtva.globe.com.ph' target='_blank'>https://gtva.globe.com.ph</a> and log in using your username and password. Accreditation guidelines and list of required documents are available online.</li>");
+        //sb.Append("<li>Upon Vendor’s submission of the complete requirements and payment of the service fee, our accreditation service partner, Dun and Bradstreet, will typically have 7 days to prepare a report.");
+        //    sb.Append("<ul>");
+        //    sb.Append("<li>Service fee is P3,950 for Metro Manila applicants, Php5,600 for provincial</li>");
+        //    sb.Append("<li>For Foreign Vendors, please directly coordinate with Dun and Bradstreet Phils. for the Service fee.");
+        //        sb.Append("<ul>");
+        //        sb.Append("<li>Mr. Rolan M. Sebastian</li>");
+        //        sb.Append("<li>Dun & Bradstreet Philippines, Inc.</li>");
+        //        sb.Append("<li>Unit 507 5/F Rufino Pacific Tower</li>");
+        //        sb.Append("<li>6784 Ayala Ave., Cor. VA Rufino Makati City, 1226</li>");
+        //        sb.Append("<li>tel.632.504.4537</li>");
+        //        sb.Append("<li>mobile.63905.551.3668</li>");
+        //        sb.Append("<li>Cebu Office:</li>");
+        //        sb.Append("<li>tel.6332.233.6053:</li>");
+        //        sb.Append("<li>fax. 6332.233.6051</li>");
+        //        sb.Append("<li><a href='mailto:SebastianR@dnb.com.ph'>SebastianR@dnb.com.ph</a></li>");
+        //        sb.Append("</ul>");
+        //        sb.Append("</li>");
+        //    sb.Append("</ul>");
+        //    sb.Append("</li>");
+        //    sb.Append("<li>Another 4 days evaluation period within Globe after receipt of D&B's report.</li>");
+        //sb.Append("</ul>");
+        //sb.Append("We encourage you to renew your accreditation and continue to be a business partner of Globe Telecom.<br><br>");
+        //sb.Append("Hope to receive positive response from your end.<br><br>");
+        //sb.Append("Please get in touch with Russel Toribio of Vendor Management for any clarifications.<br><br>");
+        //sb.Append("</p>");
+        //sb.Append("<br><br>");
+        //sb.Append("Very truly yours,<br><br>");
+        //sb.Append("<b>Honesto P. Oliva</b><br>");
+        //sb.Append("Head - Vendor Management<br><br><br><br>");
+        //sb.Append("Whistleblower Contact Channels:<br>");
+        //sb.Append("Whistleblower Hotline : 0917-8189934<br>");
+        //sb.Append("Globe Corporate Site: www.globe.com.ph<br>");
+        //sb.Append("Send Email to:  gt_whistleblower@globetel.com.ph<br>");
+        //sb.Append("Send  letter to Employee Relations, HR Department, 3rd Floor, GT Tower 1, Mandaluyong City<br><br><br><br>");
+        ////sb.Append("<b>Globe Telecom Admin<br><br>");
+        //sb.Append("</td></tr>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>&nbsp;</p><span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span>");
+        //sb.Append("</td></tr>");
+        ////Response.Write(sb.ToString());
         return MailTemplate.IntegrateBodyIntoTemplate(sb.ToString());
     }
 

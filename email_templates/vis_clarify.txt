@@ -1,0 +1,21 @@
+Sent: {VarCurrDate}
+From: {VarcfromName}
+To: {VarctoName}     
+
+
+Dear {VarctoName}:
+
+Re: Vendor information for clarification --  {VarcVendorName}
+
+This is to request for your clarification of the ff:
+
+Vendor ID: {VarVendorId}
+Company Name: {VarcVendorName}
+Authentication Ticket: {VarcAuthenticationNumber}
+
+
+Sincerely,
+Globe Telecom
+
+
+**Please do not reply to this auto-generated  message.**

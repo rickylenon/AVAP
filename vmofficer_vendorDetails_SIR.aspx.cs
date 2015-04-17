@@ -14,6 +14,7 @@ using Ava.lib;
 using Ava.lib.constant;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 public partial class vmofficer_vendorDetails_SIR : System.Web.UI.Page
 {
@@ -517,53 +518,81 @@ public partial class vmofficer_vendorDetails_SIR : System.Web.UI.Page
             }
         }
 
+
+
         StringBuilder sb = new StringBuilder();
-        string sTxt = "<table border='1' style='font-size:12px'>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Vendor ID</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + Session["VendorId"] + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Company Name</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + cVendorName + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Category</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + cServices + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "</table>";
 
-        //sb.Append("<tr><td><p>Sent: " + DateTime.Now.ToLongDateString() + "<br>From: " + cfromName + "<br> To: " + ctoName + "<br><br> Good day!<br><br> This is to inform you that application for vendor accreditation has been reviewed for your approval.<br></p><br>" + sTxt + "<p>Very truly yours,<br><br><br> <strong>" + cfromName + "</strong></p><p>&nbsp;</p> <span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span></td></tr>");
+        string text = string.Empty;
+        using (StreamReader streamReader = new StreamReader(Server.MapPath("~/email_templates/sir_forapproval.txt"), Encoding.UTF8))
+        {
+            while (streamReader.Peek() >= 0)
+            {
+                text = text + streamReader.ReadLine() + "<br>";
+            }
+        }
+
+        //VARIABLES
+        text = text.Replace("{VarCurrDate}", DateTime.Now.ToLongDateString());
+        text = text.Replace("{VarcfromName}", cfromName);
+        text = text.Replace("{VarctoName}", ctoName);
+        text = text.Replace("{VarcVendorName}", cVendorName);
+        //text = text.Replace("{VarcVendorEmail}", cVendorEmail);
+        text = text.Replace("{VarURL}", System.Configuration.ConfigurationManager.AppSettings["ServerUrl"]);
+        //text = text.Replace("{VarcUserName}", cUserName);
+        //text = text.Replace("{VarcPassword}", cPassword);
+        text = text.Replace("{VarcAuthenticationNumber}", cAuthenticationNumber);
+        text = text.Replace("{VarVendorId}", Session["VendorId"].ToString());
+        text = text.Replace("{VarcServices}", cServices);
+
+        sb.Append("<tr><td>");
+        sb.Append(text);
+        sb.Append("</td></tr>");
 
 
-        sb.Append("<tr><td>");
-        sb.Append("<p>");
-        sb.Append("Sent: " + DateTime.Now.ToLongDateString() + "<br>From: " + cfromName + "<br>");
-        sb.Append("To: " + ctoName + "<br><br>");
-        sb.Append("</p>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>");
-        sb.Append("Dear " + ctoName + ":<br><br>");
-        sb.Append("Re: Request for Vendor Accreditation Approval -- " + cVendorName + "<br><br>");
-        sb.Append("This is to request for your Approval of the ff: <br><br>");
-        //sb.Append("<a href='http://'<br><br>");
-        sb.Append(sTxt);
-        sb.Append("</p><br><br>");
-        //sb.Append("We are happy to be doing business with you. Thank you and God bless your dealings.<br><br><br>");
-        sb.Append("Very truly yours,<br><br>");
-        sb.Append("Globe Telecom<br><br>");
-        sb.Append("</td></tr>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>&nbsp;</p>");
-        sb.Append("<b>Instructions:</b><br>");
-        sb.Append("&nbsp;&nbsp;1. Go to <a href='" + System.Configuration.ConfigurationManager.AppSettings["ServerUrl"] + "' target='_blank'>" + System.Configuration.ConfigurationManager.AppSettings["ServerUrl"] + "</a><br>");
-        sb.Append("&nbsp;&nbsp;2. Enter your Username and Password then click Login<br>");
-        sb.Append("&nbsp;&nbsp;3. Click Vendors for Approval<br>");
-        sb.Append("&nbsp;&nbsp;4. Click View<br>");
-        sb.Append("</td></tr>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>&nbsp;</p><span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span>");
-        sb.Append("</td></tr>");
+        //StringBuilder sb = new StringBuilder();
+        //string sTxt = "<table border='1' style='font-size:12px'>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Vendor ID</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + Session["VendorId"] + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Company Name</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + cVendorName + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Category</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + cServices + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "</table>";
+
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>");
+        //sb.Append("Sent: " + DateTime.Now.ToLongDateString() + "<br>From: " + cfromName + "<br>");
+        //sb.Append("To: " + ctoName + "<br><br>");
+        //sb.Append("</p>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>");
+        //sb.Append("Dear " + ctoName + ":<br><br>");
+        //sb.Append("Re: Request for Vendor Accreditation Approval -- " + cVendorName + "<br><br>");
+        //sb.Append("This is to request for your Approval of the ff: <br><br>");
+        ////sb.Append("<a href='http://'<br><br>");
+        //sb.Append(sTxt);
+        //sb.Append("</p><br><br>");
+        ////sb.Append("We are happy to be doing business with you. Thank you and God bless your dealings.<br><br><br>");
+        //sb.Append("Very truly yours,<br><br>");
+        //sb.Append("Globe Telecom<br><br>");
+        //sb.Append("</td></tr>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>&nbsp;</p>");
+        //sb.Append("<b>Instructions:</b><br>");
+        //sb.Append("&nbsp;&nbsp;1. Go to <a href='" + System.Configuration.ConfigurationManager.AppSettings["ServerUrl"] + "' target='_blank'>" + System.Configuration.ConfigurationManager.AppSettings["ServerUrl"] + "</a><br>");
+        //sb.Append("&nbsp;&nbsp;2. Enter your Username and Password then click Login<br>");
+        //sb.Append("&nbsp;&nbsp;3. Click Vendors for Approval<br>");
+        //sb.Append("&nbsp;&nbsp;4. Click View<br>");
+        //sb.Append("</td></tr>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>&nbsp;</p><span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span>");
+        //sb.Append("</td></tr>");
 
         return MailTemplate.IntegrateBodyIntoTemplate(sb.ToString());
     }
@@ -613,51 +642,80 @@ public partial class vmofficer_vendorDetails_SIR : System.Web.UI.Page
 
     private string CreateNotificationBodyClarify(string cfromName, string ctoName, string cAuthenticationNumber, string cVendorName)
     {
-        StringBuilder sb = new StringBuilder();
-        string sTxt = "<table border='0' cellpadding='5' style='font-size:12px'>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Vendor ID</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + Session["VendorId"] + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Company Name</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + cVendorName + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Authentication Ticket</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + cAuthenticationNumber + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "</table>";
 
-        //sb.Append("<tr><td><p>Sent: " + DateTime.Now.ToLongDateString() + "<br>From: " + cfromName + "<br> To: " + ctoName + "<br><br> Good day!<br><br> This is to inform you that application for vendor accreditation has been posted for your approval.<br></p><br>" + sTxt + "<p>Very truly yours,<br><br><br> <strong>" + cfromName + "</strong></p><p>&nbsp;</p> <span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span></td></tr>");
+
+        StringBuilder sb = new StringBuilder();
+
+        string text = string.Empty;
+        using (StreamReader streamReader = new StreamReader(Server.MapPath("~/email_templates/sir_clarificationtodnb.txt"), Encoding.UTF8))
+        {
+            while (streamReader.Peek() >= 0)
+            {
+                text = text + streamReader.ReadLine() + "<br>";
+            }
+        }
+
+        //VARIABLES
+        text = text.Replace("{VarCurrDate}", DateTime.Now.ToLongDateString());
+        text = text.Replace("{VarcfromName}", cfromName);
+        text = text.Replace("{VarctoName}", ctoName);
+        text = text.Replace("{VarcVendorName}", cVendorName);
+        //text = text.Replace("{VarcVendorEmail}", cVendorEmail);
+        text = text.Replace("{VarURL}", System.Configuration.ConfigurationManager.AppSettings["ServerUrl"]);
+        //text = text.Replace("{VarcUserName}", cUserName);
+        //text = text.Replace("{VarcPassword}", cPassword);
+        text = text.Replace("{VarcAuthenticationNumber}", cAuthenticationNumber);
+        text = text.Replace("{VarVendorId}", Session["VendorId"].ToString());
+        //text = text.Replace("{VarcServices}", cServices);
+
         sb.Append("<tr><td>");
-        sb.Append("<p>");
-        sb.Append("Sent: " + DateTime.Now.ToLongDateString() + "<br>From: " + cfromName + "<br>");
-        sb.Append("To: " + ctoName + "<br><br>");
-        sb.Append("</p>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>");
-        sb.Append("Dear " + ctoName + ":<br><br>");
-        sb.Append("Re: Vendor Accreditation SIR for clarification -- " + cVendorName + "<br><br>");
-        sb.Append("This is to clarify SIR of the ff: <br><br>");
-        //sb.Append("<a href='http://'<br><br>");
-        sb.Append(sTxt);
-        sb.Append("</p><br><br>");
-        //sb.Append("We are happy to be doing business with you. Thank you and God bless your dealings.<br><br><br>");
-        sb.Append("Very truly yours,<br><br>");
-        sb.Append("Globe Telecom<br><br>");
+        sb.Append(text);
         sb.Append("</td></tr>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>&nbsp;</p>");
-        sb.Append("<b>Instructions:</b><br>");
-        sb.Append("&nbsp;&nbsp;1. Go to <a href='" + System.Configuration.ConfigurationManager.AppSettings["ServerUrl"] + "' target='_blank'>" + System.Configuration.ConfigurationManager.AppSettings["ServerUrl"] + "</a><br>");
-        sb.Append("&nbsp;&nbsp;2. Enter your Username and Password then click Login<br>");
-        sb.Append("&nbsp;&nbsp;3. Click Endorsed Vendors for Clarification<br>");
-        sb.Append("&nbsp;&nbsp;4. Click View Report<br>");
-        sb.Append("</td></tr>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>&nbsp;</p><span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span>");
-        sb.Append("</td></tr>");
+
+        //StringBuilder sb = new StringBuilder();
+        //string sTxt = "<table border='0' cellpadding='5' style='font-size:12px'>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Vendor ID</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + Session["VendorId"] + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Company Name</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + cVendorName + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Authentication Ticket</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + cAuthenticationNumber + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "</table>";
+
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>");
+        //sb.Append("Sent: " + DateTime.Now.ToLongDateString() + "<br>From: " + cfromName + "<br>");
+        //sb.Append("To: " + ctoName + "<br><br>");
+        //sb.Append("</p>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>");
+        //sb.Append("Dear " + ctoName + ":<br><br>");
+        //sb.Append("Re: Vendor Accreditation SIR for clarification -- " + cVendorName + "<br><br>");
+        //sb.Append("This is to clarify SIR of the ff: <br><br>");
+        ////sb.Append("<a href='http://'<br><br>");
+        //sb.Append(sTxt);
+        //sb.Append("</p><br><br>");
+        ////sb.Append("We are happy to be doing business with you. Thank you and God bless your dealings.<br><br><br>");
+        //sb.Append("Very truly yours,<br><br>");
+        //sb.Append("Globe Telecom<br><br>");
+        //sb.Append("</td></tr>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>&nbsp;</p>");
+        //sb.Append("<b>Instructions:</b><br>");
+        //sb.Append("&nbsp;&nbsp;1. Go to <a href='" + System.Configuration.ConfigurationManager.AppSettings["ServerUrl"] + "' target='_blank'>" + System.Configuration.ConfigurationManager.AppSettings["ServerUrl"] + "</a><br>");
+        //sb.Append("&nbsp;&nbsp;2. Enter your Username and Password then click Login<br>");
+        //sb.Append("&nbsp;&nbsp;3. Click Endorsed Vendors for Clarification<br>");
+        //sb.Append("&nbsp;&nbsp;4. Click View Report<br>");
+        //sb.Append("</td></tr>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>&nbsp;</p><span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span>");
+        //sb.Append("</td></tr>");
 
         return MailTemplate.IntegrateBodyIntoTemplate(sb.ToString());
     }

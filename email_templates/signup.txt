@@ -1,0 +1,18 @@
+Sent: {VarCurrDate}
+From: {VarcfromName}
+To: {VarctoName}     
+
+
+Dear {VarctoName}:
+
+This email is to inform you that we have received a new letter of intent for accreditation.
+
+Company Name: {VarcVendorName}
+Vendor Email: {VarcVendorEmail}
+
+Sincerely,
+Globe Telecom
+
+
+
+**Please do not reply to this auto-generated  message.**

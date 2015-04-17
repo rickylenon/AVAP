@@ -1,0 +1,23 @@
+Sent: {VarCurrDate}
+From: {VarcfromName}
+To: {VarctoName}     
+
+
+Dear {VarctoName}:
+
+This email is to inform you that we have received your letter of intent for accreditation. Your request has been approved.
+
+Please access the link below using your username and password to start your application for Globe Telecom accreditation.
+
+<a href='{VarURL}' target='_blank'>{VarURL}</a>
+User name: {VarcUserName}
+User password: {VarcPassword}
+
+We are happy to be doing business with you. Thank you and God bless your dealings.
+
+Sincerely,
+Globe Telecom
+
+
+
+**Please do not reply to this auto-generated  message.**

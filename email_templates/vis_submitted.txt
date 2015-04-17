@@ -1,0 +1,15 @@
+Sent: {VarCurrDate}
+From: {VarcfromName}
+To: {VarctoName}     
+
+
+Good day!
+
+Your application for accreditation will now undergo approval processes. You will be notified once approved or rejected.
+
+
+Sincerely,
+Globe Telecom
+
+
+**Please do not reply to this auto-generated  message.**

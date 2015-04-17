@@ -1,0 +1,35 @@
+Date: {VarcAccreDate}
+
+{VarcCeo}  
+{VarcVendorName}   
+{VarcAddress}
+
+
+Dear {VarcCeo}:
+
+We are pleased to inform you that Globe Telecom Vendor Management has approved your accreditation.
+
+Please inform us immediately should there be any change in your products and services, organization, management, ownership, contact numbers, address and other material information which will affect our business relationship.
+
+This certification is valid for {VarcAccreDuration} from date of issuance. Globe reserves the right to invite and select suppliers, determine allocation and volume of orders in accordance with the company's procurement policies and objectives. Globe is also not committed to place an order upon accreditation.
+
+Your continuing status as an accredited supplier of Globe Telecom depends on your performance as a vendor/service provider subject to regular review and your compliance to company requirements. Consequently, Globe reserves the right to invite and require you to undergo an accreditation renewal process 60 days prior to the lapse of the {VarcAccreDuration} period.
+
+As part of Globe's program for good governance, we would like to take this opportunity to remind you, our business partner, of Globe's Gifts and Inducement Policy. Our policy strongly prohibits Globe employees from soliciting gifts from business partners; and conversely prohibits business partners from giving Globe employees gifts of any kind in consideration of business, or as an inducement for the award of business.  And as we are committed to compliance with law and regulations to which it is subject and to conduct our business in accordance with ethical standards, the company has a Whistleblower Policy that provides a formal mechanism for employee, suppliers and third parties to submit reports of improper activities perpetrated by the Company's employees, officers and directors. Please see below for the contact channels.
+
+We congratulate you and we look forward to a mutually beneficial and long-lasting business relationship with you.
+
+Sincerely,
+Honesto P. Oliva
+Head - Vendor Management
+
+
+Whistleblower Contact Channels:
+Whistleblower Hotline : 0917-8189934
+Globe Corporate Site: www.globe.com.ph
+Send Email to:  gt_whistleblower@globe.com.ph
+Send  letter to Employee Relations, HR Department, 19th Floor, The Globe Tower 32nd Street cor 7th Avenue, Bonifacio Global City, Taguig
+
+
+
+**Please do not reply to this auto-generated  message.**

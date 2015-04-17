@@ -1,0 +1,60 @@
+Date: {VarCurrDate}
+
+{VarcCeo}  
+{VarcVendorName}   
+{VarcAddress}
+
+
+Dear {VarcCeo}:
+
+Please consider this email as reminders to renew/update your accreditation status with Globe Telecom.
+
+Looking forward for your compliance on this request before your accreditation expired. Failure to comply will temporarily suspend your company to participate on any upcoming bid events.
+
+Following are the general steps for Globe Vendor accreditation renewal: 
+
+<ul>
+	<li>Access this site - <a href='https://gtva.globe.com.ph' target='_blank'>https://gtva.globe.com.ph</a> and log in using your username and password. Accreditation guidelines and list of required documents are available online.</li> 
+	<li>Upon Vendor's submission of the complete requirements and payment of the service fee, our accreditation service partner, Dun and Bradstreet, will typically have 7 days to prepare a report. 
+		<ul> 
+			<li>Service fee is P3,950 for Metro Manila applicants, Php5,600 for provincial</li> 
+			<li>For Foreign Vendors, please directly coordinate with Dun and Bradstreet Phils. for the Service fee. 
+				<ul> 
+					<li>Mr. Rolan M. Sebastian</li> 
+					<li>Dun & Bradstreet Philippines, Inc.</li> 
+					<li>Unit 507 5/F Rufino Pacific Tower</li> 
+					<li>6784 Ayala Ave., Cor. VA Rufino Makati City, 1226</li> 
+					<li>tel.632.504.4537</li> 
+					<li>mobile.63905.551.3668</li> 
+					<li>Cebu Office:</li> 
+					<li>tel.6332.233.6053:</li> 
+					<li>fax. 6332.233.6051</li> 
+					<li><a href='mailto:SebastianR@dnb.com.ph'>SebastianR@dnb.com.ph</a></li> 
+				</ul> 
+			</li> 
+		</ul> 
+    </li> 
+    <li>Another 4 days evaluation period within Globe after receipt of D&B's report.</li> 
+</ul>
+
+We encourage you to renew your accreditation and continue to be a business partner of Globe Telecom.
+
+Hope to receive positive response from your end.
+
+Please get in touch with Russel Toribio of Vendor Management for any clarifications.
+
+
+Sincerely,
+Honesto P. Oliva
+Head - Vendor Management
+
+
+Whistleblower Contact Channels:
+Whistleblower Hotline : 0917-8189934
+Globe Corporate Site: www.globe.com.ph
+Send Email to:  gt_whistleblower@globe.com.ph
+Send  letter to Employee Relations, HR Department, 19th Floor, The Globe Tower 32nd Street cor 7th Avenue, Bonifacio Global City, Taguig
+
+
+
+**Please do not reply to this auto-generated  message.**

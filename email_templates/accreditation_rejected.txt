@@ -1,0 +1,20 @@
+Sent: {VarCurrDate}
+From: {VarcfromName}
+To: {VarcVendorName}    
+
+
+Dear {VarcVendorName}:
+
+Be advised that your application to be an Accredited Globe Vendor was evaluated and found to have not met the requirements, we regret that you will not be accredited at this time.
+
+If you so wish, we encourage you to schedule a meeting with us to discuss the result of your application for accreditation.
+
+We would like to thank you for the time afforded in completing and submitting your application.  We will keep your details on record for consideration of future business opportunities.
+
+
+Sincerely,
+Globe Telecom
+
+
+
+**Please do not reply to this auto-generated  message.**

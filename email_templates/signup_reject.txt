@@ -1,0 +1,22 @@
+Sent: {VarCurrDate}
+From: {VarcfromName}
+To: {VarctoName}     
+
+
+Dear {VarctoName}:
+
+This email is to acknowledge receipt of your Letter of Intent for accreditation.
+
+We regret to inform you that your application did not pass Globe's pre-screening conditions at this time.
+
+Company Name: {VarcVendorName}
+Vendor Email: {VarcVendorEmail}
+
+
+
+Sincerely,
+Globe Telecom
+
+
+
+**Please do not reply to this auto-generated  message.**

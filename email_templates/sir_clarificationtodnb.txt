@@ -1,0 +1,29 @@
+Sent: {VarCurrDate}
+From: {VarcfromName}
+To: {VarctoName}     
+
+
+Dear {VarctoName}:
+
+Re: Vendor Accreditation SIR for clarification -- {VarcVendorName}
+
+This is to clarify SIR of the ff:
+
+Vendor ID: {VarVendorId}
+Company Name: {VarcVendorName}
+Authentication Ticket: {VarcAuthenticationNumber}
+
+
+Sincerely,
+Globe Telecom
+
+
+Instructions:
+1. Go to <a href='{VarURL}' target='_blank'>{VarURL}</a>
+2. Enter your Username and Password then click Login
+3. Click Endorsed Vendors for Clarification
+4. Click View Report
+
+
+
+**Please do not reply to this auto-generated  message.**

@@ -1,0 +1,27 @@
+Sent: {VarCurrDate}
+From: {VarcfromName}
+To: {VarctoName}     
+
+
+Dear {VarctoName}:
+
+Re: Request for Vendor Accreditation Approval -- {VarcVendorName}
+
+This is to request for your Approval of the ff:
+
+Vendor ID: {VarVendorId}
+Company Name: {VarcVendorName}
+Authentication Ticket: {VarcAuthenticationNumber}
+
+
+Sincerely,
+Globe Telecom
+
+
+Instructions:
+1. Go to <a href='{VarURL}' target='_blank'>{VarURL}</a>
+2. Enter your Username and Password then click Login
+3. Click Vendors for Authentication
+4. Click Authenticate
+
+**Please do not reply to this auto-generated  message.**

@@ -13,6 +13,7 @@ using Ava.lib;
 using Ava.lib.constant;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 public partial class vendor_signup : System.Web.UI.Page
 {
@@ -35,7 +36,6 @@ public partial class vendor_signup : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
         //if (Session["CaptchaImageText"].ToString()!="") { } else { Response.Redirect("vendor_signup.aspx"); }
         dsSelectedCategory.SelectCommand = "Select '0' as CategoryId, '--Selected' as Categoryname";
         repeaterSelectedCategory.DataBind();
@@ -255,16 +255,16 @@ public partial class vendor_signup : System.Web.UI.Page
             errNotification.Text = "Application successfully posted.";
             errNotification.ForeColor = Color.Blue;
             errNotification2.Text = "Your Vendor Accrediation application is subject to prequalification by Globe Vendor Management. Once prequalify, your username and password will be sent to you via email.";
-            titleRegister.InnerHtml = "";
-            tblForm.Visible = false;
-            createBt.Visible = false;
-            cancelBtLbl.Text = "BACK";
+            //titleRegister.InnerHtml = "";
+            //tblForm.Visible = false;
+            //createBt.Visible = false;
+            //cancelBtLbl.Text = "BACK";
 
-            EmailAdd.Value = "";
-            CompanyName.Value = "";
-            //txtCaptcha.Text = "";
-            CompanyName.Disabled = true;
-            EmailAdd.Disabled = true;
+            //EmailAdd.Value = "";
+            //CompanyName.Value = "";
+            ////txtCaptcha.Text = "";
+            //CompanyName.Disabled = true;
+            //EmailAdd.Disabled = true;
         }
         else
         {
@@ -341,44 +341,62 @@ public partial class vendor_signup : System.Web.UI.Page
 
     private string CreateNotificationBody(string cfromName, string ctoName, string cVendorEmail, string cVendorName)
     {
+
         StringBuilder sb = new StringBuilder();
-        string sTxt = "<table border='0' cellpadding='5' style='font-size:12px'>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Company Name</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + cVendorName + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "<tr>";
-        sTxt = sTxt + "<td><strong>&nbsp;Vendor Email</strong></td>";
-        sTxt = sTxt + "<td>&nbsp;" + cVendorEmail + "&nbsp;</td>";
-        sTxt = sTxt + "</tr>";
-        sTxt = sTxt + "</table>";
+
+
+        string text = string.Empty;
+        using (StreamReader streamReader = new StreamReader(Server.MapPath("~/email_templates/signup.txt"), Encoding.UTF8))
+        {
+            while (streamReader.Peek() >= 0)
+            {
+                //Console.WriteLine(sr.ReadLine());
+                text = text + streamReader.ReadLine() + "<br>";
+            }
+        }
+        //Response.Write(text);
+
+        //VARIABLES
+        string CurrDate = DateTime.Now.ToLongDateString();
+        text = text.Replace("{VarCurrDate}", CurrDate);
+        text = text.Replace("{VarcfromName}", cfromName);
+        text = text.Replace("{VarctoName}", ctoName);
+        text = text.Replace("{VarcVendorName}", cVendorName);
+        text = text.Replace("{VarcVendorEmail}", cVendorEmail);
 
         sb.Append("<tr><td>");
-        sb.Append("<p>");
-        sb.Append("Sent: " + DateTime.Now.ToLongDateString() + "<br>From: " + cfromName + "<br>");
-        sb.Append("To: " + ctoName + "<br><br>");
-        sb.Append("</p>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>");
-        sb.Append("Dear " + ctoName + ":<br><br>");
-        sb.Append("This email is to inform you that we have received a new letter of intent for accreditation.<br><br>");
-        //sb.Append("Please access the link below using your username and password to start your application for Globe Telecom accreditation. <br><br>");
-        //sb.Append("<a href='http://'<br><br>");
-        sb.Append(sTxt);
-        sb.Append("</p>");
-        sb.Append("<br><br><br>");
-        sb.Append("Sincerely,<br><br>");
-        sb.Append("Globe Telecom<br><br>");
+        sb.Append(text);
         sb.Append("</td></tr>");
-        sb.Append("<tr><td>");
-        sb.Append("<p>&nbsp;</p><span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span>");
-        sb.Append("</td></tr>");
-        //StringBuilder sb = new StringBuilder();
 
-        //string AdminName1 = fromName;
-        //string VendorName1 = toName;
+        //string sTxt = "<table border='0' cellpadding='5' style='font-size:12px'>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Company Name</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + cVendorName + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "<tr>";
+        //sTxt = sTxt + "<td><strong>&nbsp;Vendor Email</strong></td>";
+        //sTxt = sTxt + "<td>&nbsp;" + cVendorEmail + "&nbsp;</td>";
+        //sTxt = sTxt + "</tr>";
+        //sTxt = sTxt + "</table>";
 
-        //sb.Append("<tr><td><p>Sent: " + DateTime.Now.ToLongDateString() + "<br> To: " + VendorName1 + "<br><br> Good day!<br><br> This is to inform you that your application for accreditation is being processed.<br></p>&nbsp;<p>Very truly yours,<br><br><br> <strong>e-Sourcing Procurement</strong></p><p>&nbsp;</p> <span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span></td></tr>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>");
+        //sb.Append("Sent: " + DateTime.Now.ToLongDateString() + "<br>From: " + cfromName + "<br>");
+        //sb.Append("To: " + ctoName + "<br><br>");
+        //sb.Append("</p>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>");
+        //sb.Append("Dear " + ctoName + ":<br><br>");
+        //sb.Append("This email is to inform you that we have received a new letter of intent for accreditation.<br><br>");
+        //sb.Append(sTxt);
+        //sb.Append("</p>");
+        //sb.Append("<br><br><br>");
+        //sb.Append("Sincerely,<br><br>");
+        //sb.Append("Globe Telecom<br><br>");
+        //sb.Append("</td></tr>");
+        //sb.Append("<tr><td>");
+        //sb.Append("<p>&nbsp;</p><span style='font-size:10px; font-style:italic;'>Please do not reply to this auto-generated  message.&nbsp;</span>");
+        //sb.Append("</td></tr>");
 
         return MailTemplate.IntegrateBodyIntoTemplate(sb.ToString());
     }
