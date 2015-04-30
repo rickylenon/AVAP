@@ -37,14 +37,16 @@ Logistics</span></li>
 <div style="background:#FFF; min-height:445px; padding:10px;" class="rounded-corners-bottom2 menu">
 <!--##################-->
 <!--BODY CONTENT STARTS-->
-<div class="topnav"><a href="admin_Home.aspx?UserId=0">Create a User</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_UsersList.aspx">List of Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_VendorUsersList.aspx">Vendor Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_EditContent.aspx">Home Content</a></div>
+<div class="topnav"><a href="admin_Home.aspx?UserId=0">Create a User</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_UsersList.aspx">List of Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_VendorUsersList.aspx">Vendor Users</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_EditContent.aspx">Home Content</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="admin_EditEmails.aspx">Email Content</a></div>
 <div style="float:left; width:350px; min-height:300px; border-right:#ccc 1px solid; margin:25px 0 0 0px; padding-top:0px;">
   <div style="margin-top:5px;">
     <div style="float:left; margin:5px 20px 0 0;"> 
     <%--<a href="#" style="font-size:16px; font-weight:bold;">Enter Authentication Ticket</a><br /><br />--%>
 	<a href="admin_UsersList.aspx" style="font-size:16px; font-weight:bold;">List of Users</a><br /><br />
 	<a href="admin_VendorUsersList.aspx" style="font-size:16px; font-weight:bold;">List of Vendor Users</a><br /><br />
-	<a href="admin_DeletedUsersList.aspx" style="font-size:16px; font-weight:bold;">Deleted Users</a><br /><br />
+	<a href="admin_DeletedUsersList.aspx" style="font-size:16px; font-weight:bold;">Deleted Users</a><br /><br /> <br /><br />
+	<a href="admin_EditContent.aspx" style="font-size:16px; font-weight:bold;">Edit Home Content</a><br /><br />
+	<a href="admin_EditEmails.aspx" style="font-size:16px; font-weight:bold;">Edit Email Content</a><br /><br />
 	<%--<a href="#" style="font-size:16px; font-weight:bold;">Provide / Edit Report</a>--%>
     
     </div>
