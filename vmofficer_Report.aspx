@@ -100,15 +100,15 @@ Globe Automated Vendor Accreditation :: Vendor
 <span style="font-size:12px; font-style:italic;">Registered business name (Exact name as in SEC Registration/DTI)</span></td>
 	</tr>--%>
   <tr>
-	<td style="width: 378px"><label for="CompanyName"><b>LOI date submitted</b><span> (d/m/yyyy)</span></label>
+	<td style="width: 378px"><label for="CompanyName"><b>LOI date submitted</b><span> (mm/dd/yyyy)</span></label>
 
 	  <div class="clearfix"></div> 
         From: 
-<input name="DateSubmittedFr" type="text" id="DateSubmittedFr"  class="date" runat="server" title="dd/mm/yyyy" 
+<input name="DateSubmittedFr" type="text" id="DateSubmittedFr"  class="date" runat="server" title="mm/dd/yyyy" 
 			causesvalidation="False" style="background:url(images/calendar_icon1.png) no-repeat center right" readonly="readonly" value="1/1/2010" />
         &nbsp;-&nbsp;
         To: 
-<input name="DateSubmittedTo" type="text" id="DateSubmittedTo"  class="date" runat="server" title="dd/mm/yyyy" 
+<input name="DateSubmittedTo" type="text" id="DateSubmittedTo"  class="date" runat="server" title="mm/dd/yyyy" 
 			causesvalidation="False" style="background:url(images/calendar_icon1.png) no-repeat center right" readonly="readonly"  />
         <%--<img src="images/calendar_icon1.png" style="height: 22px; width: 21px; margin-bottom:-7px;" /><div class="clearfix">--%></div>
 <%--span style="font-size:12px; font-style:italic;">Registered business name (Exact name as in SEC Registration/DTI)</span>--%>

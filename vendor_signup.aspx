@@ -137,9 +137,9 @@ Logistics</span></li>
 <span style="font-size:12px; font-style:italic;">Registered business name (Exact name as in SEC Registration/DTI)</span></td>
 	</tr>
   <tr>
-	<td colspan="4" style="width: 378px"><label for="CompanyName"><b>Date started</b><span> (d/m/yyyy)</span></label>
+	<td colspan="4" style="width: 378px"><label for="CompanyName"><b>Date started</b><span> (mm/dd/yyyy)</span></label>
 	  <div class="clearfix"></div>
-<input name="DateStarted" type="text" id="DateStarted"  class="date" runat="server" title="dd/mm/yyyy" 
+<input name="DateStarted" type="text" id="DateStarted"  class="date" runat="server" title="mm/dd/yyyy" 
 			causesvalidation="False" style="background:url(images/calendar_icon1.png) no-repeat center right" readonly="readonly" /><%--<img src="images/calendar_icon1.png" style="height: 22px; width: 21px; margin-bottom:-7px;" /><div class="clearfix">--%></div>
 <%--span style="font-size:12px; font-style:italic;">Registered business name (Exact name as in SEC Registration/DTI)</span>--%>
 	</td>
